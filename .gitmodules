@@ -13,3 +13,18 @@
 [submodule "bin/modules/web-css"]
 	path = bin/modules/web-css
 	url = git://github.com/manakai/perl-web-css
+[submodule "bin/modules/json-functions-xs"]
+	path = bin/modules/json-functions-xs
+	url = git://github.com/wakaba/perl-json-functions-xs
+[submodule "bin/modules/web-utils"]
+	path = bin/modules/web-utils
+	url = git://github.com/wakaba/perl-web-utils
+[submodule "bin/modules/web-useragent-functions"]
+	path = bin/modules/web-useragent-functions
+	url = git://github.com/wakaba/perl-web-useragent-functions
+[submodule "bin/modules/web-url"]
+	path = bin/modules/web-url
+	url = git://github.com/manakai/perl-web-url
+[submodule "bin/modules/web-encodings"]
+	path = bin/modules/web-encodings
+	url = git://github.com/manakai/perl-web-encodings
