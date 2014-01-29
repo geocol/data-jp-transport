@@ -11,10 +11,13 @@ use Web::HTML::Table;
 use Text::MediaWiki::Parser;
 use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 
-sub extract_from_doc ($) {
-  my $doc = $_[0];
+sub extract_from_doc ($$) {
+  my ($page_name, $doc) = @_;
   my $data = [];
   my $h1 = $doc->query_selector ('h1:-manakai-contains("駅一覧"), h1:-manakai-contains("電停一覧")');
+
+  my $has_ruby = {鹿児島市電唐湊線 => 1}->{$page_name};
+
     if (defined $h1) {
         my $section = $h1->parent_node;
         my $table = $section ? $section->get_elements_by_tag_name ('table')->[0] : undef;
@@ -34,6 +37,13 @@ sub extract_from_doc ($) {
                     $label_to_i->{"駅名・信号場名"} //
                     $label_to_i->{[grep { /駅/ } keys %$label_to_i]->[0] || '駅'} //
                     0;
+            my $i_info = $label_to_i->{[grep { /備考/ } keys %$label_to_i]->[0] || '備考'};
+
+            my $suffix = '';
+            if ($page_name eq '鹿児島市電谷山線' and $i == 0) {
+              $i = $#{$t->{column}};
+              $suffix = '電停';
+            }
             for my $y (0..$#{$t->{row}}) {
                 my $cell = $t->{cell}->[$i]->[$y]->[0] or next;
                 next unless $cell->{element}->local_name eq 'td';
@@ -49,17 +59,36 @@ sub extract_from_doc ($) {
                 }
 
                 my $d = {};
-                if (defined $l) {
-                    $d->{name} = $l->text_content;
-                    my $n = $l->get_attribute ('wref');
-                    $d->{wref} = $n if defined $n;
-                } else {
-                    my $name = $cell->{element}->text_content;
-                    $name =~ s/\A\s+//;
-                    $name =~ s/\s+\z//;
-                    $name =~ s/\s+/ /g;
-                    $d->{name} = $name;
+                my $cell_content = $cell->{element}->text_content;
+                if ($cell_content =~ /^\s*\S+?線\s*[(（][^()（）]+[)）]\s*$/) {
+                  ## <http://ja.wikipedia.org/wiki/%E9%AB%98%E5%B3%B6%E7%B7%9A>
+                  next;
                 }
+
+                if (defined $l) {
+                  $d->{name} = $l->text_content;
+                  my $n = $l->get_attribute ('wref');
+                  $d->{wref} = $n if defined $n;
+
+                  if ($cell_content =~ /廃止/) {
+                    $d->{abandoned} = 1;
+                  }
+                } else {
+                  my $name = $cell_content;
+                  if ($name =~ s/\s*[(（]廃止[)）]\s*$//) {
+                    $d->{abandoned} = 1;
+                  }
+                  $name =~ s/\A\s+//;
+                  $name =~ s/\s+\z//;
+                  $name =~ s/\s+/ /g;
+                  next unless length $name;
+                  $d->{name} = $name;
+                }
+                if (length $suffix and not $d->{name} =~ /$suffix$/) {
+                  $d->{wref} = $d->{name} if not defined $d->{wref};
+                  $d->{name} .= $suffix;
+                }
+
                 if (defined $label_to_i->{駅番号}) {
                     my $cell = $t->{cell}->[$label_to_i->{駅番号}]->[$y]->[0];
                     if ($cell) {
@@ -67,9 +96,21 @@ sub extract_from_doc ($) {
                         $num =~ s/\A\s+//;
                         $num =~ s/\s+\z//;
                         $num =~ s/\s+/ /g;
-                        $d->{number} = $num if length $num;
+                        $d->{number} = $num if length $num and $num =~ /\S/ and $num ne '-';
                     }
                 }
+
+                if (defined $i_info) {
+                  my $info_cell = $t->{cell}->[$i_info]->[$y]->[0];
+                  if ($info_cell) {
+                    my $info = $info_cell->{element}->text_content;
+                    if ($info =~ /廃止/) {
+                      $d->{abandoned} = 1;
+                    }
+                  }
+                }
+
+
                 push @$data, $d;
             }
         } else { # no table
@@ -80,6 +121,10 @@ sub extract_from_doc ($) {
                     my $wref = $_->get_attribute ('wref');
                     my $d = {name => $name};
                     $d->{wref} = $wref if defined $wref;
+                    if ($has_ruby and $d->{name} =~ /[\(\（]/) {
+                      $d->{wref} = $d->{name} if not defined $d->{wref};
+                      $d->{name} =~ s/\s*[\(（][^()（）]+[\)）]\s*//g;
+                    }
                     push @$data, $d;
                 }
             }
@@ -89,9 +134,15 @@ sub extract_from_doc ($) {
     return $data;
 } # extract_from_doc
 
-my $Data = do {
-    my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-lines.json');
-    file2perl $f;
+my $line = shift;
+$line = decode 'utf-8', $line if defined $line;
+
+my $Data = defined $line ? do {
+  my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
+  file2perl $f;
+} : do {
+  my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-lines.json');
+  file2perl $f;
 };
 
 my $root_d = file (__FILE__)->dir->parent;
@@ -105,17 +156,20 @@ select STDOUT;
 
 my $cv = AE::cv;
 
+my $targets = defined $line ? {$line => {wref => $line}} : $Data;
+
 $cv->begin;
-for my $key (keys %$Data) {
+for my $key (keys %$targets) {
   $cv->begin;
-  $mw->get_source_text_by_name_as_cv ($Data->{$key}->{wref})->cb (sub {
+  my $page_name = $targets->{$key}->{wref};
+  $mw->get_source_text_by_name_as_cv ($page_name)->cb (sub {
     my $data = $_[0]->recv;
     print STDERR ".";
     if (defined $data) {
       my $doc = new Web::DOM::Document;
       my $parser = Text::MediaWiki::Parser->new;
       $parser->parse_char_string ($data => $doc);
-      my $data = extract_from_doc $doc;
+      my $data = extract_from_doc $page_name => $doc;
       $Data->{$key}->{stations} = $data;
     } else {
       warn "No data: |$Data->{$key}->{wref}|\n";
@@ -127,7 +181,18 @@ $cv->end;
 
 $cv->cb (sub {
   print STDERR " done\n";
-  print perl2json_bytes_for_record $Data;
+
+  if (defined $line) {
+    if (not $Data->{$line} or not @{$Data->{$line}->{stations}}) {
+      delete $Data->{$line};
+    } else {
+      $Data->{$line}->{wref} ||= $line;
+      $Data->{$line}->{names}->{$line} = 1;
+    }
+  }
+
+  my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
+  print { $f->openw } perl2json_bytes_for_record $Data;
 });
 
 $cv->recv;
