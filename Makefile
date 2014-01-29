@@ -1,0 +1,58 @@
+# -*- Makefile -*-
+
+all:
+
+## ------ Setup ------
+
+WGET = wget
+GIT = git
+PERL = ./perl
+
+deps: git-submodules pmbp-install
+
+git-submodules:
+	$(GIT) submodule update --init
+
+local/bin/pmbp.pl:
+	mkdir -p local/bin
+	$(WGET) -O $@ https://raw.github.com/wakaba/perl-setupenv/master/bin/pmbp.pl
+pmbp-upgrade: local/bin/pmbp.pl
+	perl local/bin/pmbp.pl --update-pmbp-pl
+pmbp-update: git-submodules pmbp-upgrade
+	perl local/bin/pmbp.pl --update
+pmbp-install: pmbp-upgrade
+	perl local/bin/pmbp.pl --install \
+            --create-perl-command-shortcut perl \
+            --create-perl-command-shortcut prove
+
+## ------ Wikipedia dumps ------
+
+wikipedia-dumps: local/cache/xml/jawiki-latest-pages-meta-current.xml
+
+%.xml: %.xml.bz2
+	bzcat $< > $@
+
+local/cache/xml/jawiki-latest-pages-meta-current.xml.bz2:
+	mkdir -p local/cache/xml
+	$(WGET) -O $@ http://download.wikimedia.org/jawiki/latest/jawiki-latest-pages-meta-current.xml.bz2
+
+## ------ Railways ------
+
+intermediate/railway-lines.json: bin/railway-lines.pl wikipedia-dumps
+	$(PERL) bin/railway-lines.pl > $@
+
+intermediate/railway-stations.json: bin/railway-stations.pl \
+    intermediate/railway-lines.json wikipedia-dumps
+	mkdir -p intermediate
+	$(PERL) bin/railway-stations.pl > $@
+
+## ------ Tests ------
+
+PROVE = ./prove
+
+test: test-deps test-main
+
+test-deps: deps
+
+test-main:
+	$(PROVE) t/*.t
