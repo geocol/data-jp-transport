@@ -1,0 +1,26 @@
+data-jp-transport
+~~~~~~~~~~~~~~~~~
+
+Data on railways in Japan.
+
+* Data
+
+  data/    - JSON data
+  doc/     - Documentation
+
+XXX
+
+* Distribution
+
+Latest version of these data files are available from
+<https://github.com/geocol>.
+
+* Maintainer
+
+Wakaba <wakaba@suikawiki.org> (Hatena <http://hatenacorp.jp/>).
+
+* License
+
+You are granted a license to use, reproduce and create derivative
+works of these files.  See also documents under the "doc/" directory,
+which might contain additional information.
