@@ -12,6 +12,23 @@ use Text::MediaWiki::Parser;
 use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 use Char::Normalize::FullwidthHalfwidth qw(get_fwhw_normalized);
 
+sub _tc ($);
+sub _tc ($) {
+  my $el = $_[0];
+  my $text = '';
+  for (@{$el->child_nodes}) {
+    if ($_->node_type == $_->ELEMENT_NODE) {
+      my $ln = $_->local_name;
+      unless ($ln eq 'comment' or $ln eq 'ref') {
+        $text .= _tc $_;
+      }
+    } elsif ($_->node_type == $_->TEXT_NODE) {
+      $text .= $_->data;
+    }
+  }
+  return $text;
+} # _tc
+
 sub extract_from_doc ($$) {
   my ($page_name, $doc) = @_;
   my $data = [];
@@ -29,18 +46,9 @@ sub extract_from_doc ($$) {
         my $t = $tbl->form_table ($table);
         my $label_to_i = {};
         for (0..$#{$t->{column}}) {
-          my $el = $t->{cell}->[$_]->[0]->[0]->{element} or next;
-          my $text = '';
-          for (@{$el->child_nodes}) {
-            if ($_->node_type == $_->ELEMENT_NODE) {
-              my $ln = $_->local_name;
-              unless ($ln eq 'comment' or $ln eq 'ref') {
-                $text .= $_->text_content;
-              }
-            } elsif ($_->node_type == $_->TEXT_NODE) {
-              $text .= $_->data;
-            }
-          }
+          my $cell = $t->{cell}->[$_]->[0]->[0] or next;
+          my $el = $cell->{element};
+          my $text = _tc $el;
           $text =~ s/\A\s+//;
           $text =~ s/\s+\z//;
           $text =~ s/\s+/ /g;
@@ -139,14 +147,14 @@ sub extract_from_doc ($$) {
 
                 if (defined $label_to_i->{駅番号} or
                     defined $label_to_i->{電停番号}) {
-                    my $cell = $t->{cell}->[$label_to_i->{駅番号} // $label_to_i->{電停番号}]->[$y]->[0];
-                    if ($cell) {
-                        my $num = get_fwhw_normalized $cell->{element}->text_content;
-                        $num =~ s/\A\s+//;
-                        $num =~ s/\s+\z//;
-                        $num =~ s/\s+/ /g;
-                        $d->{number} = $num if length $num and $num =~ /\S/ and $num ne '-';
-                    }
+                  my $cell = $t->{cell}->[$label_to_i->{駅番号} // $label_to_i->{電停番号}]->[$y]->[0];
+                  if ($cell) {
+                    my $num = get_fwhw_normalized _tc $cell->{element};
+                    $num =~ s/\A\s+//;
+                    $num =~ s/\s+\z//;
+                    $num =~ s/\s+/ /g;
+                    $d->{number} = $num if length $num and $num =~ /\S/ and $num ne '-';
+                  }
                 }
 
                 if (defined $i_info) {
