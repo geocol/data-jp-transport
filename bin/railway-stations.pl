@@ -38,7 +38,13 @@ sub extract_from_doc ($$) {
 
   if (defined $h1) {
     my $section = $h1->parent_node;
-    my $tables = $section ? $section->get_elements_by_tag_name ('table') : [];
+    {
+      my $h1 = $section->query_selector ('h1:-manakai-contains("未開業区間")');
+      if (defined $h1) {
+        $h1->parent_node->parent_node->remove_child ($h1->parent_node);
+      }
+    }
+    my $tables = $section->get_elements_by_tag_name ('table');
     if (@$tables) {
       my %found;
       for my $table (@$tables) {
@@ -52,23 +58,31 @@ sub extract_from_doc ($$) {
           $text =~ s/\A\s+//;
           $text =~ s/\s+\z//;
           $text =~ s/\s+/ /g;
-          $label_to_i->{$text} = $_;
+          $label_to_i->{$text} //= $_;
         }
         my $i = $label_to_i->{駅名} //
             $label_to_i->{"駅名・信号場名"} //
+            $label_to_i->{電停名} //
             $label_to_i->{[grep { /駅|電停名/ } keys %$label_to_i]->[0] || '駅'} //
             0;
         my $i_info = $label_to_i->{[grep { /備考/ } keys %$label_to_i]->[0] || '備考'};
 
         my $suffix = {
           鹿児島市電谷山線 => '電停',
+          広島電鉄宇品線 => '電停',
+          広島電鉄本線 => '電停',
+          広島電鉄横川線 => '電停',
+          広島電鉄江波線 => '電停',
+          広島電鉄白島線 => '電停',
+          広島電鉄皆実線 => '電停',
           万葉線高岡軌道線 => '停留場',
           万葉線新湊港線 => '駅',
         }->{$page_name} || '';
         if ($page_name eq '鹿児島市電谷山線' and $i == 0) {
           $i = $#{$t->{column}};
         }
-        my $abandoned_area;
+        my $abandoned_area = {名鉄美濃町線 => 1,
+                              名鉄揖斐線 => 1}->{$page_name};
         my $in_progress_area;
         for my $y (0..$#{$t->{row}}) {
           my $cell = $t->{cell}->[$i]->[$y]->[0] or next;
@@ -99,10 +113,6 @@ sub extract_from_doc ($$) {
 
           my $d = {};
           my $cell_content = get_fwhw_normalized $cell->{element}->text_content;
-          if ($cell_content =~ /^\s*\S+?線\s*[(][^()]+[)]\s*$/) {
-            ## <http://ja.wikipedia.org/wiki/%E9%AB%98%E5%B3%B6%E7%B7%9A>
-            next;
-          }
           if ($page_name eq '東北本線' and not $cell_content =~ /駅/) {
             ## <http://ja.wikipedia.org/wiki/%E6%9D%B1%E5%8C%97%E6%9C%AC%E7%B7%9A>
             next;
@@ -129,8 +139,12 @@ sub extract_from_doc ($$) {
                   $d->{abandoned} = 1
                       if $name =~ s/\s*[(]廃止[)]\s*$// or $abandoned_area;
                   if ($name =~ m{^\s*[(][^()]+[)]\s*(.+)$}) {
-                      $name = $1;
+                    $name = $1;
                   }
+                  if ($name =~ m{^\((.+信号所)\)$}) {
+                    $name = $1;
+                  }
+                  $name =~ s/^\s*\*\s*//;
                   $name =~ s/\A\s+//;
                   $name =~ s/\s+\z//;
                   $name =~ s/\s+/ /g;
@@ -167,6 +181,7 @@ sub extract_from_doc ($$) {
                   }
                 }
 
+          next if $d->{name} =~ /接続点|分界点/;
           next if $found{$d->{name}};
           $found{$d->{name}}++;
           push @$data, $d;

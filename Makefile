@@ -38,13 +38,18 @@ local/cache/xml/jawiki-latest-pages-meta-current.xml.bz2:
 
 ## ------ Railways ------
 
-intermediate/railway-lines.json: bin/railway-lines.pl wikipedia-dumps
+intermediate/railway-lines.json: bin/railway-lines.pl #wikipedia-dumps
 	$(PERL) bin/railway-lines.pl > $@
 
 intermediate/railway-stations.json: bin/railway-stations.pl \
-    intermediate/railway-lines.json wikipedia-dumps
+    intermediate/railway-lines.json #wikipedia-dumps
 	mkdir -p intermediate
-	$(PERL) bin/railway-stations.pl > $@
+	$(PERL) bin/railway-stations.pl
+
+local/railway-station-lines.json: bin/railway-station-lines.pl \
+    intermediate/railway-stations.json
+	mkdir -p intermediate
+	$(PERL) bin/railway-station-lines.pl > $@
 
 ## ------ Tests ------
 
