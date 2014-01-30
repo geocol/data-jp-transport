@@ -10,77 +10,117 @@ use Web::DOM::Document;
 use Web::HTML::Table;
 use Text::MediaWiki::Parser;
 use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
+use Char::Normalize::FullwidthHalfwidth qw(get_fwhw_normalized);
 
 sub extract_from_doc ($$) {
   my ($page_name, $doc) = @_;
   my $data = [];
-  my $h1 = $doc->query_selector ('h1:-manakai-contains("駅一覧"), h1:-manakai-contains("電停一覧")');
+  my $h1 = $doc->query_selector ('h1:-manakai-contains("駅一覧"), h1:-manakai-contains("電停一覧"), h1:-manakai-contains("駅・信号場一覧")');
 
   my $has_ruby = {鹿児島市電唐湊線 => 1}->{$page_name};
 
-    if (defined $h1) {
-        my $section = $h1->parent_node;
-        my $table = $section ? $section->get_elements_by_tag_name ('table')->[0] : undef;
-        if (defined $table) {
-            my $tbl = Web::HTML::Table->new;
-            my $t = $tbl->form_table ($table);
-            my $label_to_i = {};
-            for (0..$#{$t->{column}}) {
-                my $el = $t->{cell}->[$_]->[0]->[0]->{element} or next;
-                my $text = $el->text_content;
-                $text =~ s/\A\s+//;
-                $text =~ s/\s+\z//;
-                $text =~ s/\s+/ /g;
-                $label_to_i->{$text} = $_;
+  if (defined $h1) {
+    my $section = $h1->parent_node;
+    my $tables = $section ? $section->get_elements_by_tag_name ('table') : [];
+    if (@$tables) {
+      my %found;
+      for my $table (@$tables) {
+        my $tbl = Web::HTML::Table->new;
+        my $t = $tbl->form_table ($table);
+        my $label_to_i = {};
+        for (0..$#{$t->{column}}) {
+          my $el = $t->{cell}->[$_]->[0]->[0]->{element} or next;
+          my $text = '';
+          for (@{$el->child_nodes}) {
+            if ($_->node_type == $_->ELEMENT_NODE) {
+              my $ln = $_->local_name;
+              unless ($ln eq 'comment' or $ln eq 'ref') {
+                $text .= $_->text_content;
+              }
+            } elsif ($_->node_type == $_->TEXT_NODE) {
+              $text .= $_->data;
             }
-            my $i = $label_to_i->{駅名} //
-                    $label_to_i->{"駅名・信号場名"} //
-                    $label_to_i->{[grep { /駅/ } keys %$label_to_i]->[0] || '駅'} //
-                    0;
-            my $i_info = $label_to_i->{[grep { /備考/ } keys %$label_to_i]->[0] || '備考'};
+          }
+          $text =~ s/\A\s+//;
+          $text =~ s/\s+\z//;
+          $text =~ s/\s+/ /g;
+          $label_to_i->{$text} = $_;
+        }
+        my $i = $label_to_i->{駅名} //
+            $label_to_i->{"駅名・信号場名"} //
+            $label_to_i->{[grep { /駅|電停名/ } keys %$label_to_i]->[0] || '駅'} //
+            0;
+        my $i_info = $label_to_i->{[grep { /備考/ } keys %$label_to_i]->[0] || '備考'};
 
-            my $suffix = '';
-            if ($page_name eq '鹿児島市電谷山線' and $i == 0) {
-              $i = $#{$t->{column}};
-              $suffix = '電停';
+        my $suffix = {
+          鹿児島市電谷山線 => '電停',
+          万葉線高岡軌道線 => '停留場',
+          万葉線新湊港線 => '駅',
+        }->{$page_name} || '';
+        if ($page_name eq '鹿児島市電谷山線' and $i == 0) {
+          $i = $#{$t->{column}};
+        }
+        my $abandoned_area;
+        my $in_progress_area;
+        for my $y (0..$#{$t->{row}}) {
+          my $cell = $t->{cell}->[$i]->[$y]->[0] or next;
+
+          if ($cell->{width} > 1 and $cell->{width} == @{$t->{column}}) {
+            my $cell_data = $cell->{element}->text_content;
+            if ($cell_data =~ /廃止区間/) {
+              ## <http://ja.wikipedia.org/wiki/%E3%81%AE%E3%81%A8%E9%89%84%E9%81%93%E4%B8%83%E5%B0%BE%E7%B7%9A>
+              $abandoned_area = 1;
+            } elsif ($cell_data =~ /未開業区間/) {
+              $in_progress_area = 1;
             }
-            for my $y (0..$#{$t->{row}}) {
-                my $cell = $t->{cell}->[$i]->[$y]->[0] or next;
-                next unless $cell->{element}->local_name eq 'td';
-                next if $cell->{x} != $i;
-                next if $cell->{y} != $y;
-                next if $cell->{width} > 1 and $cell->{width} == @{$t->{column}};
+            next;
+          }
+          next if $in_progress_area;
+          next if $cell->{x} != $i;
+          next if $cell->{y} != $y;
+          next unless $cell->{element}->local_name eq 'td';
 
-                my $l;
-                for my $el (@{$cell->{element}->children}) {
-                    next unless $el->local_name eq 'l';
-                    next if $el->has_attribute ('embed');
-                    $l = $el;
-                    last;
-                }
+          my $l;
+          for my $el (@{$cell->{element}->children}) {
+            next unless $el->local_name eq 'l';
+            next if $el->has_attribute ('embed');
+            next if $el->text_content eq '臨';
+            $l = $el;
+            last;
+          }
 
-                my $d = {};
-                my $cell_content = $cell->{element}->text_content;
-                if ($cell_content =~ /^\s*\S+?線\s*[(（][^()（）]+[)）]\s*$/) {
-                  ## <http://ja.wikipedia.org/wiki/%E9%AB%98%E5%B3%B6%E7%B7%9A>
-                  next;
-                }
+          my $d = {};
+          my $cell_content = get_fwhw_normalized $cell->{element}->text_content;
+          if ($cell_content =~ /^\s*\S+?線\s*[(][^()]+[)]\s*$/) {
+            ## <http://ja.wikipedia.org/wiki/%E9%AB%98%E5%B3%B6%E7%B7%9A>
+            next;
+          }
+          if ($page_name eq '東北本線' and not $cell_content =~ /駅/) {
+            ## <http://ja.wikipedia.org/wiki/%E6%9D%B1%E5%8C%97%E6%9C%AC%E7%B7%9A>
+            next;
+          }
 
                 if (defined $l) {
                   $d->{name} = $l->text_content;
                   my $n = $l->get_attribute ('wref');
                   $d->{wref} = $n if defined $n;
 
-                  if ($cell_content =~ /廃止/) {
-                    $d->{abandoned} = 1;
+                  my $nn = get_fwhw_normalized $d->{name};
+                  if (not $nn eq $d->{name}) {
+                    if (not defined $d->{wref}) {
+                      $d->{wref} = $d->{name};
+                    }
+                    $d->{name} = $nn;
                   }
+
+                  $d->{abandoned} = 1
+                      if $abandoned_area or $cell_content =~ /廃止/;
                 } else {
                   my $name = $cell_content;
                   $name =~ s/^\s*#[0-9A-Fa-f]+\s*//;
-                  if ($name =~ s/\s*[(（]廃止[)）]\s*$//) {
-                    $d->{abandoned} = 1;
-                  }
-                  if ($name =~ m{^\s*[(（][^()（）]+[)）]\s*(.+)$}) {
+                  $d->{abandoned} = 1
+                      if $name =~ s/\s*[(]廃止[)]\s*$// or $abandoned_area;
+                  if ($name =~ m{^\s*[(][^()]+[)]\s*(.+)$}) {
                       $name = $1;
                   }
                   $name =~ s/\A\s+//;
@@ -97,10 +137,11 @@ sub extract_from_doc ($$) {
                     $d->{wref} = $page_name . $d->{wref};
                 }
 
-                if (defined $label_to_i->{駅番号}) {
-                    my $cell = $t->{cell}->[$label_to_i->{駅番号}]->[$y]->[0];
+                if (defined $label_to_i->{駅番号} or
+                    defined $label_to_i->{電停番号}) {
+                    my $cell = $t->{cell}->[$label_to_i->{駅番号} // $label_to_i->{電停番号}]->[$y]->[0];
                     if ($cell) {
-                        my $num = $cell->{element}->text_content;
+                        my $num = get_fwhw_normalized $cell->{element}->text_content;
                         $num =~ s/\A\s+//;
                         $num =~ s/\s+\z//;
                         $num =~ s/\s+/ /g;
@@ -118,28 +159,37 @@ sub extract_from_doc ($$) {
                   }
                 }
 
-
-                push @$data, $d;
-            }
-        } else { # no table
+          next if $found{$d->{name}};
+          $found{$d->{name}}++;
+          push @$data, $d;
+        } # row
+      } # $table
+    } else { # no table
             my $ls = $section->query_selector_all ('l');
             for (@$ls) {
+                next if $_->has_attribute ('embed');
                 my $name = $_->text_content;
                 if ($name =~ /(?:駅|信号所|電停|停留所|仮乗降場)$/) {
                     my $wref = $_->get_attribute ('wref');
                     my $d = {name => $name};
                     $d->{wref} = $wref if defined $wref;
-                    if ($has_ruby and $d->{name} =~ /[\(\（]/) {
+                    my $nn = get_fwhw_normalized $d->{name};
+                    if (not $nn eq $d->{name}) {
+                      if (not defined $d->{wref}) {
+                        $d->{wref} = $d->{name};
+                      }
+                      $d->{name} = $nn;
+                    }
+                    if ($has_ruby and $d->{name} =~ /[(]/) {
                       $d->{wref} = $d->{name} if not defined $d->{wref};
-                      $d->{name} =~ s/\s*[\(（][^()（）]+[\)）]\s*//g;
+                      $d->{name} =~ s/\s*[(][^()]+[)]\s*//g;
                     }
                     push @$data, $d;
                 }
             }
-
-        }
-    }
-    return $data;
+    } # table
+  }
+  return $data;
 } # extract_from_doc
 
 my $line = shift;
@@ -198,6 +248,8 @@ $cv->cb (sub {
       $Data->{$line}->{wref} ||= $line;
       $Data->{$line}->{names}->{$line} = 1;
     }
+  } else {
+    $Data->{東海道本線}->{stations} = [];
   }
 
   my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
