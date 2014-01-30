@@ -49,6 +49,7 @@ sub extract_from_doc ($$) {
                 next unless $cell->{element}->local_name eq 'td';
                 next if $cell->{x} != $i;
                 next if $cell->{y} != $y;
+                next if $cell->{width} > 1 and $cell->{width} == @{$t->{column}};
 
                 my $l;
                 for my $el (@{$cell->{element}->children}) {
@@ -75,8 +76,12 @@ sub extract_from_doc ($$) {
                   }
                 } else {
                   my $name = $cell_content;
+                  $name =~ s/^\s*#[0-9A-Fa-f]+\s*//;
                   if ($name =~ s/\s*[(（]廃止[)）]\s*$//) {
                     $d->{abandoned} = 1;
+                  }
+                  if ($name =~ m{^\s*[(（][^()（）]+[)）]\s*(.+)$}) {
+                      $name = $1;
                   }
                   $name =~ s/\A\s+//;
                   $name =~ s/\s+\z//;
@@ -87,6 +92,9 @@ sub extract_from_doc ($$) {
                 if (length $suffix and not $d->{name} =~ /$suffix$/) {
                   $d->{wref} = $d->{name} if not defined $d->{wref};
                   $d->{name} .= $suffix;
+                }
+                if (defined $d->{wref} and $d->{wref} =~ /^\#/) {
+                    $d->{wref} = $page_name . $d->{wref};
                 }
 
                 if (defined $label_to_i->{駅番号}) {
@@ -136,6 +144,7 @@ sub extract_from_doc ($$) {
 
 my $line = shift;
 $line = decode 'utf-8', $line if defined $line;
+$line =~ tr/_/ / if defined $line;
 
 my $Data = defined $line ? do {
   my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
@@ -183,7 +192,7 @@ $cv->cb (sub {
   print STDERR " done\n";
 
   if (defined $line) {
-    if (not $Data->{$line} or not @{$Data->{$line}->{stations}}) {
+    if (not $Data->{$line} or not @{$Data->{$line}->{stations} or []}) {
       delete $Data->{$line};
     } else {
       $Data->{$line}->{wref} ||= $line;
