@@ -29,6 +29,8 @@ sub _n ($) {
   return get_fwhw_normalized $s;
 } # _n
 
+my $IgnoredTemplates = {color => 1, flagicon => 1};
+
 sub _tc ($);
 sub _tc ($) {
   my $el = $_[0];
@@ -39,12 +41,17 @@ sub _tc ($) {
       my $ln = $_->local_name;
       if ($ln eq 'comment' or $ln eq 'ref') {
         #
-      } elsif ($ln eq 'include' and $_->get_attribute ('wref') eq 'Color') {
+      } elsif ($ln eq 'include' and $IgnoredTemplates->{lc ($_->get_attribute ('wref') // '')}) {
         #
       } elsif ($ln eq 'include' and $_->get_attribute ('wref') eq '駅番号c') {
         my @ip = grep { $_->local_name eq 'iparam' } @{$_->children};
         if (defined $ip[1]) {
           $text .= _tc $ip[1];
+        }
+      } elsif ($ln eq 'include' and $_->get_attribute ('wref') eq '駅番号s') {
+        my @ip = grep { $_->local_name eq 'iparam' } @{$_->children};
+        if (defined $ip[2]) {
+          $text .= _tc $ip[2];
         }
       } elsif ($ln eq 'span') {
         my $v = _tc $_;
@@ -73,7 +80,7 @@ sub _extract_objects ($) {
         $l //= $_;
       } elsif ($ln eq 'comment' or $ln eq 'ref') {
         #
-      } elsif ($ln eq 'include' and $_->get_attribute ('wref') eq 'Color') {
+      } elsif ($ln eq 'include' and $IgnoredTemplates->{lc ($_->get_attribute ('wref') // '')}) {
         #
       } elsif ($ln eq 'span') {
         push @n, $_ unless (_tc $_) eq "\x{25A0}";
@@ -196,9 +203,23 @@ sub parse_station ($) {
         }
       }
       if (defined $el) {
-        my @ip = map { _tc $_ } grep { $_->local_name eq 'iparam' } @{$el->children};
-        $data->{lat} = ($ip[3] eq 'N' ? 1 : -1) * ($ip[0] + $ip[1] * (1/60) + $ip[2] * (1/3600));
-        $data->{lon} = ($ip[7] eq 'E' ? 1 : -1) * ($ip[4] + $ip[5] * (1/60) + $ip[6] * (1/3600));
+        my %attr;
+        my @ip;
+        for (grep { $_->local_name eq 'iparam' } @{$el->children}) {
+          my $name = $_->get_attribute ('name');
+          if (defined $name) {
+            $attr{$name} = _tc $_;
+          } else {
+            push @ip, _tc $_;
+          }
+        }
+        if (defined $attr{format} and $attr{format} eq 'dms') {
+          $data->{lat} = 0+$ip[0];
+          $data->{lon} = 0+$ip[1];
+        } else {
+          $data->{lat} = ($ip[3] eq 'N' ? 1 : -1) * ($ip[0] + $ip[1] * (1/60) + $ip[2] * (1/3600));
+          $data->{lon} = ($ip[7] eq 'E' ? 1 : -1) * ($ip[4] + $ip[5] * (1/60) + $ip[6] * (1/3600));
+        }
       }
     } elsif ({qw(緯度度 1 緯度分 1 緯度秒 1
                  経度度 1 経度分 1 経度秒 1)}->{$name}) {
@@ -248,6 +269,7 @@ sub extract_station_as_cv ($) {
 
         for (@$stations) {
           my $data = parse_station $_;
+          warn "No |name| - $wref" unless defined $data->{name};
           $Data->{$wref}->{stations}->{$data->{name}} = $data;
         }
       }
