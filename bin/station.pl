@@ -13,8 +13,9 @@ use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 use Char::Normalize::FullwidthHalfwidth qw(get_fwhw_normalized);
 
 my $root_d = file (__FILE__)->dir->parent;
+my $data_f = $root_d->file ('data', 'stations.json');
 
-my $Data = {};
+my $Data = file2perl $data_f;
 
 my $mw = AnyEvent::MediaWiki::Source->new_from_dump_f_and_cache_d
     ($root_d->file ('local', 'cache', 'xml', 'jawiki-latest-pages-meta-current.xml'),
@@ -210,7 +211,7 @@ sub parse_station ($) {
     } elsif ($name eq '廃止年月日') {
       my $value = _n _tc $iparam;
       if ($value =~ /(\d+)年\s*\([^()]+\)\s*(\d+)月(\d+)日/) {
-        $data->{open_date} = sprintf '%04d-%02d-%02d', $1, $2, $3;
+        $data->{closed_date} = sprintf '%04d-%02d-%02d', $1, $2, $3;
       }
     }
   } # $iparam
@@ -229,6 +230,8 @@ sub parse_station ($) {
 
 sub extract_station_as_cv ($) {
   my $wref = $_[0];
+  $wref =~ s/#.+//s;
+  $wref =~ tr/_/ /;
   my $cv = AE::cv;
   $cv->begin;
   $mw->get_source_text_by_name_as_cv ($wref)->cb (sub {
@@ -265,7 +268,7 @@ for (@ARGV) {
 $cv->end;
 
 $cv->cb (sub {
-  print perl2json_bytes_for_record $Data;
+  print { $data_f->openw } perl2json_bytes_for_record $Data;
 });
 
 $cv->recv;

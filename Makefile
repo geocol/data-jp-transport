@@ -51,6 +51,17 @@ local/railway-station-lines.json: bin/railway-station-lines.pl \
 	mkdir -p intermediate
 	$(PERL) bin/railway-station-lines.pl > $@
 
+local/bin/jq:
+	$(WGET) -O $@ http://stedolan.github.io/jq/download/linux64/jq
+	chmod u+x local/bin/jq
+
+local/station-list.json: local/bin/jq intermediate/railway-stations.json Makefile
+	cat intermediate/railway-stations.json  | local/bin/jq "[.[].stations[] | .wref // .name] | unique" > $@
+
+data/stations.json: local/station-list.json bin/update-station-data.pl #wikipedia-dumps
+	echo "{}" > $@
+	$(PERL) bin/update-station-data.pl
+
 ## ------ Tests ------
 
 PROVE = ./prove
