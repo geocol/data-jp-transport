@@ -172,7 +172,7 @@ sub parse_station ($) {
           $value =~ s/\x0A.*//s;
         }
         $value = _n $value;
-        $value =~ s/\s*\*$//;
+        $value =~ s/\s*\*+$//;
       }
       if (defined $value and length $value) {
         if ($fdef->{line_indexed}) {
