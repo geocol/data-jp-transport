@@ -6,7 +6,7 @@ use lib glob file (__FILE__)->dir->subdir ('modules', '*', 'lib')->stringify;
 use MediaWikiXML::PageExtractor;
 
 my $root_d = file (__FILE__)->dir->parent;
-my $pattern = qr{駅};
+my $pattern = qr{駅|停留|電停|信号所};
 
 my $dump_f = $root_d->file ('local', 'cache', 'xml', 'jawiki-latest-pages-meta-current.xml');
 my $cache_d = $root_d->subdir ('local', 'cache');
