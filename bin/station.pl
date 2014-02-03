@@ -237,6 +237,7 @@ sub parse_station ($) {
     }
   } # $iparam
   if (defined $props->{緯度秒}) {
+    warn "Unsupported lat format - $data->{name}" if not defined $props->{緯度分};
     $data->{lat} = $props->{緯度度} + $props->{緯度分} * (1/60) + $props->{緯度秒} * (1/3600);
   }
   if (defined $props->{経度秒}) {

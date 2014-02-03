@@ -1,6 +1,6 @@
 # -*- Makefile -*-
 
-all:
+all: data/railway-lines.json data/stations.json
 
 ## ------ Setup ------
 
@@ -55,8 +55,11 @@ local/bin/jq:
 	$(WGET) -O $@ http://stedolan.github.io/jq/download/linux64/jq
 	chmod u+x local/bin/jq
 
-local/station-list.json: local/bin/jq intermediate/railway-stations.json Makefile
+local/station-list.json: local/bin/jq intermediate/railway-stations.json
 	cat intermediate/railway-stations.json  | local/bin/jq "[.[].stations[] | .wref // .name] | unique" > $@
+
+data/railway-lines.json: intermediate/railway-stations.json
+	cp $< $@
 
 data/stations.json: local/station-list.json bin/update-station-data.pl #wikipedia-dumps
 	echo "{}" > $@
