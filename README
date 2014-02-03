@@ -3,12 +3,16 @@ data-jp-transport
 
 Data on railways in Japan.
 
+Please note that data in this repository is NOT YET HIGH QUALITY
+ENOUGH FOR PRODUCTION USES.
+
 * Data
 
   data/    - JSON data
   doc/     - Documentation
 
-XXX
+data/railway-lines.json  - List of railway lines
+data/stations.json       - List of railway stations
 
 * Distribution
 

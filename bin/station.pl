@@ -243,6 +243,10 @@ sub parse_station ($) {
   if (defined $props->{経度秒}) {
     $data->{lon} = $props->{経度度} + $props->{経度分} * (1/60) + $props->{経度秒} * (1/3600);
   }
+  if (defined $data->{company_wrefs} and
+      ref $data->{company_wrefs} eq 'ARRAY') {
+    $data->{company_wrefs} = {map { $_ => 1 } @{$data->{company_wrefs}}};
+  }
   for (@$lines) {
     my $line_wref = delete $_->{line_wref} // '';
     $data->{lines}->{$line_wref} = $_;

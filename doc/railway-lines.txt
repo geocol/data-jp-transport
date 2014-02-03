@@ -1,0 +1,52 @@
+railway-lines.json
+~~~~~~~~~~~~~~~~~~
+
+This file contains lines of railways in Japan and stations on those
+lines.
+
+* Structure
+
+The file contains a JSON object, whose names are line identifiers and
+values are corresponding properties.
+
+Line identifiers are strings identifying railway lines.  The Wikipedia
+reference of the Wikipedia article in which the line is described is
+used as the line identifier of the line.
+
+Values are JSON objects with following name/value pairs:
+
+  names [object]
+
+    Known formal or informal names of the line.  Names of the object
+    are names and values of the object are boolean true values.
+
+  stations
+
+    A JSON array of stations in the line, if known.  Stations are
+    sorted in some order, but might not reflect actual geographical
+    order of the stations (e.g. when there are multiple branch lines).
+
+    Stations are represented as JSON objects with following name/value
+    pairs:
+
+      abandoned [boolean]
+
+        Whether the station has been abandoned or not.
+
+      name [string]
+
+        The name of the station.
+
+      wref [string?]
+
+        The Wikipedia reference of the description of the station, if
+        known and is different from |name|'s value.
+
+* License
+
+This file contains data extracted from Wikipedia.  See the following
+document for the full license terms:
+
+  Wikipedia:Text of Creative Commons Attribution-ShareAlike 3.0
+Unported License
+  <http://ja.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License>

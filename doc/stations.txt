@@ -1,0 +1,96 @@
+stations.json
+~~~~~~~~~~~~~
+
+This file contains stations of railways in Japan.
+
+* Structure
+
+The file contains a JSON object, whose names are station identifiers
+and values are corresponding properties.
+
+Station identifiers are strings identifying railway stations.  The
+Wikipedia reference of the Wikipedia article in which the station is
+described is used as the station identifier of the station.
+
+Values are JSON objects with following name/value pairs:
+
+  closed_date [string?]
+
+    The HTML valid date string of the date the station has been
+    closed.
+
+  company_wrefs [object?]
+
+    The list of the organizations maintaining the station, if known.
+    Names are Wikipedia references of the organizations and values are
+    boolean true values.
+
+  lat [number?]
+
+    The WGS84 latitude of the station, if known.
+
+  lines [object?]
+
+    The list of the lines to which the station belongs, if known.
+    Names are Wikipedia references ot the lines and values are JSON
+    objects with following name/value pairs:
+
+      number [string?]
+
+        The station number of the station for the line, if exists and
+        known.
+
+  location [string?]
+
+    The address string (in Japanese) of the location of the station,
+    if known.
+
+  lon [number?]
+
+    The WGS84 longitude of the station, if known.
+
+  name [string]
+
+    The name of the station.
+
+  name_kana [string?]
+
+    The kana representation of the station name.
+
+  name_latin [string?]
+
+    The Roman representation of the station name.
+
+  open_date [string?]
+
+    The HTML valid date string of the date the station has opened.
+
+  photo_desc [string?]
+
+    The short caption text of the photo of the station, shown in
+    Wikipedia page.
+
+  photo_wref [string?]
+
+    The file name of the photo of the station, shown in Wikipedia
+    page.  This is a Wikipedia reference of the image file without
+    "File:" prefix.
+
+  stations [object?]
+
+    If the station is in fact a set of multiple stations sharing same
+    or similar names and location, data of the actual stations.
+    Alternatively, if there are historical stations near the station,
+    data of such stations.  Anyway, names of the object are the
+    station identifiers of such actual or historical stations and
+    values of the object are properties of the stations, using the
+    same data structure as top-level stations.
+
+* License
+
+This file contains data extracted from Wikipedia.  See the following
+document for the full license terms:
+
+  Wikipedia:Text of Creative Commons Attribution-ShareAlike 3.0
+Unported License
+  <http://ja.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License>

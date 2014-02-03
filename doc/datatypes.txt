@@ -1,0 +1,20 @@
+Data types used in data files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Common data types are described in
+<https://github.com/manakai/data-web-defs/blob/master/doc/data-types.txt>.
+
+A Wikipedia reference is a short string used to identify a Wikipedia
+page and/or section, as used in Wikipedia's [[...]] notation.  For
+example:
+
+  Hoge Fuga      - Wikipedia page whose name is "Hoge Fuga"
+  Hoge#Fuga      - Wikipedia section "Fuga" in page "Hoge"
+  #Fuga          - Wikipedia section "Fuga" in some base page
+
+When a Wikipedia reference without page name is used, a way to
+determine the base page for the reference must be described somewhere.
+
+Unless otherwise stated, the Wikipedia references identify pages
+and/or sections in Japanese version of Wikipedia
+<http://ja.wikipedia.org/>.
