@@ -36,6 +36,17 @@ local/cache/xml/jawiki-latest-pages-meta-current.xml.bz2:
 	mkdir -p local/cache/xml
 	$(WGET) -O $@ http://download.wikimedia.org/jawiki/latest/jawiki-latest-pages-meta-current.xml.bz2
 
+wp-autoupdate: wp-clean wp-data
+
+wp-clean:
+	rm -fr intermediate/railway-lines.json
+	rm -fr intermediate/railway-stations.json intermediate/stations.json
+
+wp-data: intermediate/railway-lines.json \
+    intermediate/railway-stations.json \
+    intermediate/stations.json
+	$(GIT) add intermediate
+
 ## ------ Railways ------
 
 intermediate/railway-lines.json: bin/railway-lines.pl #wikipedia-dumps
