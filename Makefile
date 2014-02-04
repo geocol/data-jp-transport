@@ -36,7 +36,7 @@ local/cache/xml/jawiki-latest-pages-meta-current.xml.bz2:
 	mkdir -p local/cache/xml
 	$(WGET) -O $@ http://download.wikimedia.org/jawiki/latest/jawiki-latest-pages-meta-current.xml.bz2
 
-wp-autoupdate: wp-clean wp-data
+wp-autoupdate: deps wp-clean wp-data
 
 wp-clean:
 	rm -fr intermediate/railway-lines.json
