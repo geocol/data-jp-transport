@@ -42,7 +42,10 @@ wp-clean:
 	rm -fr intermediate/railway-lines.json
 	rm -fr intermediate/railway-stations.json intermediate/stations.json
 
-wp-data: intermediate/railway-lines.json \
+wp-deps:
+	$(PERL) bin/prepare-wikipedia-cache.pl
+
+wp-data: wp-deps intermediate/railway-lines.json \
     intermediate/railway-stations.json \
     intermediate/stations.json
 	$(GIT) add intermediate
