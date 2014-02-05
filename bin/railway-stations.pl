@@ -19,7 +19,17 @@ sub _tc ($) {
   for (@{$el->child_nodes}) {
     if ($_->node_type == $_->ELEMENT_NODE) {
       my $ln = $_->local_name;
-      unless ($ln eq 'comment' or $ln eq 'ref') {
+      if ($ln eq 'comment' or $ln eq 'ref') {
+        #
+      } elsif ($ln eq 'include') {
+        my $wref = $_->get_attribute ('wref');
+        if ($wref eq 'Color' or $wref eq 'color') {
+          my @ip = grep { $_->local_name eq 'iparam' } @{$_->children};
+          $text .= _tc $ip[1];
+        } else {
+          $text .= _tc $_;
+        }
+      } else {
         $text .= _tc $_;
       }
     } elsif ($_->node_type == $_->TEXT_NODE) {
@@ -38,11 +48,8 @@ sub extract_from_doc ($$) {
 
   if (defined $h1) {
     my $section = $h1->parent_node;
-    {
-      my $h1 = $section->query_selector ('h1:-manakai-contains("未開業区間")');
-      if (defined $h1) {
-        $h1->parent_node->parent_node->remove_child ($h1->parent_node);
-      }
+    for my $h1 (@{$section->query_selector_all ('h1:-manakai-contains("未開業区間"), h1:-manakai-contains("配線図")')}) {
+      $h1->parent_node->parent_node->remove_child ($h1->parent_node);
     }
     my $tables = $section->get_elements_by_tag_name ('table');
     if (@$tables) {
@@ -112,28 +119,28 @@ sub extract_from_doc ($$) {
           }
 
           my $d = {};
-          my $cell_content = get_fwhw_normalized $cell->{element}->text_content;
+          my $cell_content = get_fwhw_normalized _tc $cell->{element};
           if ($page_name eq '東北本線' and not $cell_content =~ /駅/) {
             ## <http://ja.wikipedia.org/wiki/%E6%9D%B1%E5%8C%97%E6%9C%AC%E7%B7%9A>
             next;
           }
 
-                if (defined $l) {
-                  $d->{name} = $l->text_content;
-                  my $n = $l->get_attribute ('wref');
-                  $d->{wref} = $n if defined $n;
+          if (defined $l) {
+            $d->{name} = _tc $l;
+            my $n = $l->get_attribute ('wref');
+            $d->{wref} = $n if defined $n;
 
-                  my $nn = get_fwhw_normalized $d->{name};
-                  if (not $nn eq $d->{name}) {
-                    if (not defined $d->{wref}) {
-                      $d->{wref} = $d->{name};
-                    }
-                    $d->{name} = $nn;
-                  }
+            my $nn = get_fwhw_normalized $d->{name};
+            if (not $nn eq $d->{name}) {
+              if (not defined $d->{wref}) {
+                $d->{wref} = $d->{name};
+              }
+              $d->{name} = $nn;
+            }
 
-                  $d->{abandoned} = 1
-                      if $abandoned_area or $cell_content =~ /廃止/;
-                } else {
+            $d->{abandoned} = 1
+                if $abandoned_area or $cell_content =~ /廃止/;
+          } else {
                   my $name = $cell_content;
                   $name =~ s/^\s*#[0-9A-Fa-f]+\s*//;
                   $d->{abandoned} = 1
