@@ -50,7 +50,7 @@ sub extract_from_doc ($$) {
 
   if (defined $h1) {
     my $section = $h1->parent_node;
-    for my $h1 (@{$section->query_selector_all ('h1:-manakai-contains("未開業区間"), h1:-manakai-contains("配線図"), h1:-manakai-contains("構造"), h1:-manakai-contains("過去の")')}) {
+    for my $h1 (@{$section->query_selector_all ('h1:-manakai-contains("未開業区間"), h1:-manakai-contains("配線図"), h1:-manakai-contains("構造"), h1:-manakai-contains("過去の"), h1:-manakai-contains("廃止")')}) {
       $h1->parent_node->parent_node->remove_child ($h1->parent_node);
     }
     my $tables = $section->get_elements_by_tag_name ('table');
