@@ -12,6 +12,8 @@ use Text::MediaWiki::Parser;
 use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 use Char::Normalize::FullwidthHalfwidth qw(get_fwhw_normalized);
 
+my $Symbols = qr{[*\x{25C7}\x{25A0}]};
+
 sub _tc ($);
 sub _tc ($) {
   my $el = $_[0];
@@ -48,7 +50,7 @@ sub extract_from_doc ($$) {
 
   if (defined $h1) {
     my $section = $h1->parent_node;
-    for my $h1 (@{$section->query_selector_all ('h1:-manakai-contains("未開業区間"), h1:-manakai-contains("配線図")')}) {
+    for my $h1 (@{$section->query_selector_all ('h1:-manakai-contains("未開業区間"), h1:-manakai-contains("配線図"), h1:-manakai-contains("構造"), h1:-manakai-contains("過去の")')}) {
       $h1->parent_node->parent_node->remove_child ($h1->parent_node);
     }
     my $tables = $section->get_elements_by_tag_name ('table');
@@ -99,7 +101,7 @@ sub extract_from_doc ($$) {
             if ($cell_data =~ /廃止区間/) {
               ## <http://ja.wikipedia.org/wiki/%E3%81%AE%E3%81%A8%E9%89%84%E9%81%93%E4%B8%83%E5%B0%BE%E7%B7%9A>
               $abandoned_area = 1;
-            } elsif ($cell_data =~ /未開業区間/) {
+            } elsif ($cell_data =~ /未開業区間|計画中/) {
               $in_progress_area = 1;
             }
             next;
@@ -141,23 +143,24 @@ sub extract_from_doc ($$) {
             $d->{abandoned} = 1
                 if $abandoned_area or $cell_content =~ /廃止/;
           } else {
-                  my $name = $cell_content;
-                  $name =~ s/^\s*#[0-9A-Fa-f]+\s*//;
-                  $d->{abandoned} = 1
-                      if $name =~ s/\s*[(]廃止[)]\s*$// or $abandoned_area;
-                  if ($name =~ m{^\s*[(][^()]+[)]\s*(.+)$}) {
-                    $name = $1;
-                  }
-                  if ($name =~ m{^\((.+信号所)\)$}) {
-                    $name = $1;
-                  }
-                  $name =~ s/^\s*\*\s*//;
-                  $name =~ s/\A\s+//;
-                  $name =~ s/\s+\z//;
-                  $name =~ s/\s+/ /g;
-                  next unless length $name;
-                  $d->{name} = $name;
-                }
+            my $name = $cell_content;
+            $name =~ s/^\s*#[0-9A-Fa-f]+\s*//;
+            $d->{abandoned} = 1
+                if $name =~ s/\s*[(]廃止[)]\s*$// or $abandoned_area;
+            if ($name =~ m{^\s*[(][^()]+[)]\s*(.+)$}) {
+              $name = $1;
+            }
+            if ($name =~ m{^\((.+信号所)\)$}) {
+              $name = $1;
+            }
+            $name =~ s/$Symbols+\s*\z//o;
+            $name =~ s/^\s*\*\s*//;
+            $name =~ s/\A\s+//;
+            $name =~ s/\s+\z//;
+            $name =~ s/\s+/ /g;
+            next unless length $name;
+            $d->{name} = $name;
+          }
                 if (length $suffix and not $d->{name} =~ /$suffix$/) {
                   $d->{wref} = $d->{name} if not defined $d->{wref};
                   $d->{name} .= $suffix;
@@ -188,35 +191,35 @@ sub extract_from_doc ($$) {
                   }
                 }
 
-          next if $d->{name} =~ /接続点|分界点/;
+          next if $d->{name} =~ /接続点|分界点|分岐点/;
           next if $found{$d->{name}};
           $found{$d->{name}}++;
           push @$data, $d;
         } # row
       } # $table
     } else { # no table
-            my $ls = $section->query_selector_all ('l');
-            for (@$ls) {
-                next if $_->has_attribute ('embed');
-                my $name = $_->text_content;
-                if ($name =~ /(?:駅|信号所|電停|停留所|仮乗降場)$/) {
-                    my $wref = $_->get_attribute ('wref');
-                    my $d = {name => $name};
-                    $d->{wref} = $wref if defined $wref;
-                    my $nn = get_fwhw_normalized $d->{name};
-                    if (not $nn eq $d->{name}) {
-                      if (not defined $d->{wref}) {
-                        $d->{wref} = $d->{name};
-                      }
-                      $d->{name} = $nn;
-                    }
-                    if ($has_ruby and $d->{name} =~ /[(]/) {
-                      $d->{wref} = $d->{name} if not defined $d->{wref};
-                      $d->{name} =~ s/\s*[(][^()]+[)]\s*//g;
-                    }
-                    push @$data, $d;
-                }
+      my $ls = $section->query_selector_all ('l');
+      for (@$ls) {
+        next if $_->has_attribute ('embed');
+        my $name = $_->text_content;
+        if ($name =~ /(?:駅|信号所|電停|停留所|仮乗降場)$/) {
+          my $wref = $_->get_attribute ('wref');
+          my $d = {name => $name};
+          $d->{wref} = $wref if defined $wref;
+          my $nn = get_fwhw_normalized $d->{name};
+          if (not $nn eq $d->{name}) {
+            if (not defined $d->{wref}) {
+              $d->{wref} = $d->{name};
             }
+            $d->{name} = $nn;
+          }
+          if ($has_ruby and $d->{name} =~ /[(]/) {
+            $d->{wref} = $d->{name} if not defined $d->{wref};
+            $d->{name} =~ s/\s*[(][^()]+[)]\s*//g;
+          }
+          push @$data, $d;
+        }
+      }
     } # table
   }
   return $data;
