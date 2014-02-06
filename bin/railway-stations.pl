@@ -74,6 +74,9 @@ sub extract_from_doc ($$) {
             $label_to_i->{電停名} //
             $label_to_i->{[grep { /駅|電停名/ } keys %$label_to_i]->[0] || '駅'} //
             0;
+        $i = 1 if $page_name eq '真岡鐵道真岡線' and $i == 0;
+        $i = 1 if $page_name eq '秋田内陸縦貫鉄道秋田内陸線' and $i == 0;
+        $i = 1 if $page_name eq '赤羽線' and $i == 0;
         my $i_info = $label_to_i->{[grep { /備考/ } keys %$label_to_i]->[0] || '備考'};
 
         my $suffix = {
