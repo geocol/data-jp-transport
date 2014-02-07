@@ -1,11 +1,15 @@
 # -*- Makefile -*-
 
+GIT = git
+
 all: data/railway-lines.json data/stations.json
+
+dataautoupdate: clean deps all
+	$(GIT) add data/*
 
 ## ------ Setup ------
 
 WGET = wget
-GIT = git
 PERL = ./perl
 
 deps: git-submodules pmbp-install
