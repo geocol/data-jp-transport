@@ -12,4 +12,5 @@ my $dump_f = $root_d->file ('local', 'cache', 'xml', 'jawiki-latest-pages-meta-c
 my $cache_d = $root_d->subdir ('local', 'cache');
 
 my $mx = MediaWikiXML::PageExtractor->new_from_cache_d ($cache_d);
+$mx->save_titles_from_f_if_necessary ($dump_f);
 $mx->save_page_xml_from_f ($dump_f, $pattern);
