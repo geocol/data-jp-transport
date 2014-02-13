@@ -112,10 +112,14 @@ sub _extract_objects ($) {
       push @object, $name;
     } else {
       push @object, _tc $l;
+      $object[-1] =~ s/\*+\z//;
     }
   } else {
     my $v = _n join '', map { _tc $_ } @n;
-    push @object, $v if length $v;
+    if (length $v) {
+      push @object, $v;
+      $object[-1] =~ s/\*+\z//;
+    }
   }
 
   return \@object;
@@ -260,7 +264,7 @@ sub extract_station_as_cv ($) {
   $wref =~ tr/_/ /;
   my $cv = AE::cv;
   $cv->begin;
-  $mw->get_source_text_by_name_as_cv ($wref, ims => ($Data->{$wref} or {})->{timestamp} || 0)->cb (sub {
+  $mw->get_source_text_by_name_as_cv ($wref, ims => $ENV{FORCE_UPDATE} ? 0 : ($Data->{$wref} or {})->{timestamp} || 0)->cb (sub {
     my $data = $_[0]->recv;
     if (defined $data and defined $data->{data}) {
       my $doc = new Web::DOM::Document;
