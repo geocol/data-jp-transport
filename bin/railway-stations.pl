@@ -50,7 +50,7 @@ sub extract_from_doc ($$) {
 
   if (defined $h1) {
     my $section = $h1->parent_node;
-    for my $h1 (@{$section->query_selector_all ('h1:-manakai-contains("未開業区間"), h1:-manakai-contains("配線図"), h1:-manakai-contains("構造"), h1:-manakai-contains("過去の"), h1:-manakai-contains("廃止")')}) {
+    for my $h1 (@{$section->query_selector_all ('h1:-manakai-contains("未開業区間"), h1:-manakai-contains("配線図"), h1:-manakai-contains("構造"), h1:-manakai-contains("過去の"), h1:-manakai-contains("廃止"), h1:-manakai-contains("比較表")')}) {
       $h1->parent_node->parent_node->remove_child ($h1->parent_node);
     }
     my $tables = $section->get_elements_by_tag_name ('table');
@@ -228,17 +228,16 @@ sub extract_from_doc ($$) {
   return $data;
 } # extract_from_doc
 
-my $line = shift;
-$line = decode 'utf-8', $line if defined $line;
-$line =~ tr/_/ / if defined $line;
+my @line = map { tr/_/ /; decode 'utf-8', $_ } @ARGV;
+my $force_update = @ARGV;
 
-my $Data = defined $line ? do {
-  my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
-  file2perl $f;
-} : do {
-  my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-lines.json');
-  file2perl $f;
-};
+my $data_f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
+my $Data = file2perl $data_f;
+
+my $lines_f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-lines.json');
+my $LinesData = file2perl $lines_f;
+
+@line = keys %$LinesData unless @line;
 
 my $root_d = file (__FILE__)->dir->parent;
 my $mw = AnyEvent::MediaWiki::Source->new_from_dump_f_and_cache_d
@@ -251,23 +250,27 @@ select STDOUT;
 
 my $cv = AE::cv;
 
-my $targets = defined $line ? {$line => {wref => $line}} : $Data;
-
 $cv->begin;
-for my $key (keys %$targets) {
+for my $key (@line) {
   $cv->begin;
-  my $page_name = $targets->{$key}->{wref};
-  $mw->get_source_text_by_name_as_cv ($page_name)->cb (sub {
+  my $page_name = $LinesData->{$key}->{wref} || $key;
+  $mw->get_source_text_by_name_as_cv ($page_name, ims => ($force_update ? 0 : $Data->{$key} or {})->{timestamp} || 0)->cb (sub {
     my $data = $_[0]->recv;
-    print STDERR ".";
-    if (defined $data) {
+    if (defined $data and defined $data->{data}) {
       my $doc = new Web::DOM::Document;
       my $parser = Text::MediaWiki::Parser->new;
-      $parser->parse_char_string ($data => $doc);
-      my $data = extract_from_doc $page_name => $doc;
-      $Data->{$key}->{stations} = $data;
+      $parser->parse_char_string ($data->{data} => $doc);
+      my $stations = extract_from_doc $page_name => $doc;
+      $Data->{$key} = $LinesData->{$key};
+      $Data->{$key}->{wref} = $page_name;
+      $Data->{$key}->{names}->{$page_name} = 1;
+      $Data->{$key}->{timestamp} = $data->{timestamp};
+      $Data->{$key}->{stations} = $stations;
+      print STDERR ".";
+    } elsif ($data->{not_modified}) {
+      #
     } else {
-      warn "No data: |$Data->{$key}->{wref}|\n";
+      warn "No data: |$page_name|\n";
     }
     $cv->end;
   });
@@ -277,19 +280,9 @@ $cv->end;
 $cv->cb (sub {
   print STDERR " done\n";
 
-  if (defined $line) {
-    if (not $Data->{$line} or not @{$Data->{$line}->{stations} or []}) {
-      delete $Data->{$line};
-    } else {
-      $Data->{$line}->{wref} ||= $line;
-      $Data->{$line}->{names}->{$line} = 1;
-    }
-  } else {
-    $Data->{東海道本線}->{stations} = [];
-  }
+  $Data->{東海道本線}->{stations} = [];
 
-  my $f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
-  print { $f->openw } perl2json_bytes_for_record $Data;
+  print { $data_f->openw } perl2json_bytes_for_record $Data;
 });
 
 $cv->recv;

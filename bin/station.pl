@@ -260,24 +260,28 @@ sub extract_station_as_cv ($) {
   $wref =~ tr/_/ /;
   my $cv = AE::cv;
   $cv->begin;
-  $mw->get_source_text_by_name_as_cv ($wref)->cb (sub {
+  $mw->get_source_text_by_name_as_cv ($wref, ims => ($Data->{$wref} or {})->{timestamp} || 0)->cb (sub {
     my $data = $_[0]->recv;
-    if (defined $data) {
+    if (defined $data and defined $data->{data}) {
       my $doc = new Web::DOM::Document;
       my $parser = Text::MediaWiki::Parser->new;
-      $parser->parse_char_string ($data => $doc);
+      $parser->parse_char_string ($data->{data} => $doc);
       my $stations = [@{$doc->query_selector_all ('include[wref="駅情報"]')}];
       if (@$stations) {
         my $station = shift @$stations;
-        my $data = parse_station $station;
-        $Data->{$wref} = $data;
+        my $station_data = parse_station $station;
+        $Data->{$wref} = $station_data;
 
         for (@$stations) {
-          my $data = parse_station $_;
-          warn "No |name| - $wref" unless defined $data->{name};
-          $Data->{$wref}->{stations}->{$data->{name}} = $data;
+          my $station_data = parse_station $_;
+          warn "No |name| - $wref" unless defined $station_data->{name};
+          $Data->{$wref}->{stations}->{$station_data->{name}} = $station_data;
         }
+
+        $Data->{$wref}->{timestamp} = $data->{timestamp};
       }
+    } elsif ($data->{not_modified}) {
+      #
     } else {
       warn "No data: |$wref|\n";
     }
