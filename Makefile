@@ -43,7 +43,8 @@ local/cache/xml/jawiki-latest-pages-meta-current.xml.bz2:
 wp-autoupdate: deps wp-clean wp-data
 
 wp-clean:
-	rm -fr local/intermediate-wikipedia
+	rm -fr local/intermediate-wikipedia local/suffix-patterns.json
+	rm -fr local/regions.json
 
 wp-deps:
 	$(PERL) bin/prepare-wikipedia-cache.pl
@@ -85,11 +86,26 @@ intermediate/stations.json: local/station-list.json \
 data/railway-lines.json: intermediate/railway-stations.json
 	cp $< $@
 
-data/stations.json: intermediate/stations.json
-	cp $< $@
+data/stations.json: intermediate/stations.json \
+    local/station-location-regions.json bin/stations.pl
+	$(PERL) bin/stations.pl > $@
 
 local/intermediate-wikipedia:
 	touch $@
+
+local/suffix-patterns.json:
+	$(WGET) -O $@ https://raw.github.com/geocol/data-jp-areas/master/data/jp-regions-suffix-mixed-names.json
+
+local/regions.json:
+	$(WGET) -O $@ https://raw.github.com/geocol/data-jp-areas/master/data/jp-regions.json
+
+local/station-locations.json: local/bin/jq intermediate/stations.json
+	cat intermediate/stations.json | ./local/bin/jq 'to_entries | map(select(.value.location)) | map([.key, .value.location])' > $@
+
+local/station-location-regions.json: local/station-locations.json \
+    bin/parse-station-location.pl local/suffix-patterns.json \
+    local/regions.json
+	$(PERL) bin/parse-station-location.pl > $@
 
 ## ------ Tests ------
 

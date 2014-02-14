@@ -45,6 +45,13 @@ Values are JSON objects with following name/value pairs:
     The address string (in Japanese) of the location of the station,
     if known.
 
+  location_code [string?]
+
+    The code of the region in which the station locates, as specific
+    as possible.  The value is a two or five digit code of the local
+    government of the region (全国地方公共団体コード - JIS X 0401, JIS
+    X 0402).
+
   lon [number?]
 
     The WGS84 longitude of the station, if known.
