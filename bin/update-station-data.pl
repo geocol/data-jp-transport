@@ -13,6 +13,7 @@ my $stations = file2perl $list_f;
 
 my $i = 0;
 {
+  last if $i*100 > @$stations;
   warn sprintf "%d-%d of %d...\n", $i*100, ($i+1)*100-1, scalar @$stations;
   my @sub = @$stations[$i*100..($i+1)*100-1];
   if (@sub) {
