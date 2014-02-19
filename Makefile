@@ -7,6 +7,8 @@ all: data/railway-lines.json data/stations.json
 dataautoupdate: clean deps all
 	$(GIT) add data/*
 
+clean:
+
 ## ------ Setup ------
 
 WGET = wget
