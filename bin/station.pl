@@ -112,13 +112,13 @@ sub _extract_objects ($) {
       push @object, $name;
     } else {
       push @object, _tc $l;
-      $object[-1] =~ s/\*+\z//;
+      $object[-1] =~ s/\s*\*+\z//;
     }
   } else {
     my $v = _n join '', map { _tc $_ } @n;
     if (length $v) {
       push @object, $v;
-      $object[-1] =~ s/\*+\z//;
+      $object[-1] =~ s/\s*\*+\z//;
     }
   }
 
