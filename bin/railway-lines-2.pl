@@ -113,6 +113,11 @@ for my $line (keys %$Data) {
 
     ## <http://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E3%81%AE%E3%83%A2%E3%83%8E%E3%83%AC%E3%83%BC%E3%83%AB>
     $data->{monorail} = 1 if $line =~ /モノレール|上野懸垂線|ディズニーリゾートライン|大阪高速鉄道|広島短距離交通瀬野線|北九州高速鉄道/;
+
+    ## <http://ja.wikipedia.org/wiki/%E8%B2%A8%E7%89%A9%E7%B7%9A>
+    $data->{freight} = 1 if $line =~ /貨物|三ヶ尻線/;
+    $data->{freight} = 1 if $data->{company_wrefs}->{日本貨物鉄道} and
+                            1 == keys %{$data->{company_wrefs}};
 }
 
 print perl2json_bytes_for_record $Data;

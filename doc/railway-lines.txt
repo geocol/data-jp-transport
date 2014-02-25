@@ -42,6 +42,10 @@ Values are JSON objects with following name/value pairs:
     contains name/value pairs where names are the Wikipedia reference
     of the company and values are boolean true values.
 
+  freight [boolean]
+
+    Whether the line is only used for freight trains.
+
   hsst [boolean]
 
     Whether the line is an HSST or not.
