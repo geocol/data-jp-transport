@@ -267,7 +267,7 @@ for my $key (@line) {
       $Data->{$key}->{timestamp} = $data->{timestamp};
       $Data->{$key}->{stations} = $stations;
       print STDERR ".";
-    } elsif ($data->{not_modified}) {
+    } elsif (defined $data and $data->{not_modified}) {
       #
     } else {
       warn "No data: |$page_name|\n";

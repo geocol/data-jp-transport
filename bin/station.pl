@@ -284,7 +284,7 @@ sub extract_station_as_cv ($) {
 
         $Data->{$wref}->{timestamp} = $data->{timestamp};
       }
-    } elsif ($data->{not_modified}) {
+    } elsif (defined $data and $data->{not_modified}) {
       #
     } else {
       warn "No data: |$wref|\n";
