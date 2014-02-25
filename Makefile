@@ -85,8 +85,9 @@ intermediate/stations.json: local/station-list.json \
 	echo "{}" > $@
 	$(PERL) bin/update-station-data.pl
 
-data/railway-lines.json: intermediate/railway-stations.json
-	cp $< $@
+data/railway-lines.json: intermediate/railway-stations.json \
+    intermediate/stations.json bin/railway-lines-2.pl
+	$(PERL) bin/railway-lines-2.pl > $@
 
 data/stations.json: intermediate/stations.json \
     local/station-location-regions.json bin/stations.pl

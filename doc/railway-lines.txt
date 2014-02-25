@@ -15,6 +15,16 @@ used as the line identifier of the line.
 
 Values are JSON objects with following name/value pairs:
 
+  closed [boolean]
+
+    Whether the line is abandoned or not.
+
+  company_wrefs [object?]
+
+    Companies to which the line belongs, if known.  The object
+    contains name/value pairs where names are the Wikipedia reference
+    of the company and values are boolean true values.
+
   names [object]
 
     Known formal or informal names of the line.  Names of the object
