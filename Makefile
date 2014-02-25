@@ -90,7 +90,7 @@ data/railway-lines.json: intermediate/railway-stations.json \
 	$(PERL) bin/railway-lines-2.pl > $@
 
 data/stations.json: intermediate/stations.json \
-    local/station-location-regions.json bin/stations.pl
+    local/suffix-patterns.json local/regions.json bin/stations.pl
 	$(PERL) bin/stations.pl > $@
 
 local/intermediate-wikipedia:
@@ -101,14 +101,6 @@ local/suffix-patterns.json:
 
 local/regions.json:
 	$(WGET) -O $@ https://raw.github.com/geocol/data-jp-areas/master/data/jp-regions.json
-
-local/station-locations.json: local/bin/jq intermediate/stations.json
-	cat intermediate/stations.json | ./local/bin/jq 'to_entries | map(select(.value.location)) | map([.key, .value.location])' > $@
-
-local/station-location-regions.json: local/station-locations.json \
-    bin/parse-station-location.pl local/suffix-patterns.json \
-    local/regions.json
-	$(PERL) bin/parse-station-location.pl > $@
 
 data/region-lines.json: bin/region-lines.pl data/stations.json
 	$(PERL) bin/region-lines.pl > $@

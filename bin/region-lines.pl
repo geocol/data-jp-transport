@@ -12,10 +12,19 @@ my $Data = {};
 for (keys %$stations) {
     my $data = $stations->{$_};
     next if $data->{closed_date};
-    next unless $data->{location_code};
-    for (keys %{$data->{lines}}) {
-        $Data->{substr $data->{location_code}, 0, 2}->{$_}++;
-        $Data->{$data->{location_code}}->{$_}++;
+    if ($data->{location_code}) {
+        for (keys %{$data->{lines}}) {
+            $Data->{substr $data->{location_code}, 0, 2}->{$_}++;
+            $Data->{$data->{location_code}}->{$_}++;
+        }
+    }
+    for my $station (values %{$data->{stations}}) {
+        next if $station->{closed_date};
+        next unless $station->{location_code};
+        for (keys %{$station->{lines}}) {
+            $Data->{substr $station->{location_code}, 0, 2}->{$_}++;
+            $Data->{$station->{location_code}}->{$_}++;
+        }
     }
 }
 

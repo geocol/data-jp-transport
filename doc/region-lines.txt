@@ -1,7 +1,7 @@
 region-lines.json
 ~~~~~~~~~~~~~~~~~
 
-The file contains list of railway lines in regions in Japan.
+The file contains list of active railway lines in regions in Japan.
 
 * Structure
 
@@ -11,8 +11,8 @@ are Wikipedia references of lines and values are "weight" numbers.
 
 Region codes are codes (全国地方公共団体コード) of prefectures,
 non-designated cities, wards, towns, and villages (都道府県市区町村、た
-だし政令指定都市を除く。) in Japan.  Regions which have no station are
-omitted.  See
+だし政令指定都市を除く。) in Japan.  Regions which have no open
+station are omitted.  See
 <https://github.com/geocol/data-jp-areas/blob/master/data/jp-regions.json>
 for the mapping of regions and their codes.
 
