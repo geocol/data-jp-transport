@@ -36,6 +36,14 @@ for (keys %$stations) {
     }
 }
 
+## <http://ja.wikipedia.org/wiki/JR%E6%9D%B1%E8%A5%BF%E7%B7%9A>
+$Data->{JR東西線}->{company_wrefs}->{関西高速鉄道}->{'single', ''} = 1
+    if $Data->{JR東西線}->{company_wrefs}->{関西高速鉄道};
+
+## <http://ja.wikipedia.org/wiki/%E5%A4%A7%E9%98%AA%E5%A4%96%E7%92%B0%E7%8A%B6%E9%89%84%E9%81%93>
+$Data->{おおさか東線}->{company_wrefs}->{大阪外環状鉄道}->{'single', ''} = 1
+    if $Data->{おおさか東線}->{company_wrefs}->{大阪外環状鉄道};
+
 for my $line (keys %$Data) {
     my $companies = $Data->{$line}->{company_wrefs} or next;
     my $has_single;
@@ -65,9 +73,6 @@ delete $Data->{東海道本線}->{company_wrefs}->{日本国有鉄道};
 ## <http://ja.wikipedia.org/wiki/%E9%87%8E%E5%B2%A9%E9%89%84%E9%81%93%E4%BC%9A%E6%B4%A5%E9%AC%BC%E6%80%92%E5%B7%9D%E7%B7%9A>
 delete $Data->{野岩鉄道会津鬼怒川線}->{company_wrefs}->{会津鉄道};
 delete $Data->{野岩鉄道会津鬼怒川線}->{company_wrefs}->{東武鉄道};
-
-## <http://ja.wikipedia.org/wiki/JR%E6%9D%B1%E8%A5%BF%E7%B7%9A>
-$Data->{JR東西線}->{company_wrefs}->{関西高速鉄道} = 1;
 
 for my $line (keys %$Data) {
     my $data = $Data->{$line};
