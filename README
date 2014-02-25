@@ -12,6 +12,7 @@ ENOUGH FOR PRODUCTION USES.
   doc/     - Documentation
 
 data/railway-lines.json  - List of railway lines
+data/region-lines.json   - List of railway lines in regions
 data/stations.json       - List of railway stations
 
 * Distribution

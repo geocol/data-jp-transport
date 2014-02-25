@@ -1,0 +1,34 @@
+region-lines.json
+~~~~~~~~~~~~~~~~~
+
+The file contains list of railway lines in regions in Japan.
+
+* Structure
+
+The file contains a JSON object whose names are region codes and
+values are JSON objects containing list of lines.  Names of objects
+are Wikipedia references of lines and values are "weight" numbers.
+
+Region codes are codes (全国地方公共団体コード) of prefectures,
+non-designated cities, wards, towns, and villages (都道府県市区町村、た
+だし政令指定都市を除く。) in Japan.  Regions which have no station are
+omitted.  See
+<https://github.com/geocol/data-jp-areas/blob/master/data/jp-regions.json>
+for the mapping of regions and their codes.
+
+Weights can be used to sort lines by "significance" in the region.
+Greater values are more "significant".  The values theirselves should
+not be considered important.
+
+* Source
+
+Wikipedia <http://ja.wikipedia.org/>.
+
+* License
+
+This file contains data extracted from Wikipedia.  See the following
+document for the full license terms:
+
+  Wikipedia:Text of Creative Commons Attribution-ShareAlike 3.0
+Unported License
+  <http://ja.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License>

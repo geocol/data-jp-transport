@@ -2,7 +2,7 @@
 
 GIT = git
 
-all: data/railway-lines.json data/stations.json
+all: data/railway-lines.json data/stations.json data/region-lines.json
 
 dataautoupdate: clean deps all
 	$(GIT) add data/*
@@ -109,6 +109,9 @@ local/station-location-regions.json: local/station-locations.json \
     bin/parse-station-location.pl local/suffix-patterns.json \
     local/regions.json
 	$(PERL) bin/parse-station-location.pl > $@
+
+data/region-lines.json: bin/region-lines.pl data/stations.json
+	$(PERL) bin/region-lines.pl > $@
 
 ## ------ Tests ------
 

@@ -49,8 +49,9 @@ Values are JSON objects with following name/value pairs:
 
     The code of the region in which the station locates, as specific
     as possible.  The value is a two or five digit code of the local
-    government of the region (全国地方公共団体コード - JIS X 0401, JIS
-    X 0402).
+    government of the region (全国地方公共団体コード).  See
+    <https://github.com/geocol/data-jp-areas/blob/master/data/jp-regions.json>
+    for the mapping of regions and their codes.
 
   lon [number?]
 
