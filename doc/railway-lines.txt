@@ -15,6 +15,23 @@ used as the line identifier of the line.
 
 Values are JSON objects with following name/value pairs:
 
+  agt [boolean]
+
+    Whether the line is an AGT or not.
+
+  bus [string?]
+
+    One of following values are specified if the line is used by
+    buses:
+
+      brt       BRTs are running.
+      guided    Guided buses are running.
+      trolley   Trolly buses are running.
+
+  cablecar [boolean]
+
+    Whether the line is a cable car (funicular) or not.
+
   closed [boolean]
 
     Whether the line is abandoned or not.
@@ -25,10 +42,32 @@ Values are JSON objects with following name/value pairs:
     contains name/value pairs where names are the Wikipedia reference
     of the company and values are boolean true values.
 
+  hsst [boolean]
+
+    Whether the line is an HSST or not.
+
+  jr [boolean]
+
+    Whether the line is owned by JR (or Japanese National Railways (日
+    本国有鉄道, 国鉄) until 1987).
+
+  monorail [boolean]
+
+    Whether the line is a monorail or not.
+
   names [object]
 
     Known formal or informal names of the line.  Names of the object
     are names and values of the object are boolean true values.
+
+  shinkansen [string?]
+
+    One of following values is specified if the line is shinkansen (新
+    幹線):
+
+      full  A "full" (フル規格) shinkansen line.
+      mini  A "mini" shinkansen (ミニ新幹線) line.
+      misc  Legally not a shinkansen line shinkansen cars are running.
 
   stations
 
@@ -51,6 +90,22 @@ Values are JSON objects with following name/value pairs:
 
         The Wikipedia reference of the description of the station, if
         known and is different from |name|'s value.
+
+  subway [string?]
+
+    Whether the line is a subway or not.  If the value is "1", it is a
+    subway.  If the value is "partial", it is partially a subway.
+    Otherwise, it is not a subway.
+
+  tram [string?]
+
+    Whether the line is a tram or not.  If the value is "1", it is a
+    tram.  If the value is "partial", it is partially a tram.
+    Otherwise, it is not a tram.
+
+* Source
+
+Wikipedia <http://ja.wikipedia.org/>.
 
 * License
 

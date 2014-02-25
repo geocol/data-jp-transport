@@ -93,6 +93,10 @@ Values are JSON objects with following name/value pairs:
     values of the object are properties of the stations, using the
     same data structure as top-level stations.
 
+* Source
+
+Wikipedia <http://ja.wikipedia.org/>.
+
 * License
 
 This file contains data extracted from Wikipedia.  See the following
