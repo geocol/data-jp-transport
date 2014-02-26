@@ -278,7 +278,10 @@ sub extract_station_as_cv ($) {
 
         for (@$stations) {
           my $station_data = parse_station $_;
-          warn "No |name| - $wref" unless defined $station_data->{name};
+          unless (defined $station_data->{name}) {
+              warn "No |name| - $wref";
+              next;
+          }
           $Data->{$wref}->{stations}->{$station_data->{name}} = $station_data;
         }
 
