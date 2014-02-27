@@ -83,7 +83,12 @@ sub _extract_objects ($) {
       } elsif ($ln eq 'include' and $IgnoredTemplates->{lc ($_->get_attribute ('wref') // '')}) {
         #
       } elsif ($ln eq 'span') {
-        push @n, $_ unless (_tc $_) eq "\x{25A0}";
+        my $e = $_->query_selector ('l');
+        if (defined $e and not $e->has_attribute ('embed')) {
+          $l //= $e;
+        } else {
+          push @n, $_ unless (_tc $_) eq "\x{25A0}";
+        }
       } elsif ($ln eq 'br') {
         if (defined $l) {
           my $name = $l->get_attribute ('wref');
