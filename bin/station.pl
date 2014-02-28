@@ -117,6 +117,7 @@ sub _extract_objects ($) {
       push @object, $name;
     } else {
       push @object, _tc $l;
+      $object[-1] =~ s/\A\s+//;
       $object[-1] =~ s/\s*\*+\z//;
     }
   } else {

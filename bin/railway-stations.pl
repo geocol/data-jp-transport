@@ -164,6 +164,11 @@ sub extract_from_doc ($$) {
             next unless length $name;
             $d->{name} = $name;
           }
+
+          if (not defined $d->{wref} and $d->{name} eq '四平駅') {
+            $d->{wref} = '四平駅 (富山県)';
+          }
+
                 if (length $suffix and not $d->{name} =~ /$suffix$/) {
                   $d->{wref} = $d->{name} if not defined $d->{wref};
                   $d->{name} .= $suffix;
