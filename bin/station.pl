@@ -15,6 +15,15 @@ use Char::Normalize::FullwidthHalfwidth qw(get_fwhw_normalized);
 my $root_d = file (__FILE__)->dir->parent;
 my $data_f = $root_d->file ('intermediate', 'stations.json');
 
+my $LinesMap = {};
+{
+    my $lines_f = $root_d->file ('intermediate', 'railway-lines.json');
+    my $lines = file2perl $lines_f;
+    for my $wref (keys %$lines) {
+        $LinesMap->{$_} = $wref for keys %{$lines->{$wref}->{names} or {}};
+    }
+}
+
 my $Data = file2perl $data_f;
 
 my $mw = AnyEvent::MediaWiki::Source->new_from_dump_f_and_cache_d
@@ -72,12 +81,14 @@ sub _extract_objects ($) {
   my $el = shift;
   my @object;
   my $l;
+  my @l;
   my @n;
   for (@{$el->child_nodes}) {
     if ($_->node_type == $_->ELEMENT_NODE) {
       my $ln = $_->local_name;
       if ($ln eq 'l' and not $_->has_attribute ('embed')) {
         $l //= $_;
+        push @l, $_;
       } elsif ($ln eq 'comment' or $ln eq 'ref') {
         #
       } elsif ($ln eq 'include' and $IgnoredTemplates->{lc ($_->get_attribute ('wref') // '')}) {
@@ -86,6 +97,7 @@ sub _extract_objects ($) {
         my $e = $_->query_selector ('l');
         if (defined $e and not $e->has_attribute ('embed')) {
           $l //= $e;
+          push @l, $e;
         } else {
           push @n, $_ unless (_tc $_) eq "\x{25A0}";
         }
@@ -111,9 +123,18 @@ sub _extract_objects ($) {
     }
   }
 
+  if (@l > 1) {
+      my $t1 = $l[0]->get_attribute ('wref') // $l[0]->text_content;
+      my $t2 = $l[1]->get_attribute ('wref') // $l[1]->text_content;
+      if ($t2 =~ /\Q$t1\E/) {
+          $l = $l[1];
+      }
+  }
+
   if (defined $l) {
     my $name = $l->get_attribute ('wref');
     if (defined $name) {
+      $name =~ s/\s+\z//;
       push @object, $name;
     } else {
       push @object, _tc $l;
@@ -259,6 +280,7 @@ sub parse_station ($) {
   }
   for (@$lines) {
     my $line_wref = delete $_->{line_wref} // '';
+    $line_wref = $LinesMap->{$line_wref} // $line_wref;
     $data->{lines}->{$line_wref} = $_;
   }
   return $data;

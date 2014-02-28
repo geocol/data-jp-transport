@@ -58,5 +58,22 @@ $mw->get_source_text_by_name_as_cv ($word)->cb (sub {
 $cv->end;
 $cv->recv;
 
+for (qw(加悦鉄道 北丹鉄道 北見鉄道 南部鉄道 池田鉄道 沙流鉄道
+        洞爺湖電気鉄道 津軽鉄道 渡島海岸鉄道 熊延鉄道 留萠鉄道
+        雄別鉄道)) {
+    if ($Data->{$_} and not $Data->{$_ . '線'}) {
+        $Data->{$_}->{names}->{$_ . '線'} = 1;
+    }
+    if ($Data->{$_.'線'} and not $Data->{$_ . $_ . '線'}) {
+        $Data->{$_.'線'}->{names}->{$_ . $_ . '線'} = 1;
+    }
+}
+
+unless ($Data->{"尺別鉄道線"} or $Data->{"尺別鉄道"}) {
+    $Data->{"雄別鉄道#尺別鉄道線"}->{names}->{"雄別鉄道#尺別鉄道線"} = 1;
+    $Data->{"雄別鉄道#尺別鉄道線"}->{names}->{"尺別鉄道線"} = 1;
+    $Data->{"雄別鉄道#尺別鉄道線"}->{names}->{"尺別鉄道"} = 1;
+}
+
 use JSON::Functions::XS qw(perl2json_bytes_for_record);
 print perl2json_bytes_for_record $Data;
