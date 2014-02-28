@@ -22,6 +22,7 @@ for my $word (
   q(日本の鉄道路線一覧 あ-か行),
   q(日本の鉄道路線一覧 さ-な行),
   q(日本の鉄道路線一覧 は-わ行),
+  q(日本の廃止鉄道路線一覧),
 ) {
 
 $cv->begin;
@@ -40,6 +41,7 @@ $mw->get_source_text_by_name_as_cv ($word)->cb (sub {
     for my $l (@{$doc->query_selector_all ('section li > l:first-child')}) {
         my $name = $l->text_content;
         my $wref = $l->get_attribute ('wref') || $name;
+        $Data->{$wref}->{closed} = 1 if $word =~ /廃止/ and not $Data->{$wref};
         $Data->{$wref}->{wref} = $wref;
         $Data->{$wref}->{names}->{$wref} = 1;
         $Data->{$wref}->{names}->{$name} = 1;
