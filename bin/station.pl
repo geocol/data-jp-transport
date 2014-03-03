@@ -58,7 +58,9 @@ sub _tc ($) {
         if (defined $ip[1]) {
           $text .= _tc $ip[1];
         }
-      } elsif ($ln eq 'include' and $_->get_attribute ('wref') eq '駅番号s') {
+      } elsif ($ln eq 'include' and
+               {駅番号s => 1,
+                駅番号 => 1}->{$_->get_attribute ('wref')}) {
         my @ip = grep { $_->local_name eq 'iparam' } @{$_->children};
         if (defined $ip[2]) {
           $text .= _tc $ip[2];
@@ -84,6 +86,30 @@ sub _extract_objects ($) {
   my $l;
   my @l;
   my @n;
+
+  my $push_object = sub {
+    if (defined $l) {
+      my $name = $l->get_attribute ('wref');
+      if (defined $name) {
+        $name =~ s/\s+\z//;
+        push @object, $name;
+      } else {
+        push @object, _tc $l;
+        $object[-1] =~ s/\A\s+//;
+        $object[-1] =~ s/\s*\*+\z//;
+      }
+    } else {
+      my $v = _n join '', map { _tc $_ } @n;
+      if ($v =~ /^\(正式.+\)$/) {
+        $v = '';
+      }
+      if (length $v) {
+        push @object, $v;
+        $object[-1] =~ s/\s*\*+\z//;
+      }
+    }
+  }; # $push_object
+
   for (@{$el->child_nodes}) {
     if ($_->node_type == $_->ELEMENT_NODE) {
       my $ln = $_->local_name;
@@ -103,17 +129,7 @@ sub _extract_objects ($) {
           push @n, $_ unless (_tc $_) eq "\x{25A0}";
         }
       } elsif ($ln eq 'br') {
-        if (defined $l) {
-          my $name = $l->get_attribute ('wref');
-          if (defined $name) {
-            push @object, $name;
-          } else {
-            push @object, _tc $l;
-          }
-        } else {
-          my $v = _n join '', map { _tc $_ } @n;
-          push @object, $v if length $v;
-        }
+        $push_object->();
         undef $l;
         @n = ();
       } else {
@@ -124,23 +140,7 @@ sub _extract_objects ($) {
     }
   }
 
-  if (defined $l) {
-    my $name = $l->get_attribute ('wref');
-    if (defined $name) {
-      $name =~ s/\s+\z//;
-      push @object, $name;
-    } else {
-      push @object, _tc $l;
-      $object[-1] =~ s/\A\s+//;
-      $object[-1] =~ s/\s*\*+\z//;
-    }
-  } else {
-    my $v = _n join '', map { _tc $_ } @n;
-    if (length $v) {
-      push @object, $v;
-      $object[-1] =~ s/\s*\*+\z//;
-    }
-  }
+  $push_object->();
 
   return \@object;
 } # _extract_objects
