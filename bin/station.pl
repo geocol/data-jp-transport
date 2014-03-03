@@ -88,7 +88,7 @@ sub _extract_objects ($) {
   my @n;
 
   my $push_object = sub {
-    if (defined $l) {
+    for my $l (@l) {
       my $name = $l->get_attribute ('wref');
       if (defined $name) {
         $name =~ s/\s+\z//;
@@ -98,7 +98,8 @@ sub _extract_objects ($) {
         $object[-1] =~ s/\A\s+//;
         $object[-1] =~ s/\s*\*+\z//;
       }
-    } else {
+    }
+    unless (@l) {
       my $v = _n join '', map { _tc $_ } @n;
       if ($v =~ /^\(正式.+\)$/) {
         $v = '';
