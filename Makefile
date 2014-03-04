@@ -1,5 +1,3 @@
-# -*- Makefile -*-
-
 GIT = git
 
 all: data/railway-lines.json data/stations.json data/region-lines.json \
