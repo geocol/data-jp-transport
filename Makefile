@@ -2,7 +2,8 @@
 
 GIT = git
 
-all: data/railway-lines.json data/stations.json data/region-lines.json
+all: data/railway-lines.json data/stations.json data/region-lines.json \
+    data/stations.json.gz
 
 dataautoupdate: clean deps all
 	$(GIT) add data/*
@@ -92,6 +93,9 @@ data/railway-lines.json: intermediate/railway-stations.json \
 data/stations.json: intermediate/stations.json \
     local/suffix-patterns.json local/regions.json bin/stations.pl
 	$(PERL) bin/stations.pl > $@
+
+data/stations.json.gz: data/stations.json
+	cat $< | gzip > $@
 
 local/intermediate-wikipedia:
 	touch $@
