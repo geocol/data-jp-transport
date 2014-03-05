@@ -75,5 +75,10 @@ unless ($Data->{"尺別鉄道線"} or $Data->{"尺別鉄道"}) {
     $Data->{"雄別鉄道#尺別鉄道線"}->{names}->{"尺別鉄道"} = 1;
 }
 
+unless ($Data->{早来鉄道} or $Data->{早来鉄道線}) {
+    $Data->{"あつまバス"}->{names}->{早来鉄道} = 1;
+    $Data->{"あつまバス"}->{names}->{早来鉄道線} = 1;
+}
+
 use JSON::Functions::XS qw(perl2json_bytes_for_record);
 print perl2json_bytes_for_record $Data;
