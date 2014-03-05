@@ -276,6 +276,7 @@ sub parse_station ($) {
     my $line_wrefs = delete $_->{line_wref} // '';
     for my $line_wref (@$line_wrefs) {
         $line_wref = $LinesMap->{$line_wref} // $line_wref;
+        $line_wref = [grep { defined } map { $LinesMap->{$_ . $line_wref} } keys %{$data->{company_wrefs}}]->[0] // $line_wref;
         $data->{lines}->{$line_wref} = $_;
     }
   }
