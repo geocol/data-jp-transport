@@ -59,7 +59,8 @@ wp-data: wp-deps intermediate/railway-lines.json \
 data-railways: \
     data/railway-lines.json data/stations.json data/region-lines.json \
     data/stations.json.gz \
-    data/railways/lines.json  data/railways/companies.json
+    data/railways/lines.json  data/railways/companies.json \
+    data/railways/stations.json
 
 intermediate/railway-lines.json: bin/railway-lines.pl \
     local/intermediate-wikipedia #wikipedia-dumps
@@ -72,6 +73,10 @@ intermediate/line-ids.json: intermediate/railway-lines.json \
 intermediate/company-ids.json: intermediate/stations.json \
     bin/append-company-ids.pl
 	$(PERL) bin/append-company-ids.pl
+
+intermediate/station-ids.json: intermediate/stations.json \
+    bin/append-station-ids.pl
+	$(PERL) bin/append-station-ids.pl
 
 intermediate/railway-stations.json: bin/railway-stations.pl \
     intermediate/railway-lines.json local/intermediate-wikipedia \
@@ -107,6 +112,10 @@ data/railways/lines.json: bin/railway-lines-3.pl data/railway-lines.json \
 data/railways/companies.json: bin/railway-companies.pl \
     intermediate/company-ids.json
 	$(PERL) bin/railway-companies.pl > $@
+
+data/railways/stations.json: bin/railway-stations-2.pl \
+    intermediate/company-ids.json intermediate/station-ids.json
+	$(PERL) bin/railway-stations-2.pl > $@
 
 data/stations.json: intermediate/stations.json \
     local/suffix-patterns.json local/regions.json bin/stations.pl
