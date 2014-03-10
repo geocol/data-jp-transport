@@ -73,9 +73,10 @@ intermediate/wp-railway-lines.json: bin/wp-railway-lines.pl \
 	mkdir -p intermediate
 	$(PERL) bin/wp-railway-lines.pl
 intermediate/wp-stations.json: local/station-list.json \
-    bin/update-station-data.pl local/intermediate-wikipedia #wikipedia-dumps
+    bin/wp-railway-stations-update.pl \
+    local/intermediate-wikipedia #wikipedia-dumps
 	echo "{}" > $@
-	$(PERL) bin/update-station-data.pl
+	$(PERL) bin/wp-railway-stations-update.pl
 
 intermediate/line-ids.json: intermediate/wp-railway-line-list.json \
     bin/append-line-ids.pl

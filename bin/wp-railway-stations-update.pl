@@ -17,7 +17,7 @@ my $i = 0;
   warn sprintf "%d-%d of %d...\n", $i*100, ($i+1)*100-1, scalar @$stations;
   my @sub = @$stations[$i*100..($i+1)*100-1];
   if (@sub) {
-    (system 'perl', $root_d->file ('bin', 'station.pl'), map { encode 'utf-8', $_ } @sub) == 0 or die $?;
+    (system 'perl', $root_d->file ('bin', 'wp-railway-station-update-by-name.pl'), map { encode 'utf-8', $_ } @sub) == 0 or die $?;
     $i++;
     redo;
   }
