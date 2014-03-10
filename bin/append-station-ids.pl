@@ -37,7 +37,7 @@ for my $wref (keys %$stations) {
         }
         @id = sort { $a <=> $b } @id;
         if (@id) {
-            my $id = $Data->{$wref, @id} ? $Data->{$wref}->{id} : $next_id++;
+            my $id = $Data->{$wref, @id} ? $Data->{$wref, @id}->{id} : $next_id++;
             $Data->{$wref, @id}->{id} = $id;
         } else {
             warn "|$wref|'s substation has no company";

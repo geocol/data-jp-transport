@@ -13,7 +13,7 @@ my $Data = {};
 my $ids = file2perl $root_d->file ('intermediate', 'station-ids.json');
 my $company_ids = file2perl $root_d->file ('intermediate', 'company-ids.json');
 my $line_ids = file2perl $root_d->file ('intermediate', 'line-ids.json');
-#my $stations = file2perl $root_d->file ('intermediate', 'wp-stations.json');
+#my $stations = file2perl $root_d->file ('intermediate', 'wp-railway-stations.json');
 my $stations = file2perl $root_d->file ('data', 'stations.json'); # XXX
 
 sub process_station ($$) {
@@ -58,6 +58,12 @@ for my $wref (keys %$stations) {
     $dest_data->{wref} = $wref;
     process_station $src_data => $dest_data;
 
+    my $has_different_name;
+    my $has_non_closed;
+    my %company = %{$src_data->{company_wref} or {}};
+    my $children = {};
+
+    my $parent_id = $id;
     for (values %{$src_data->{stations} or {}}) {
         my $companies = [sort { $a <=> $b } map { $company_ids->{$_}->{id} || '???' } keys %{$_->{company_wrefs} or {}}];
         my $id = $ids->{$wref, @$companies}->{id};
@@ -67,7 +73,21 @@ for my $wref (keys %$stations) {
         }
         my $src_data = $_;
         my $dest_data = $Data->{stations}->{$id} ||= {};
+        $dest_data->{parent_station} = $parent_id;
+        $children->{$id} = 1;
         process_station $src_data => $dest_data;
+
+        $has_different_name = 1 unless $_->{name} =~ /$wref/;
+        delete $company{$_} for keys %{$_->{company_wrefs} or {}};
+        $has_non_closed = 1 if not defined $src_data->{closed_date};
+    }
+
+    $dest_data->{child_stations} = $children if keys %$children;
+    if (keys %{$src_data->{stations} or {}} and
+        not keys %company and
+        not $has_different_name and
+        $has_non_closed) {
+        $dest_data->{abstract} = 1;
     }
 }
 
