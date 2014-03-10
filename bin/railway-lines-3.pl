@@ -19,7 +19,7 @@ for my $name (keys %$line_ids) {
     $Data->{lines}->{$id}->{wref} = $name if $line_ids->{$name}->{wref};
 }
 
-my $lines = file2perl file (__FILE__)->dir->parent->file ('data', 'railway-lines.json');
+my $lines = file2perl file (__FILE__)->dir->parent->file ('data', 'wp-railway-line-list.json');
 
 for my $wref (keys %$lines) {
     my $id = ($line_ids->{$wref} or {})->{id};

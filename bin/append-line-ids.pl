@@ -4,7 +4,7 @@ use Path::Class;
 use lib glob file (__FILE__)->dir->subdir ('modules', '*', 'lib');
 use JSON::Functions::XS qw(perl2json_bytes_for_record file2perl);
 
-my $lines = file2perl file (__FILE__)->dir->parent->file ('intermediate', 'railway-lines.json');
+my $lines = file2perl file (__FILE__)->dir->parent->file ('intermediate', 'wp-railway-line-list.json');
 
 my $data_f = file (__FILE__)->dir->parent->file ('intermediate', 'line-ids.json');
 my $Data = file2perl $data_f;

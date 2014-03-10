@@ -239,7 +239,7 @@ my $force_update = @ARGV;
 my $data_f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-stations.json');
 my $Data = file2perl $data_f;
 
-my $lines_f = file (__FILE__)->dir->parent->file ('intermediate', 'railway-lines.json');
+my $lines_f = file (__FILE__)->dir->parent->file ('intermediate', 'wp-railway-line-list.json');
 my $LinesData = file2perl $lines_f;
 
 @line = keys %$LinesData unless @line;

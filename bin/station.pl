@@ -17,7 +17,7 @@ my $data_f = $root_d->file ('intermediate', 'stations.json');
 
 my $LinesMap = {};
 {
-    my $lines_f = $root_d->file ('intermediate', 'railway-lines.json');
+    my $lines_f = $root_d->file ('intermediate', 'wp-railway-line-list.json');
     my $lines = file2perl $lines_f;
     for my $wref (keys %$lines) {
         $LinesMap->{$_} ||= $wref for keys %{$lines->{$wref}->{names} or {}};
