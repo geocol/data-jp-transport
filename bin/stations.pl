@@ -7,7 +7,7 @@ use Encode;
 use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 
 my $root_d = file (__FILE__)->dir->parent;
-my $f = $root_d->file ('intermediate', 'stations.json');
+my $f = $root_d->file ('intermediate', 'wp-stations.json');
 my $Data = file2perl $f;
 
 for (keys %$Data) {

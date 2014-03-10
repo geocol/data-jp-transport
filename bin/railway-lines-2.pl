@@ -16,7 +16,7 @@ for (keys %$lines) {
     $Data->{$_}->{stations} = $lines->{$_}->{stations} if $lines->{$_}->{stations};
 }
 
-my $stations = file2perl $root_d->file ('intermediate', 'stations.json');
+my $stations = file2perl $root_d->file ('intermediate', 'wp-stations.json');
 
 for (keys %$stations) {
     my $station = $stations->{$_};

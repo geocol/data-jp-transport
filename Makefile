@@ -62,27 +62,32 @@ data-railways: \
     data/railways/lines.json  data/railways/companies.json \
     data/railways/stations.json
 
+local/intermediate-wikipedia:
+	touch $@
 intermediate/wp-railway-line-list.json: bin/wp-railway-line-list.pl \
     local/intermediate-wikipedia #wikipedia-dumps
 	$(PERL) bin/wp-railway-line-list.pl > $@
-
-intermediate/line-ids.json: intermediate/wp-railway-line-list.json \
-    bin/append-line-ids.pl
-	$(PERL) bin/append-line-ids.pl
-
-intermediate/company-ids.json: intermediate/stations.json \
-    bin/append-company-ids.pl
-	$(PERL) bin/append-company-ids.pl
-
-intermediate/station-ids.json: intermediate/stations.json \
-    bin/append-station-ids.pl
-	$(PERL) bin/append-station-ids.pl
-
 intermediate/wp-railway-lines.json: bin/wp-railway-lines.pl \
     intermediate/wp-railway-line-list.json local/intermediate-wikipedia \
     #wikipedia-dumps
 	mkdir -p intermediate
 	$(PERL) bin/wp-railway-lines.pl
+intermediate/wp-stations.json: local/station-list.json \
+    bin/update-station-data.pl local/intermediate-wikipedia #wikipedia-dumps
+	echo "{}" > $@
+	$(PERL) bin/update-station-data.pl
+
+intermediate/line-ids.json: intermediate/wp-railway-line-list.json \
+    bin/append-line-ids.pl
+	$(PERL) bin/append-line-ids.pl
+
+intermediate/company-ids.json: intermediate/wp-stations.json \
+    bin/append-company-ids.pl
+	$(PERL) bin/append-company-ids.pl
+
+intermediate/station-ids.json: intermediate/wp-stations.json \
+    bin/append-station-ids.pl
+	$(PERL) bin/append-station-ids.pl
 
 local/bin/jq:
 	$(WGET) -O $@ http://stedolan.github.io/jq/download/linux64/jq
@@ -91,15 +96,11 @@ local/bin/jq:
 local/station-list.json: local/bin/jq intermediate/wp-railway-lines.json
 	cat intermediate/wp-railway-lines.json  | local/bin/jq "[.[].stations[] | .wref // .name] | unique" > $@
 
-intermediate/stations.json: local/station-list.json \
-    bin/update-station-data.pl local/intermediate-wikipedia #wikipedia-dumps
-	echo "{}" > $@
-	$(PERL) bin/update-station-data.pl
 
 data/railway-lines.json: \
     intermediate/wp-railway-line-list.json \
     intermediate/wp-railway-lines.json \
-    intermediate/stations.json bin/railway-lines-2.pl
+    intermediate/wp-stations.json bin/railway-lines-2.pl
 	$(PERL) bin/railway-lines-2.pl > $@
 
 data/railways/lines.json: bin/railway-lines-3.pl data/railway-lines.json \
@@ -114,15 +115,12 @@ data/railways/stations.json: bin/railway-stations-2.pl \
     intermediate/company-ids.json intermediate/station-ids.json
 	$(PERL) bin/railway-stations-2.pl > $@
 
-data/stations.json: intermediate/stations.json \
+data/stations.json: intermediate/wp-stations.json \
     local/suffix-patterns.json local/regions.json bin/stations.pl
 	$(PERL) bin/stations.pl > $@
 
 data/stations.json.gz: data/stations.json
 	cat $< | gzip > $@
-
-local/intermediate-wikipedia:
-	touch $@
 
 local/suffix-patterns.json:
 	$(WGET) -O $@ https://raw.github.com/geocol/data-jp-areas/master/data/jp-regions-suffix-mixed-names.json

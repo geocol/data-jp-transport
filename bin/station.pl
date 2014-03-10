@@ -13,7 +13,7 @@ use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 use Char::Normalize::FullwidthHalfwidth qw(get_fwhw_normalized);
 
 my $root_d = file (__FILE__)->dir->parent;
-my $data_f = $root_d->file ('intermediate', 'stations.json');
+my $data_f = $root_d->file ('intermediate', 'wp-stations.json');
 
 my $LinesMap = {};
 {
