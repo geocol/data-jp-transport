@@ -331,6 +331,7 @@ for (@ARGV) {
 $cv->end;
 
 $cv->cb (sub {
+  (($Data->{八丁畷駅} or {})->{lines}->{京急本線} or {})->{number} =~ s/\s*\(京急\)$//;
   print { $data_f->openw } perl2json_bytes_for_record $Data;
 });
 

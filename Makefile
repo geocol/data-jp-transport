@@ -61,6 +61,10 @@ intermediate/railway-lines.json: bin/railway-lines.pl \
     local/intermediate-wikipedia #wikipedia-dumps
 	$(PERL) bin/railway-lines.pl > $@
 
+intermediate/line-ids.json: intermediate/railway-lines.json \
+    bin/append-line-ids.pl
+	$(PERL) bin/append-line-ids.pl
+
 intermediate/railway-stations.json: bin/railway-stations.pl \
     intermediate/railway-lines.json local/intermediate-wikipedia \
     #wikipedia-dumps
@@ -88,6 +92,10 @@ data/railway-lines.json: intermediate/railway-stations.json \
     intermediate/stations.json bin/railway-lines-2.pl
 	$(PERL) bin/railway-lines-2.pl > $@
 
+data/railways/lines.json: bin/railway-lines-3.pl data/railway-lines.json \
+    intermediate/line-ids.json
+	$(PERL) bin/railway-lines-3.pl > $@
+
 data/stations.json: intermediate/stations.json \
     local/suffix-patterns.json local/regions.json bin/stations.pl
 	$(PERL) bin/stations.pl > $@
@@ -106,6 +114,13 @@ local/regions.json:
 
 data/region-lines.json: bin/region-lines.pl data/stations.json
 	$(PERL) bin/region-lines.pl > $@
+
+local/N02-12.xml: local/N02-12_GML.zip
+	cd local && unzip -o N02-12_GML.zip
+	touch $@
+
+local/ksj-railroads.json: local/N02-12.xml bin/ksj-railroads.pl
+	$(PERL) bin/ksj-railroads.pl > $@
 
 ## ------ Tests ------
 
