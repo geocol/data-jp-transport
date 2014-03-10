@@ -7,7 +7,14 @@ use Encode;
 use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 
 my $root_d = file (__FILE__)->dir->parent;
-my $Data = file2perl $root_d->file ('intermediate', 'railway-stations.json');
+my $Data = {};
+
+my $line_list = file2perl $root_d->file ('intermediate', 'wp-railway-line-list.json');
+my $lines = file2perl $root_d->file ('intermediate', 'wp-railway-lines.json');
+$Data = $line_list;
+for (keys %$lines) {
+    $Data->{$_}->{stations} = $lines->{$_}->{stations} if $lines->{$_}->{stations};
+}
 
 my $stations = file2perl $root_d->file ('intermediate', 'stations.json');
 

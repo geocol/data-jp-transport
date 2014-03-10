@@ -49,8 +49,8 @@ wp-clean:
 wp-deps:
 	$(PERL) bin/prepare-wikipedia-cache.pl
 
-wp-data: wp-deps intermediate/railway-lines.json \
-    intermediate/railway-stations.json \
+wp-data: wp-deps intermediate/wp-railway-line-list.json \
+    intermediate/wp-railway-lines.json \
     intermediate/stations.json
 	$(GIT) add intermediate
 
@@ -78,25 +78,27 @@ intermediate/station-ids.json: intermediate/stations.json \
     bin/append-station-ids.pl
 	$(PERL) bin/append-station-ids.pl
 
-intermediate/railway-stations.json: bin/railway-stations.pl \
+intermediate/wp-railway-lines.json: bin/wp-to-railway-lines.pl \
     intermediate/wp-railway-line-list.json local/intermediate-wikipedia \
     #wikipedia-dumps
 	mkdir -p intermediate
-	$(PERL) bin/railway-stations.pl
+	$(PERL) bin/wp-to-railway-lines.pl
 
 local/bin/jq:
 	$(WGET) -O $@ http://stedolan.github.io/jq/download/linux64/jq
 	chmod u+x local/bin/jq
 
-local/station-list.json: local/bin/jq intermediate/railway-stations.json
-	cat intermediate/railway-stations.json  | local/bin/jq "[.[].stations[] | .wref // .name] | unique" > $@
+local/station-list.json: local/bin/jq intermediate/wp-railway-lines.json
+	cat intermediate/wp-railway-lines.json  | local/bin/jq "[.[].stations[] | .wref // .name] | unique" > $@
 
 intermediate/stations.json: local/station-list.json \
     bin/update-station-data.pl local/intermediate-wikipedia #wikipedia-dumps
 	echo "{}" > $@
 	$(PERL) bin/update-station-data.pl
 
-data/railway-lines.json: intermediate/railway-stations.json \
+data/railway-lines.json: \
+    intermediate/wp-railway-line-list.json \
+    intermediate/wp-railway-lines.json \
     intermediate/stations.json bin/railway-lines-2.pl
 	$(PERL) bin/railway-lines-2.pl > $@
 
