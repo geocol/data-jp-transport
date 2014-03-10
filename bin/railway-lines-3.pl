@@ -11,6 +11,7 @@ my $root_d = file (__FILE__)->dir->parent;
 my $Data = {};
 
 my $line_ids = file2perl $root_d->file ('intermediate', 'line-ids.json');
+my $company_ids = file2perl $root_d->file ('intermediate', 'company-ids.json');
 
 for my $name (keys %$line_ids) {
     my $id = $line_ids->{$name}->{id};
@@ -38,14 +39,21 @@ for my $wref (keys %$lines) {
     for my $k (keys %$data) {
         my $v = $data->{$k};
         if (ref $v eq 'HASH') {
-            $Data->{$id}->{$k}->{$_} = $v->{$_} for keys %$v;
+            $Data->{lines}->{$id}->{$k}->{$_} = $v->{$_} for keys %$v;
         } else {
-            $Data->{$id}->{$k} ||= $v;
+            $Data->{lines}->{$id}->{$k} ||= $v;
         }
     }
-    delete $Data->{$id}->{company_wrefs}; # XXX
-    delete $Data->{$id}->{stations}; # XXX
-    delete $Data->{$id}->{timestamp};
+    for (keys %{$Data->{lines}->{$id}->{company_wrefs}}) {
+        if ($company_ids->{$_}) {
+            $Data->{lines}->{$id}->{companies}->{$company_ids->{$_}->{id}} = 1;
+        } else {
+            push @{$Data->{_errors}}, "Company |$_| has no ID";
+        }
+    }
+    delete $Data->{lines}->{$id}->{company_wrefs};
+    delete $Data->{lines}->{$id}->{stations}; # XXX
+    delete $Data->{lines}->{$id}->{timestamp};
 }
 
 print perl2json_bytes_for_record $Data;
