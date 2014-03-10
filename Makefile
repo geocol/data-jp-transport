@@ -1,7 +1,6 @@
 GIT = git
 
-all: data/railway-lines.json data/stations.json data/region-lines.json \
-    data/stations.json.gz
+all: data-railways
 
 dataautoupdate: clean deps all
 	$(GIT) add data/*
@@ -57,6 +56,11 @@ wp-data: wp-deps intermediate/railway-lines.json \
 
 ## ------ Railways ------
 
+data-railways: \
+    data/railway-lines.json data/stations.json data/region-lines.json \
+    data/stations.json.gz \
+    data/railways/lines.json  data/railways/companies.json
+
 intermediate/railway-lines.json: bin/railway-lines.pl \
     local/intermediate-wikipedia #wikipedia-dumps
 	$(PERL) bin/railway-lines.pl > $@
@@ -64,6 +68,10 @@ intermediate/railway-lines.json: bin/railway-lines.pl \
 intermediate/line-ids.json: intermediate/railway-lines.json \
     bin/append-line-ids.pl
 	$(PERL) bin/append-line-ids.pl
+
+intermediate/company-ids.json: intermediate/stations.json \
+    bin/append-company-ids.pl
+	$(PERL) bin/append-company-ids.pl
 
 intermediate/railway-stations.json: bin/railway-stations.pl \
     intermediate/railway-lines.json local/intermediate-wikipedia \
@@ -95,6 +103,10 @@ data/railway-lines.json: intermediate/railway-stations.json \
 data/railways/lines.json: bin/railway-lines-3.pl data/railway-lines.json \
     intermediate/line-ids.json
 	$(PERL) bin/railway-lines-3.pl > $@
+
+data/railways/companies.json: bin/railway-companies.pl \
+    intermediate/company-ids.json
+	$(PERL) bin/railway-companies.pl > $@
 
 data/stations.json: intermediate/stations.json \
     local/suffix-patterns.json local/regions.json bin/stations.pl

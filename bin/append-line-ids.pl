@@ -11,8 +11,12 @@ my $Data = file2perl $data_f;
 
 my $next_id = 1;
 for (values %$Data) {
-    next unless defined $_->{id};
-    $next_id = $_->{id} + 1 if $_->{id} > $next_id;
+    if (defined $_->{id}) {
+        $next_id = $_->{id} + 1 if $_->{id} > $next_id;
+    }
+}
+for (values %$Data) {
+    $_->{id} = $next_id++ unless defined $_->{id};
 }
 
 for (keys %$lines) {

@@ -15,6 +15,7 @@ my $line_ids = file2perl $root_d->file ('intermediate', 'line-ids.json');
 for my $name (keys %$line_ids) {
     my $id = $line_ids->{$name}->{id};
     $Data->{lines}->{$id}->{names}->{$name} = 1;
+    $Data->{lines}->{$id}->{wref} = $name if $line_ids->{$name}->{wref};
 }
 
 my $lines = file2perl file (__FILE__)->dir->parent->file ('data', 'railway-lines.json');
@@ -26,6 +27,11 @@ for my $wref (keys %$lines) {
         next;
     }
     my $data = $lines->{$wref};
+    if (defined $data->{wref} and
+        defined $Data->{lines}->{$id}->{wref} and
+        not $data->{wref} eq $Data->{lines}->{$id}->{wref}) {
+        warn "Conflict #$id - |$data->{wref}| and |$Data->{lines}->{$id}->{wref}|";
+    }
     if (defined $data->{wref} and not $data->{wref} eq $wref) {
         warn "Conflict #$id - |$data->{wref}| and |$wref|";
     }
@@ -34,7 +40,7 @@ for my $wref (keys %$lines) {
         if (ref $v eq 'HASH') {
             $Data->{$id}->{$k}->{$_} = $v->{$_} for keys %$v;
         } else {
-            $Data->{$id}->{$k} = $v;
+            $Data->{$id}->{$k} ||= $v;
         }
     }
     delete $Data->{$id}->{company_wrefs}; # XXX
