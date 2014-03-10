@@ -72,7 +72,7 @@ intermediate/wp-railway-lines.json: bin/wp-railway-lines.pl \
     #wikipedia-dumps
 	mkdir -p intermediate
 	$(PERL) bin/wp-railway-lines.pl
-intermediate/wp-stations.json: local/station-list.json \
+intermediate/wp-railway-stations.json: local/station-list.json \
     bin/wp-railway-stations-update.pl \
     local/intermediate-wikipedia #wikipedia-dumps
 	echo "{}" > $@
@@ -82,11 +82,11 @@ intermediate/line-ids.json: intermediate/wp-railway-line-list.json \
     bin/append-line-ids.pl
 	$(PERL) bin/append-line-ids.pl
 
-intermediate/company-ids.json: intermediate/wp-stations.json \
+intermediate/company-ids.json: intermediate/wp-railway-stations.json \
     bin/append-company-ids.pl
 	$(PERL) bin/append-company-ids.pl
 
-intermediate/station-ids.json: intermediate/wp-stations.json \
+intermediate/station-ids.json: intermediate/wp-railway-stations.json \
     bin/append-station-ids.pl
 	$(PERL) bin/append-station-ids.pl
 
@@ -101,7 +101,7 @@ local/station-list.json: local/bin/jq intermediate/wp-railway-lines.json
 data/railway-lines.json: \
     intermediate/wp-railway-line-list.json \
     intermediate/wp-railway-lines.json \
-    intermediate/wp-stations.json bin/railway-lines-2.pl
+    intermediate/wp-railway-stations.json bin/railway-lines-2.pl
 	$(PERL) bin/railway-lines-2.pl > $@
 
 data/railways/lines.json: bin/railway-lines-3.pl data/railway-lines.json \
@@ -116,7 +116,7 @@ data/railways/stations.json: bin/railway-stations-2.pl \
     intermediate/company-ids.json intermediate/station-ids.json
 	$(PERL) bin/railway-stations-2.pl > $@
 
-data/stations.json: intermediate/wp-stations.json \
+data/stations.json: intermediate/wp-railway-stations.json \
     local/suffix-patterns.json local/regions.json bin/stations.pl
 	$(PERL) bin/stations.pl > $@
 
