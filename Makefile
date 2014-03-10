@@ -62,9 +62,9 @@ data-railways: \
     data/railways/lines.json  data/railways/companies.json \
     data/railways/stations.json
 
-intermediate/wp-railway-line-list.json: bin/wp-to-railway-lines.pl \
+intermediate/wp-railway-line-list.json: bin/wp-railway-line-list.pl \
     local/intermediate-wikipedia #wikipedia-dumps
-	$(PERL) bin/wp-to-railway-lines.pl > $@
+	$(PERL) bin/wp-railway-line-list.pl > $@
 
 intermediate/line-ids.json: intermediate/wp-railway-line-list.json \
     bin/append-line-ids.pl
@@ -78,11 +78,11 @@ intermediate/station-ids.json: intermediate/stations.json \
     bin/append-station-ids.pl
 	$(PERL) bin/append-station-ids.pl
 
-intermediate/wp-railway-lines.json: bin/wp-to-railway-lines.pl \
+intermediate/wp-railway-lines.json: bin/wp-railway-lines.pl \
     intermediate/wp-railway-line-list.json local/intermediate-wikipedia \
     #wikipedia-dumps
 	mkdir -p intermediate
-	$(PERL) bin/wp-to-railway-lines.pl
+	$(PERL) bin/wp-railway-lines.pl
 
 local/bin/jq:
 	$(WGET) -O $@ http://stedolan.github.io/jq/download/linux64/jq
