@@ -115,6 +115,7 @@ sub _extract_objects ($) {
     if ($_->node_type == $_->ELEMENT_NODE) {
       my $ln = $_->local_name;
       if ($ln eq 'l' and not $_->has_attribute ('embed')) {
+        next if $_->text_content eq '駅詳細';
         $l //= $_;
         push @l, $_;
       } elsif ($ln eq 'comment' or $ln eq 'ref') {
