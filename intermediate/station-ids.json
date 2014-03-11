@@ -1,65 +1,27 @@
 {
    "_errors" : [
       "|大日駅|'s substation has no company",
-      "ID for company |東急電鉄| not defined",
-      "|日吉駅 (神奈川県)|'s substation has no company",
       "ID for company |宮島松大汽船| not defined",
       "|広電宮島口駅|'s substation has no company",
-      "ID for company |早来鉄道| not defined",
-      "|早来駅|'s substation has no company",
-      "ID for company |茨城交通| not defined",
-      "|赤塚駅|'s substation has no company",
-      "ID for company |渡島海岸鉄道| not defined",
-      "|森駅 (北海道)|'s substation has no company",
-      "ID for company |東急電鉄| not defined",
-      "|新横浜駅|'s substation has no company",
       "ID for company |天塩炭砿鉄道| not defined",
       "|留萌駅|'s substation has no company",
       "ID for company |岩内馬車鉄道| not defined",
       "|小沢駅|'s substation has no company",
       "ID for company |筑豊鉄道 (2代)| not defined",
       "|香月駅|'s substation has no company",
-      "ID for company |北見鉄道| not defined",
-      "|止別駅|'s substation has no company",
-      "ID for company |雄別炭礦| not defined",
-      "|尺別駅|'s substation has no company",
-      "ID for company |南部縦貫鉄道| not defined",
-      "|野辺地駅|'s substation has no company",
       "|名寄駅|'s substation has no company",
-      "ID for company |岡山電気軌道| not defined",
-      "|岡山駅|'s substation has no company",
-      "ID for company |山形交通| not defined",
-      "|高畠駅|'s substation has no company",
-      "ID for company |留萠鉄道| not defined",
-      "|恵比島駅|'s substation has no company",
-      "ID for company |沙流鉄道| not defined",
-      "|富川駅|'s substation has no company",
-      "ID for company |荒尾市交通局| not defined",
-      "|荒尾駅 (熊本県)|'s substation has no company",
-      "ID for company |蒲原鉄道| not defined",
-      "|五泉駅|'s substation has no company",
       "ID for company |村松軌道| not defined",
       "|東海駅|'s substation has no company",
       "ID for company |叡山電鉄]]| not defined",
       "|出町柳駅|'s substation has no company",
       "ID for company |JR西日本宮島フェリー| not defined",
       "|宮島口駅|'s substation has no company",
-      "ID for company |常総筑波鉄道| not defined",
-      "|大田郷駅|'s substation has no company",
       "ID for company |札幌市電| not defined",
       "|南大嶺駅|'s substation has no company",
       "ID for company |十勝鉄道| not defined",
       "|十勝清水駅|'s substation has no company",
-      "ID for company |洞爺湖電気鉄道| not defined",
-      "|洞爺駅|'s substation has no company",
       "ID for company |三井芦別鉄道| not defined",
       "|芦別駅|'s substation has no company",
-      "ID for company |函館市企業局交通部| not defined",
-      "|函館駅|'s substation has no company",
-      "ID for company |松尾鉱業鉄道| not defined",
-      "|大更駅|'s substation has no company",
-      "ID for company |蒲原鉄道| not defined",
-      "|加茂駅 (新潟県)|'s substation has no company",
       "ID for company |羽幌炭礦鉄道| not defined",
       "|築別駅|'s substation has no company"
    ],
@@ -1836,6 +1798,9 @@
       },
       "上田駅" : {
          "id" : 10362
+      },
+      "上田駅\u001c100" : {
+         "id" : 11162
       },
       "上田駅\u001c269" : {
          "id" : 10364
@@ -3735,6 +3700,9 @@
       },
       "五泉駅" : {
          "id" : 7177
+      },
+      "五泉駅\u001c277" : {
+         "id" : 11157
       },
       "五百川駅" : {
          "id" : 8276
@@ -6109,6 +6077,9 @@
       "函館駅" : {
          "id" : 9338
       },
+      "函館駅\u001c269" : {
+         "id" : 11160
+      },
       "刀根駅" : {
          "id" : 459
       },
@@ -6384,6 +6355,9 @@
       },
       "加茂駅 (新潟県)" : {
          "id" : 10621
+      },
+      "加茂駅 (新潟県)\u001c277" : {
+         "id" : 11163
       },
       "加賀一の宮駅" : {
          "id" : 3058
@@ -10357,6 +10331,9 @@
       "大更駅" : {
          "id" : 9986
       },
+      "大更駅\u001c276" : {
+         "id" : 11161
+      },
       "大曽根浦駅" : {
          "id" : 5980
       },
@@ -10629,6 +10606,9 @@
       },
       "大田郷駅" : {
          "id" : 8189
+      },
+      "大田郷駅\u001c274" : {
+         "id" : 11158
       },
       "大町停留場 (富山県)" : {
          "id" : 8229
@@ -12139,6 +12119,9 @@
       "富川駅" : {
          "id" : 6834
       },
+      "富川駅\u001c279" : {
+         "id" : 11155
+      },
       "富戸駅" : {
          "id" : 9300
       },
@@ -12823,6 +12806,9 @@
       "尺別駅" : {
          "id" : 3408
       },
+      "尺別駅\u001c272" : {
+         "id" : 11150
+      },
       "尺土駅" : {
          "id" : 975
       },
@@ -13224,6 +13210,9 @@
       },
       "岡山駅" : {
          "id" : 4573
+      },
+      "岡山駅\u001c285" : {
+         "id" : 11152
       },
       "岡崎公園前駅" : {
          "id" : 10577
@@ -15205,6 +15194,9 @@
       "恵比島駅" : {
          "id" : 5582
       },
+      "恵比島駅\u001c280" : {
+         "id" : 11154
+      },
       "恵比須駅" : {
          "id" : 3807
       },
@@ -16249,6 +16241,9 @@
       "新横浜駅" : {
          "id" : 2379
       },
+      "新横浜駅\u001c27" : {
+         "id" : 11148
+      },
       "新横浜駅\u001c29\u001c29" : {
          "id" : 2380
       },
@@ -16947,6 +16942,9 @@
       },
       "早来駅" : {
          "id" : 1942
+      },
+      "早来駅\u001c282" : {
+         "id" : 11145
       },
       "早瀬駅" : {
          "id" : 5635
@@ -19834,6 +19832,9 @@
       "森駅 (北海道)" : {
          "id" : 2071
       },
+      "森駅 (北海道)\u001c281" : {
+         "id" : 11147
+      },
       "森駅 (大阪府)" : {
          "id" : 7778
       },
@@ -20205,6 +20206,9 @@
       },
       "止別駅" : {
          "id" : 3381
+      },
+      "止別駅\u001c271" : {
+         "id" : 11149
       },
       "正丸トンネル信号場" : {
          "id" : 734
@@ -21246,6 +21250,9 @@
       },
       "洞爺駅" : {
          "id" : 9111
+      },
+      "洞爺駅\u001c273" : {
+         "id" : 11159
       },
       "津ノ井駅" : {
          "id" : 1426
@@ -27190,6 +27197,9 @@
       "荒尾駅 (熊本県)" : {
          "id" : 7085
       },
+      "荒尾駅 (熊本県)\u001c283" : {
+         "id" : 11156
+      },
       "荒屋新町駅" : {
          "id" : 8653
       },
@@ -29389,6 +29399,9 @@
       "赤塚駅" : {
          "id" : 2009
       },
+      "赤塚駅\u001c284" : {
+         "id" : 11146
+      },
       "赤岩口停留場" : {
          "id" : 4768
       },
@@ -30402,6 +30415,9 @@
       },
       "野辺地駅" : {
          "id" : 4287
+      },
+      "野辺地駅\u001c275" : {
+         "id" : 11151
       },
       "野辺山駅" : {
          "id" : 2004
@@ -32616,6 +32632,9 @@
       },
       "高畠駅" : {
          "id" : 4969
+      },
+      "高畠駅\u001c278" : {
+         "id" : 11153
       },
       "高知商業前駅" : {
          "id" : 1144
