@@ -20,6 +20,25 @@ for my $name (keys %$line_ids) {
     $Data->{lines}->{$id}->{wref} = $name if $line_ids->{$name}->{wref};
 }
 
+{
+    my $f = file (__FILE__)->dir->parent->file ('src', 'railway-lines-names.txt');
+    for (($f->slurp)) {
+        my $line = decode 'utf-8', $_;
+        if ($line =~ /^\s*#/) {
+            #
+        } elsif ($line =~ /^(\d+)\s+wref=(.+)$/) {
+            $Data->{lines}->{$1}->{names}->{$2} = 1;
+            $Data->{lines}->{$1}->{wref} = $2;
+            $line_ids->{$2}->{id} ||= $1;
+        } elsif ($line =~ /^(\d+)\s+(.+)$/) {
+            $Data->{lines}->{$1}->{names}->{$2} = 1;
+            $line_ids->{$2}->{id} ||= $1;
+        } elsif ($line =~ /\S/) {
+            die "Broken line: |$line|";
+        }
+    }
+}
+
 #my $lines = file2perl file (__FILE__)->dir->parent->file ('intermediate', 'wp-railway-line-list.json');
 my $lines = file2perl file (__FILE__)->dir->parent->file ('data', 'railway-lines.json');
 
@@ -30,14 +49,6 @@ for my $wref (keys %$lines) {
         next;
     }
     my $data = $lines->{$wref};
-    if (defined $data->{wref} and
-        defined $Data->{lines}->{$id}->{wref} and
-        not $data->{wref} eq $Data->{lines}->{$id}->{wref}) {
-        push @{$Data->{_errors}}, "Conflict #$id - |$data->{wref}| and |$Data->{lines}->{$id}->{wref}|";
-    }
-    if (defined $data->{wref} and not $data->{wref} eq $wref) {
-        push @{$Data->{_errors}}, "Conflict #$id - |$data->{wref}| and |$wref|";
-    }
     for my $k (keys %$data) {
         my $v = $data->{$k};
         if (ref $v eq 'HASH') {

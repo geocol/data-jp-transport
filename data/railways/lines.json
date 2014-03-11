@@ -1,17 +1,14 @@
 {
    "_errors" : [
       "ID for line |関西本線貨物支線| not defined",
-      "Conflict #1173 - |沼津港| and |沼津港駅|",
       "ID for line |三井芦別鉄道線(貨物線)| not defined",
       "ID for line |東海道本線貨物支線(新興線)| not defined",
-      "ID for line |黒部峡谷鉄道| not defined",
       "ID for line |夕張支線| not defined",
       "ID for line |秋田臨海鉄道線(南線)| not defined",
       "ID for line |立山ロープウェイ| not defined",
       "ID for line |成田線(空港支線)| not defined",
       "ID for line |宮島連絡船| not defined",
       "ID for line |小坂井支線| not defined",
-      "ID for line |磐梯急行電鉄線| not defined",
       "ID for line |長崎電気軌道2号系統| not defined",
       "ID for line |東田本線(支線)| not defined",
       "ID for line |奥羽本線(貨物支線)| not defined",
@@ -47,7 +44,6 @@
       "ID for line |m 東京メトロ丸ノ内線(分岐線)| not defined",
       "ID for line |箱根ロープウェイ| not defined",
       "ID for line |おおさか東線#城東貨物線| not defined",
-      "ID for line |磐梯急行電鉄線(沼尻鉄道線)| not defined",
       "ID for line |羽幌炭礦鉄道線| not defined",
       "ID for line |小野田線(本山支線)| not defined",
       "ID for line |小泉線(支線)| not defined",
@@ -4141,8 +4137,18 @@
       },
       "326" : {
          "closed" : 1,
+         "companies" : {
+            "142" : 1
+         },
          "names" : {
-            "磐梯急行電鉄" : 1
+            "日本硫黄沼尻鉄道部" : 1,
+            "日本硫黄耶麻軌道部" : 1,
+            "日本硫黄観光" : 1,
+            "沼尻鉄道" : 1,
+            "磐梯急行電鉄" : 1,
+            "磐梯急行電鉄線" : 1,
+            "磐梯急行電鉄線(沼尻鉄道線)" : 1,
+            "耶麻軌道" : 1
          },
          "wref" : "磐梯急行電鉄"
       },
@@ -5462,6 +5468,7 @@
          },
          "names" : {
             "本線" : 1,
+            "黒部峡谷鉄道" : 1,
             "黒部峡谷鉄道本線" : 1
          },
          "wref" : "黒部峡谷鉄道本線"
@@ -10557,8 +10564,7 @@
       },
       "930" : {
          "companies" : {
-            "100" : 1,
-            "269" : 1
+            "100" : 1
          },
          "names" : {
             "上田電鉄別所線" : 1,
