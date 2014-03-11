@@ -15,6 +15,9 @@ for (values %{$Data->{companies}}) {
     next unless defined $_->{id};
     $next_id = $_->{id} + 1 if $_->{id} > $next_id;
 }
+for (values %{$Data->{companies}}) {
+    $_->{id} = $next_id++ unless defined $_->{id};
+}
 
 for (keys %$stations) {
     for (keys %{$stations->{$_}->{company_wrefs}}) {

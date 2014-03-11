@@ -1,23 +1,127 @@
 {
    "_errors" : [
-      "Company |松尾鉱業鉄道| has no ID",
-      "Company |南部縦貫鉄道| has no ID",
-      "Company |函館市企業局交通部| has no ID",
-      "Company |沙流鉄道| has no ID",
-      "Company |留萠鉄道| has no ID",
-      "Company |渡島海岸鉄道| has no ID",
-      "Company |茨城交通| has no ID",
-      "Company |岡山電気軌道| has no ID",
-      "Company |常総筑波鉄道| has no ID",
-      "Company |雄別炭礦| has no ID",
-      "Company |岡山電気軌道| has no ID",
-      "Company |北見鉄道| has no ID",
-      "Company |山形交通| has no ID",
-      "Company |洞爺湖電気鉄道| has no ID",
-      "Company |早来鉄道| has no ID",
-      "Company |函館市企業局交通部| has no ID",
-      "Company |荒尾市交通局| has no ID",
-      "Company |蒲原鉄道| has no ID"
+      "ID for line |関西本線貨物支線| not defined",
+      "Conflict #1173 - |沼津港| and |沼津港駅|",
+      "ID for line |三井芦別鉄道線(貨物線)| not defined",
+      "ID for line |東海道本線貨物支線(新興線)| not defined",
+      "ID for line |黒部峡谷鉄道| not defined",
+      "ID for line |夕張支線| not defined",
+      "ID for line |秋田臨海鉄道線(南線)| not defined",
+      "ID for line |立山ロープウェイ| not defined",
+      "ID for line |成田線(空港支線)| not defined",
+      "ID for line |宮島連絡船| not defined",
+      "ID for line |小坂井支線| not defined",
+      "ID for line |磐梯急行電鉄線| not defined",
+      "ID for line |長崎電気軌道2号系統| not defined",
+      "ID for line |東田本線(支線)| not defined",
+      "ID for line |奥羽本線(貨物支線)| not defined",
+      "ID for line |上越線#上越新幹線 支線| not defined",
+      "ID for line |鹿児島市電1系統| not defined",
+      "ID for line |草軽電気鉄道線| not defined",
+      "ID for line |北越急行| not defined",
+      "ID for line |山鼻線| not defined",
+      "ID for line |金山線| not defined",
+      "ID for line |File:JR logo (east).svg中央本線(中央東線・辰野支線)| not defined",
+      "ID for line |富山市内軌道線安野屋線| not defined",
+      "ID for line |清水部線| not defined",
+      "ID for line |富山市内軌道線富山都心線| not defined",
+      "ID for line |北海道炭礦鉄道(貨物線)| not defined",
+      "ID for line |貨物支線| not defined",
+      "ID for line |雄別鉄道#雄別鉄道線| not defined",
+      "ID for line |名鉄高富線| not defined",
+      "ID for line |平野線| not defined",
+      "ID for line |鹿児島市電2系統| not defined",
+      "ID for line |熊本市電春竹線| not defined",
+      "ID for line |長崎電気軌道3号系統| not defined",
+      "ID for line |京葉線(高谷支線)| not defined",
+      "ID for line |六本木駅| not defined",
+      "ID for line |南武線支線(浜川崎支線)| not defined",
+      "ID for line |山陰本線(仙崎支線)| not defined",
+      "ID for line |大門駅 (東京都)| not defined",
+      "ID for line |北海道旅客鉄道| not defined",
+      "ID for line |北海道拓殖鉄道線| not defined",
+      "Company |叡山電鉄]]| has no ID",
+      "ID for line |関西本線(貨物支線)| not defined",
+      "ID for line |東北本線(貨物支線)| not defined",
+      "ID for line |大沼電鉄線| not defined",
+      "ID for line |m 東京メトロ丸ノ内線(分岐線)| not defined",
+      "ID for line |箱根ロープウェイ| not defined",
+      "ID for line |おおさか東線#城東貨物線| not defined",
+      "ID for line |磐梯急行電鉄線(沼尻鉄道線)| not defined",
+      "ID for line |羽幌炭礦鉄道線| not defined",
+      "ID for line |小野田線(本山支線)| not defined",
+      "ID for line |小泉線(支線)| not defined",
+      "ID for line |日豊本線(貨物支線)| not defined",
+      "ID for line |羽越本線(貨物支線)| not defined",
+      "ID for line |三岐線(近鉄連絡線)| not defined",
+      "ID for line |飯田橋駅| not defined",
+      "ID for line |軽石軌道線| not defined",
+      "ID for line |東海道本線(美濃赤坂支線)| not defined",
+      "ID for line |阪神北大阪線| not defined",
+      "ID for line |山鹿温泉鉄道線| not defined",
+      "ID for line |電車線| not defined",
+      "ID for line |村松軌道線| not defined",
+      "ID for line |筑豊鉄道線| not defined",
+      "ID for line |富山市内軌道線(支線)| not defined",
+      "ID for line |光が丘駅| not defined",
+      "ID for line |名古屋臨海高速鉄道| not defined",
+      "ID for line |長崎本線(長与支線)| not defined",
+      "ID for line |摩耶ロープウェー| not defined",
+      "ID for line |京王競馬場線| not defined",
+      "ID for line |武蔵野線貨物支線(馬橋支線)| not defined",
+      "ID for line |熊本市電坪井線| not defined",
+      "ID for line |(東海道貨物線)| not defined",
+      "ID for line |島原鉄道島原鉄道線| not defined",
+      "ID for line |東海道本線貨物支線| not defined",
+      "ID for line |新金線| not defined",
+      "ID for line |九十九里鉄道線| not defined",
+      "ID for line |のと鉄道能登線(廃止時)| not defined",
+      "ID for line |臨海本線(支線)| not defined",
+      "ID for line |天塩炭砿鉄道線| not defined",
+      "ID for line |阪和線支線(羽衣線)| not defined",
+      "ID for line |東日本旅客鉄道| not defined",
+      "ID for line |名鉄鏡島線| not defined",
+      "ID for line |美祢線(大嶺支線)| not defined",
+      "ID for line |練馬駅| not defined",
+      "ID for line |坂川鉄道線| not defined",
+      "ID for line |神奈川東部方面線| not defined",
+      "ID for line |京葉線(二俣支線)| not defined",
+      "ID for line |予讃線(新線)| not defined",
+      "ID for line |常磐線(貨物支線・田端貨物線)| not defined",
+      "ID for line |室蘭本線(支線)| not defined",
+      "ID for line |鶴野線| not defined",
+      "ID for line |両国駅| not defined",
+      "ID for line |北陸本線貨物支線(敦賀港線)| not defined",
+      "ID for line |根室拓殖鉄道線| not defined",
+      "ID for line |列車線| not defined",
+      "ID for line |尾小屋鉄道線| not defined",
+      "ID for line |名鉄谷汲線| not defined",
+      "ID for line |File:JR logo (central).svg中央本線(中央西線)| not defined",
+      "ID for line |登川支線| not defined",
+      "ID for line |武蔵野線貨物支線(北小金支線)| not defined",
+      "ID for line |鉄道省| not defined",
+      "ID for line |南美唄支線| not defined",
+      "ID for line |越中鉄道| not defined",
+      "ID for line |宮島航路| not defined",
+      "ID for line |常磐線(貨物支線・隅田川貨物線)| not defined",
+      "ID for line |雄別本線| not defined",
+      "ID for line |電車線・列車線| not defined",
+      "ID for line |大船渡線(BRT区間:上鹿折方面)| not defined",
+      "ID for line |武蔵野南線| not defined",
+      "ID for line |貨物線| not defined",
+      "ID for line |南武線貨物支線(尻手短絡線)| not defined",
+      "ID for line |武蔵野線貨物支線(西浦和支線)| not defined",
+      "ID for line |寿都鉄道線| not defined",
+      "ID for line |大船渡線(BRT区間:陸前矢作方面)| not defined",
+      "ID for line |野上電気鉄道#野上線| not defined",
+      "ID for line |東海道本線(下り本線)| not defined",
+      "ID for line |成田線(我孫子支線)| not defined",
+      "ID for line |長崎電気軌道1号系統| not defined",
+      "ID for line |C 東京メトロ千代田線(支線)| not defined",
+      "ID for line |信越本線(貨物支線)| not defined",
+      "ID for line |総武本線(貨物支線)| not defined",
+      "ID for line |上砂川支線| not defined",
+      "ID for line |上越新幹線(支線)| not defined"
    ],
    "lines" : {
       "1" : {
@@ -161,6 +265,7 @@
          "wref" : "日向軌道"
       },
       "1012" : {
+         "closed" : 1,
          "names" : {
             "北九州市交通局#北九州市電" : 1,
             "北九州市電" : 1
@@ -439,9 +544,11 @@
          "wref" : "埼京線"
       },
       "104" : {
+         "closed" : 1,
          "names" : {
             "谷地軌道" : 1
-         }
+         },
+         "wref" : "谷地軌道"
       },
       "1040" : {
          "names" : {
@@ -1357,9 +1464,11 @@
          "wref" : "土佐くろしお鉄道宿毛線"
       },
       "1127" : {
+         "closed" : 1,
          "names" : {
             "東武徳川河岸線" : 1
-         }
+         },
+         "wref" : "東武徳川河岸線"
       },
       "1128" : {
          "companies" : {
@@ -1491,9 +1600,11 @@
          "wref" : "塩原電車"
       },
       "114" : {
+         "closed" : 1,
          "names" : {
             "赤井軌道" : 1
-         }
+         },
+         "wref" : "赤井軌道"
       },
       "1140" : {
          "companies" : {
@@ -1708,9 +1819,11 @@
          "wref" : "北陸鉄道加南線"
       },
       "1161" : {
+         "closed" : 1,
          "names" : {
             "東京市軽便鉄道線" : 1
-         }
+         },
+         "wref" : "東京市軽便鉄道線"
       },
       "1162" : {
          "companies" : {
@@ -1795,6 +1908,69 @@
          },
          "wref" : "沼津港駅"
       },
+      "1174" : {
+         "companies" : {
+            "103" : 1
+         },
+         "names" : {
+            "有馬線" : 1,
+            "神戸電鉄有馬線" : 1
+         },
+         "wref" : "神戸電鉄有馬線"
+      },
+      "1175" : {
+         "companies" : {
+            "10" : 1
+         },
+         "names" : {
+            "奈良線" : 1,
+            "近鉄奈良線" : 1
+         },
+         "wref" : "近鉄奈良線"
+      },
+      "1176" : {
+         "companies" : {
+            "8" : 1
+         },
+         "jr" : 1,
+         "names" : {
+            "七尾線" : 1
+         },
+         "wref" : "七尾線"
+      },
+      "1177" : {
+         "companies" : {
+            "35" : 1
+         },
+         "names" : {
+            "宇品線" : 1,
+            "広島電鉄宇品線" : 1
+         },
+         "tram" : 1,
+         "wref" : "広島電鉄宇品線"
+      },
+      "1178" : {
+         "agt" : 1,
+         "companies" : {
+            "49" : 1
+         },
+         "names" : {
+            "山口線" : 1,
+            "西武山口線" : 1
+         },
+         "wref" : "西武山口線"
+      },
+      "1179" : {
+         "companies" : {
+            "2" : 1
+         },
+         "names" : {
+            "宇都宮線" : 1,
+            "東武宇都宮線" : 1,
+            "輪島線" : 1
+         },
+         "wref" : "東武宇都宮線"
+      },
       "118" : {
          "closed" : 1,
          "names" : {
@@ -1842,10 +2018,13 @@
          "wref" : "岩手開発鉄道赤崎線"
       },
       "122" : {
+         "closed" : 1,
+         "freight" : 1,
          "names" : {
             "東武西大家貨物線" : 1,
             "西大家駅#西大家貨物線" : 1
-         }
+         },
+         "wref" : "西大家駅#西大家貨物線"
       },
       "123" : {
          "companies" : {
@@ -1956,6 +2135,9 @@
          "wref" : "井笠鉄道矢掛線"
       },
       "134" : {
+         "companies" : {
+            "269" : 1
+         },
          "names" : {
             "函館市電大森線" : 1,
             "大森線" : 1
@@ -2011,9 +2193,11 @@
          "wref" : "茨城交通水浜線"
       },
       "14" : {
+         "closed" : 1,
          "names" : {
             "岩北軌道" : 1
-         }
+         },
+         "wref" : "岩北軌道"
       },
       "140" : {
          "closed" : 1,
@@ -2257,6 +2441,9 @@
       },
       "162" : {
          "closed" : 1,
+         "companies" : {
+            "279" : 1
+         },
          "names" : {
             "沙流鉄道" : 1,
             "沙流鉄道線" : 1
@@ -2322,6 +2509,9 @@
       },
       "169" : {
          "closed" : 1,
+         "companies" : {
+            "280" : 1
+         },
          "names" : {
             "留萠鉄道" : 1,
             "留萠鉄道線" : 1
@@ -2356,6 +2546,9 @@
       },
       "172" : {
          "closed" : 1,
+         "companies" : {
+            "281" : 1
+         },
          "names" : {
             "渡島海岸鉄道" : 1,
             "渡島海岸鉄道線" : 1
@@ -2363,9 +2556,11 @@
          "wref" : "渡島海岸鉄道"
       },
       "173" : {
+         "closed" : 1,
          "names" : {
             "胆江軌道" : 1
-         }
+         },
+         "wref" : "胆江軌道"
       },
       "174" : {
          "companies" : {
@@ -2434,6 +2629,9 @@
       },
       "180" : {
          "closed" : 1,
+         "companies" : {
+            "284" : 1
+         },
          "names" : {
             "茨城交通茨城線" : 1
          },
@@ -2581,9 +2779,11 @@
          "wref" : "伊勢鉄道伊勢線"
       },
       "195" : {
+         "closed" : 1,
          "names" : {
             "中泉軌道" : 1
-         }
+         },
+         "wref" : "中泉軌道"
       },
       "196" : {
          "closed" : 1,
@@ -2888,9 +3088,11 @@
          "wref" : "肥前電気鉄道"
       },
       "224" : {
+         "closed" : 1,
          "names" : {
             "中西徳五郎経営軌道" : 1
-         }
+         },
+         "wref" : "中西徳五郎経営軌道"
       },
       "225" : {
          "closed" : 1,
@@ -3115,15 +3317,13 @@
       },
       "248" : {
          "companies" : {
-            "2" : 1,
             "3" : 1
          },
          "jr" : 1,
          "names" : {
-            "宇都宮線" : 1,
-            "東武宇都宮線" : 1
+            "宇都宮線" : 1
          },
-         "wref" : "東武宇都宮線"
+         "wref" : "宇都宮線"
       },
       "249" : {
          "companies" : {
@@ -3199,9 +3399,11 @@
          "wref" : "京福電気鉄道北野線"
       },
       "256" : {
+         "closed" : 1,
          "names" : {
             "上川馬車鉄道" : 1
-         }
+         },
+         "wref" : "上川馬車鉄道"
       },
       "257" : {
          "companies" : {
@@ -3590,9 +3792,11 @@
          "wref" : "常磐線"
       },
       "293" : {
+         "closed" : 1,
          "names" : {
             "角田炭礦専用鉄道" : 1
-         }
+         },
+         "wref" : "角田炭礦専用鉄道"
       },
       "294" : {
          "closed" : 1,
@@ -3602,6 +3806,9 @@
          "wref" : "岩国電気軌道"
       },
       "295" : {
+         "companies" : {
+            "285" : 1
+         },
          "names" : {
             "岡山電気軌道清輝橋線" : 1,
             "清輝橋線" : 1
@@ -4375,10 +4582,8 @@
       },
       "368" : {
          "companies" : {
-            "37" : 1,
-            "8" : 1
+            "37" : 1
          },
-         "jr" : 1,
          "names" : {
             "のと鉄道七尾線" : 1,
             "七尾線" : 1,
@@ -4438,6 +4643,9 @@
       },
       "373" : {
          "closed" : 1,
+         "companies" : {
+            "274" : 1
+         },
          "names" : {
             "常総筑波鉄道鬼怒川線" : 1
          },
@@ -4524,9 +4732,11 @@
          "wref" : "同和鉱業花岡線"
       },
       "382" : {
+         "closed" : 1,
          "names" : {
             "庵原軌道" : 1
-         }
+         },
+         "wref" : "庵原軌道"
       },
       "383" : {
          "companies" : {
@@ -4744,14 +4954,10 @@
       },
       "401" : {
          "closed" : 1,
-         "companies" : {
-            "103" : 1
-         },
          "names" : {
-            "有馬線" : 1,
-            "神戸電鉄有馬線" : 1
+            "有馬線" : 1
          },
-         "wref" : "神戸電鉄有馬線"
+         "wref" : "有馬線"
       },
       "402" : {
          "companies" : {
@@ -5178,9 +5384,12 @@
          "wref" : "衣浦臨海鉄道半田線"
       },
       "443" : {
+         "closed" : 1,
+         "monorail" : 1,
          "names" : {
             "よみうりランドモノレール" : 1
-         }
+         },
+         "wref" : "よみうりランドモノレール"
       },
       "444" : {
          "closed" : 1,
@@ -5363,9 +5572,11 @@
          "wref" : "相鉄いずみ野線"
       },
       "461" : {
+         "closed" : 1,
          "names" : {
             "和賀軽便軌道" : 1
-         }
+         },
+         "wref" : "和賀軽便軌道"
       },
       "462" : {
          "companies" : {
@@ -5864,6 +6075,9 @@
       },
       "508" : {
          "closed" : 1,
+         "companies" : {
+            "272" : 1
+         },
          "names" : {
             "尺別鉄道" : 1,
             "尺別鉄道線" : 1,
@@ -5980,10 +6194,12 @@
          "wref" : "富山地方鉄道本線"
       },
       "519" : {
+         "closed" : 1,
          "names" : {
             "蒲蒲線#備考" : 1,
             "蒲蒲連絡線" : 1
-         }
+         },
+         "wref" : "蒲蒲線#備考"
       },
       "52" : {
          "closed" : 1,
@@ -6013,10 +6229,12 @@
          "wref" : "大湊線"
       },
       "522" : {
+         "closed" : 1,
          "names" : {
             "東武高坂構外側線" : 1,
             "高坂駅#高坂構外側線（廃線）" : 1
-         }
+         },
+         "wref" : "高坂駅#高坂構外側線（廃線）"
       },
       "523" : {
          "companies" : {
@@ -6062,15 +6280,13 @@
       },
       "528" : {
          "companies" : {
-            "10" : 1,
             "8" : 1
          },
          "jr" : 1,
          "names" : {
-            "奈良線" : 1,
-            "近鉄奈良線" : 1
+            "奈良線" : 1
          },
-         "wref" : "近鉄奈良線"
+         "wref" : "奈良線"
       },
       "529" : {
          "closed" : 1,
@@ -6378,6 +6594,9 @@
          "wref" : "標津線"
       },
       "557" : {
+         "companies" : {
+            "285" : 1
+         },
          "names" : {
             "岡山電気軌道東山本線" : 1,
             "東山本線" : 1
@@ -6596,6 +6815,9 @@
       },
       "577" : {
          "closed" : 1,
+         "companies" : {
+            "271" : 1
+         },
          "names" : {
             "北見鉄道" : 1,
             "北見鉄道線" : 1
@@ -6849,10 +7071,13 @@
          "wref" : "鹿島線"
       },
       "602" : {
+         "closed" : 1,
+         "monorail" : 1,
          "names" : {
             "大阪万博の交通#モノレール" : 1,
             "大阪万博会場内モノレール線" : 1
-         }
+         },
+         "wref" : "大阪万博の交通#モノレール"
       },
       "603" : {
          "companies" : {
@@ -6887,10 +7112,13 @@
          "wref" : "名鉄豊川線"
       },
       "606" : {
+         "closed" : 1,
+         "monorail" : 1,
          "names" : {
             "姫路市企業局交通事業部#姫路市営モノレール" : 1,
             "姫路市営モノレール" : 1
-         }
+         },
+         "wref" : "姫路市企業局交通事業部#姫路市営モノレール"
       },
       "607" : {
          "closed" : 1,
@@ -6935,16 +7163,13 @@
       "611" : {
          "closed" : 1,
          "companies" : {
-            "15" : 1,
-            "35" : 1
+            "15" : 1
          },
          "jr" : 1,
          "names" : {
-            "宇品線" : 1,
-            "広島電鉄宇品線" : 1
+            "宇品線" : 1
          },
-         "tram" : 1,
-         "wref" : "広島電鉄宇品線"
+         "wref" : "宇品線"
       },
       "612" : {
          "companies" : {
@@ -6959,6 +7184,9 @@
       },
       "613" : {
          "closed" : 1,
+         "companies" : {
+            "278" : 1
+         },
          "names" : {
             "山形交通高畠線" : 1
          },
@@ -7058,6 +7286,7 @@
          "wref" : "三岐鉄道北勢線"
       },
       "622" : {
+         "closed" : 1,
          "companies" : {
             "132" : 1
          },
@@ -7260,6 +7489,9 @@
       },
       "642" : {
          "closed" : 1,
+         "companies" : {
+            "273" : 1
+         },
          "names" : {
             "洞爺湖電気鉄道" : 1,
             "洞爺湖電気鉄道線" : 1
@@ -7435,6 +7667,9 @@
       },
       "66" : {
          "closed" : 1,
+         "companies" : {
+            "276" : 1
+         },
          "names" : {
             "松尾鉱業鉄道" : 1
          },
@@ -7656,6 +7891,9 @@
       },
       "680" : {
          "closed" : 1,
+         "companies" : {
+            "282" : 1
+         },
          "names" : {
             "あつまバス" : 1,
             "早来鉄道" : 1,
@@ -7791,10 +8029,12 @@
          "wref" : "東急池上線"
       },
       "693" : {
+         "closed" : 1,
          "names" : {
             "沖縄海洋博会場内新交通システム線" : 1,
             "沖縄県の鉄道#沖縄海洋博で会場内を運行した新交通システム" : 1
-         }
+         },
+         "wref" : "沖縄県の鉄道#沖縄海洋博で会場内を運行した新交通システム"
       },
       "694" : {
          "companies" : {
@@ -8261,9 +8501,11 @@
          "wref" : "博多南線"
       },
       "736" : {
+         "closed" : 1,
          "names" : {
             "勿来軌道" : 1
-         }
+         },
+         "wref" : "勿来軌道"
       },
       "737" : {
          "companies" : {
@@ -8555,9 +8797,11 @@
          "wref" : "熊本市電幹線"
       },
       "765" : {
+         "closed" : 1,
          "names" : {
             "江別町営人車軌道" : 1
-         }
+         },
+         "wref" : "江別町営人車軌道"
       },
       "766" : {
          "companies" : {
@@ -8899,9 +9143,11 @@
          "wref" : "西鉄甘木線"
       },
       "799" : {
+         "closed" : 1,
          "names" : {
             "本郷軌道" : 1
-         }
+         },
+         "wref" : "本郷軌道"
       },
       "8" : {
          "closed" : 1,
@@ -9268,6 +9514,7 @@
       },
       "833" : {
          "companies" : {
+            "269" : 1,
             "30" : 1
          },
          "names" : {
@@ -9308,6 +9555,9 @@
       },
       "837" : {
          "closed" : 1,
+         "companies" : {
+            "283" : 1
+         },
          "names" : {
             "荒尾市営電気鉄道" : 1
          },
@@ -9397,6 +9647,9 @@
       },
       "846" : {
          "closed" : 1,
+         "companies" : {
+            "277" : 1
+         },
          "names" : {
             "蒲原鉄道線" : 1
          },
@@ -9644,10 +9897,12 @@
          "wref" : "流鉄流山線"
       },
       "87" : {
+         "closed" : 1,
          "names" : {
             "大東糖業" : 1,
             "沖縄県の鉄道#玉置商会 - 東洋製糖 - 大日本製糖 - 大東糖業" : 1
-         }
+         },
+         "wref" : "沖縄県の鉄道#玉置商会 - 東洋製糖 - 大日本製糖 - 大東糖業"
       },
       "870" : {
          "closed" : 1,
@@ -10165,17 +10420,14 @@
          "wref" : "鹿島臨海鉄道鹿島臨港線"
       },
       "918" : {
-         "agt" : 1,
          "companies" : {
-            "49" : 1,
             "8" : 1
          },
          "jr" : 1,
          "names" : {
-            "山口線" : 1,
-            "西武山口線" : 1
+            "山口線" : 1
          },
-         "wref" : "西武山口線"
+         "wref" : "山口線"
       },
       "919" : {
          "cablecar" : 1,
@@ -10679,9 +10931,11 @@
          "wref" : "笠間稲荷運輸"
       },
       "968" : {
+         "closed" : 1,
          "names" : {
             "好間軌道" : 1
-         }
+         },
+         "wref" : "好間軌道"
       },
       "969" : {
          "cablecar" : 1,
@@ -10696,7 +10950,8 @@
       "97" : {
          "closed" : 1,
          "companies" : {
-            "196" : 1
+            "196" : 1,
+            "275" : 1
          },
          "names" : {
             "南部縦貫鉄道線" : 1

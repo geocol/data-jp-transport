@@ -15,26 +15,28 @@ my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))
 
 for my $name (keys %$line_ids) {
     my $id = $line_ids->{$name}->{id};
+    next unless defined $id;
     $Data->{lines}->{$id}->{names}->{$name} = 1;
     $Data->{lines}->{$id}->{wref} = $name if $line_ids->{$name}->{wref};
 }
 
-my $lines = file2perl file (__FILE__)->dir->parent->file ('data', 'wp-railway-line-list.json');
+#my $lines = file2perl file (__FILE__)->dir->parent->file ('intermediate', 'wp-railway-line-list.json');
+my $lines = file2perl file (__FILE__)->dir->parent->file ('data', 'railway-lines.json');
 
 for my $wref (keys %$lines) {
     my $id = ($line_ids->{$wref} or {})->{id};
     unless (defined $id) {
-        warn "ID for line |$wref| not defined";
+        push @{$Data->{_errors} ||= []}, "ID for line |$wref| not defined";
         next;
     }
     my $data = $lines->{$wref};
     if (defined $data->{wref} and
         defined $Data->{lines}->{$id}->{wref} and
         not $data->{wref} eq $Data->{lines}->{$id}->{wref}) {
-        warn "Conflict #$id - |$data->{wref}| and |$Data->{lines}->{$id}->{wref}|";
+        push @{$Data->{_errors}}, "Conflict #$id - |$data->{wref}| and |$Data->{lines}->{$id}->{wref}|";
     }
     if (defined $data->{wref} and not $data->{wref} eq $wref) {
-        warn "Conflict #$id - |$data->{wref}| and |$wref|";
+        push @{$Data->{_errors}}, "Conflict #$id - |$data->{wref}| and |$wref|";
     }
     for my $k (keys %$data) {
         my $v = $data->{$k};
