@@ -12,10 +12,13 @@ my $data_f = $root_d->file ('intermediate', 'line-ids.json');
 my $Data = file2perl $data_f;
 my $next_id = 1;
 for (keys %{$Data->{lines}}) {
-    my $id = $Data->{lines}->{$_}->{id};
+    my $id = $Data->{lines}->{$_}->{id} // next;
     if ($id > $next_id) {
         $next_id = $id + 1;
     }
+}
+for (values %{$Data->{lines}}) {
+    $_->{id} = $next_id++ unless defined $_->{id};
 }
 
 for (split /\x0D?\x0A/, decode 'utf-8', $root_d->file ('local', 'railway-line-names.txt')->slurp) {

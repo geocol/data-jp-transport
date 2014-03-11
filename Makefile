@@ -5,6 +5,9 @@ all: data-railways
 dataautoupdate: clean deps all
 	$(GIT) add data/*
 
+data: data-railways
+review: review-railways
+
 clean:
 
 ## ------ Setup ------
@@ -62,6 +65,8 @@ data-railways: \
     data/railways/lines.json  data/railways/companies.json \
     data/railways/stations.json
 
+review-railways: local/railway-line-ids.json.diff
+
 local/intermediate-wikipedia:
 	touch $@
 intermediate/wp-railway-line-list.json: bin/wp-railway-line-list.pl \
@@ -92,6 +97,10 @@ data/railways/lines.json: bin/railway-lines.pl local/src-railway-lines.json \
     intermediate/wp-railway-line-list.json data/railway-lines.json \
     intermediate/line-ids.json intermediate/company-ids.json
 	$(PERL) bin/railway-lines.pl > $@
+local/railway-line-ids.json.diff: bin/check-railway-line-ids.pl \
+    data/railways/lines.json local/railway-line-ids.json \
+    intermediate/line-ids.json
+	$(PERL) bin/check-railway-line-ids.pl
 
 intermediate/company-ids.json: intermediate/wp-railway-stations.json \
     bin/append-company-ids.pl

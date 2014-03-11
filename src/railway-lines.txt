@@ -26,6 +26,11 @@
   wref = 片町線#貨物支線
   freight = 1
   jr = 1
+619
+  wref = おおさか東線
+  names <- おおさか東線
+  names <- 大阪外環状線
+  jr = 1
 1181
   names <- おおさか東線#城東貨物線
   names <- 城東貨物線
@@ -33,6 +38,7 @@
   wref = おおさか東線#城東貨物線
   freight = 1
   jr = 1
+  parent_line = 619
 1180
   names <- 城東貨物南連絡線
   names <- おおさか東線#城東貨物線
@@ -40,6 +46,14 @@
   wref = おおさか東線#城東貨物線
   freight = 1
   jr = 1
+  parent_line = 619
+1290
+  names <- 関西本線(貨物支線)
+  names <- 関西本線貨物支線
+  wref = 関西本線
+  freight = 1
+  jr = 1
+  parent_line = 57
 1173
   names <- 沼津港
   names <- 沼津港線
@@ -73,5 +87,150 @@
 400
   names <- 学研都市線
   wref = 片町線
-619
-  wref = おおさか東線
+  jr = 1
+1308
+  names <- 南武線貨物支線
+  parent_line = 806
+  jr = 1
+  freight = 1
+1210
+  names <- 南武線支線(浜川崎支線)
+  names <- 浜川崎支線
+  names <- 浜線
+  names <- ハマ線
+  names <- 南武支線
+  label = 南武支線
+  wref = 南武線
+  parent_line = 1308
+  jr = 1
+1211
+  names <- 南武線貨物支線(尻手短絡線)
+  names <- 尻手短絡線
+  wref = 南武線
+  label = 尻手短絡線
+  parent_line = 1308
+  freight = 1
+  jr = 1
+1313
+  names <- 鶴塩線
+  label = 鶴塩線
+  wref = 東海道貨物線
+  parent_line = 120
+  freight = 1
+  jr = 1
+1312
+  names <- 大汐線
+  label = 大汐線
+  wref = 東海道貨物線
+  parent_line = 120
+  freight = 1
+  jr = 1
+906
+  names <- 品鶴線
+  wref = 品鶴線
+  label = 品鶴線
+  freight = 1
+  jr = 1
+  parent_line = 1253
+1253
+  names <- 東海道本線貨物支線
+  freight = 1
+  jr = 1
+  parent_line = 4
+542
+  names <- 高島線
+  wref = 高島線
+  label = 高島線
+  freight = 1
+  jr = 1
+  parent_line = 1253
+1314
+  names <- 横浜臨港線
+  wref = 高島線
+  label = 横浜臨港線
+  freight = 1
+  jr = 1
+  parent_line = 542
+1254
+  names <- 新興線
+  names <- 東海道本線貨物支線(新興線)
+  label = 新興線
+  wref = 高島線
+  parent_line = 542
+  freight = 1
+  jr = 1
+1314
+  names <- 瑞穂線
+  label = 瑞穂線
+  wref = 高島線
+  parent_line = 542
+  freight = 1
+  jr = 1
+1316
+  names <- 山下臨港線
+  names <- 山下埠頭線
+  names <- 臨港貨物線
+  names <- 公共臨港線
+  label = 山下臨港線
+  wref = 山下臨港線プロムナード
+  parent_line = 542
+  freight = 1
+  jr = 1
+1257
+  names <- 武蔵野南線
+  label = 武蔵野南線
+  wref = 武蔵野線
+  freight = 1
+  jr = 1
+  parent_line = 797
+1316
+  names <- 武蔵野線国立支線
+  label = 武蔵野線国立支線
+  wref = 武蔵野線
+  freight = 1
+  jr = 1
+  parent_line = 797
+1317
+  names <- 武蔵野線大宮支線
+  label = 武蔵野線大宮支線
+  wref = 武蔵野線
+  freight = 1
+  jr = 1
+  parent_line = 797
+1258
+  names <- 武蔵野線北小金支線
+  names <- 武蔵野線貨物支線(北小金支線)
+  label = 武蔵野線北小金支線
+  wref = 武蔵野線
+  freight = 1
+  jr = 1
+  parent_line = 797
+1259
+  names <- 武蔵野線西浦和支線
+  names <- 武蔵野線貨物支線(西浦和支線)
+  label = 武蔵野線西浦和支線
+  wref = 武蔵野線
+  freight = 1
+  jr = 1
+  parent_line = 797
+1260
+  names <- 武蔵野線馬橋支線
+  names <- 武蔵野線貨物支線(馬橋支線)
+  label = 武蔵野線馬橋支線
+  wref = 武蔵野線
+  freight = 1
+  jr = 1
+  parent_line = 797
+1324
+  names <- 下河原線
+  names <- 東京競馬場線
+  names <- 東京砂利鉄道
+  label = 下河原線
+  wref = 下河原線
+  jr = 1
+1325
+  names <- 淀川貨物線
+  label = 淀川貨物線
+  wref = 淀川貨物線
+  freight = 1
+  jr = 1

@@ -89,6 +89,10 @@ sub _extract_objects ($) {
 
   my $push_object = sub {
     my $v = _n join '', map { _tc $_ } @n;
+    if ($v =~ /^\(正式.+\)$/) {
+      $v = '';
+    }
+    $v =~ s/\s*\*+\z//;
     for my $l (@l) {
       my $name = $l->get_attribute ('wref');
       if (defined $name) {
@@ -98,19 +102,20 @@ sub _extract_objects ($) {
         $name =~ s/\A\s+//;
         $name =~ s/\s*\*+\z//;
       }
-warn $v;
       if ($v =~ /\Q$name\E貨物支線/) {
         $name .= '貨物支線';
       }
       push @object, $name;
     }
+    if ($v =~ s/^(.+線)\s*\((.+線)\)$//) {
+      push @object, $1, $2;
+    }
+    if ($v =~ s/^\((.+線)\)$//) {
+      push @object, $1;
+    }
     unless (@l) {
-      if ($v =~ /^\(正式.+\)$/) {
-        $v = '';
-      }
       if (length $v) {
         push @object, $v;
-        $object[-1] =~ s/\s*\*+\z//;
       }
     }
   }; # $push_object

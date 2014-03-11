@@ -11,8 +11,10 @@ my $lines = {};
 
 {
     my $json = file2perl $root_d->file ('local', 'src-railway-lines.json');
-    for (keys %{$json->{lines}->{names} or {}}) {
-        $lines->{$_} = 1;
+    for (keys %{$json->{lines}}) {
+        for (keys %{$json->{lines}->{$_}->{names} or {}}) {
+            $lines->{$_} = 1;
+        }
     }
 }
 
