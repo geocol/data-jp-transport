@@ -25,4 +25,21 @@ for my $name (keys %$company_ids) {
     }
 }
 
+{
+    my $f = file (__FILE__)->dir->parent->file ('src', 'railway-companies-names.txt');
+    for (($f->slurp)) {
+        my $line = decode 'utf-8', $_;
+        if ($line =~ /^\s*#/) {
+            #
+        } elsif ($line =~ /^(\d+)\s+wref=(.+)$/) {
+            $Data->{companies}->{$1}->{names}->{$2} = 1;
+            $Data->{companies}->{$1}->{wref} = $2;
+        } elsif ($line =~ /^(\d+)\s+(.+)$/) {
+            $Data->{companies}->{$1}->{names}->{$2} = 1;
+        } elsif ($line =~ /\S/) {
+            die "Broken line: |$line|";
+        }
+    }
+}
+
 print perl2json_bytes_for_record $Data;

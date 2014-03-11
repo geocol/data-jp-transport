@@ -109,7 +109,7 @@ data/railways/lines.json: bin/railway-lines-3.pl data/railway-lines.json \
 	$(PERL) bin/railway-lines-3.pl > $@
 
 data/railways/companies.json: bin/railway-companies.pl \
-    intermediate/company-ids.json
+    intermediate/company-ids.json src/railway-companies-names.txt
 	$(PERL) bin/railway-companies.pl > $@
 
 data/railways/stations.json: bin/railway-stations-2.pl \
