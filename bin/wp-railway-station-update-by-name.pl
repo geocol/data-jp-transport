@@ -88,19 +88,23 @@ sub _extract_objects ($) {
   my @n;
 
   my $push_object = sub {
+    my $v = _n join '', map { _tc $_ } @n;
     for my $l (@l) {
       my $name = $l->get_attribute ('wref');
       if (defined $name) {
         $name =~ s/\s+\z//;
-        push @object, $name;
       } else {
-        push @object, _tc $l;
-        $object[-1] =~ s/\A\s+//;
-        $object[-1] =~ s/\s*\*+\z//;
+        $name = _tc $l;
+        $name =~ s/\A\s+//;
+        $name =~ s/\s*\*+\z//;
       }
+warn $v;
+      if ($v =~ /\Q$name\E貨物支線/) {
+        $name .= '貨物支線';
+      }
+      push @object, $name;
     }
     unless (@l) {
-      my $v = _n join '', map { _tc $_ } @n;
       if ($v =~ /^\(正式.+\)$/) {
         $v = '';
       }
@@ -118,6 +122,7 @@ sub _extract_objects ($) {
         next if $_->text_content eq '駅詳細';
         $l //= $_;
         push @l, $_;
+        push @n, $_;
       } elsif ($ln eq 'comment' or $ln eq 'ref') {
         #
       } elsif ($ln eq 'include' and $IgnoredTemplates->{lc ($_->get_attribute ('wref') // '')}) {
@@ -127,6 +132,7 @@ sub _extract_objects ($) {
         if (defined $e and not $e->has_attribute ('embed')) {
           $l //= $e;
           push @l, $e;
+          push @n, $_;
         } else {
           push @n, $_ unless (_tc $_) eq "\x{25A0}";
         }

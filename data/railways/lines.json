@@ -1,123 +1,16 @@
 {
    "_errors" : [
-      "ID for line |関西本線貨物支線| not defined",
-      "ID for line |三井芦別鉄道線(貨物線)| not defined",
-      "ID for line |東海道本線貨物支線(新興線)| not defined",
-      "ID for line |夕張支線| not defined",
-      "ID for line |秋田臨海鉄道線(南線)| not defined",
-      "ID for line |立山ロープウェイ| not defined",
-      "ID for line |成田線(空港支線)| not defined",
-      "ID for line |宮島連絡船| not defined",
-      "ID for line |小坂井支線| not defined",
-      "ID for line |長崎電気軌道2号系統| not defined",
-      "ID for line |東田本線(支線)| not defined",
-      "ID for line |奥羽本線(貨物支線)| not defined",
-      "ID for line |上越線#上越新幹線 支線| not defined",
-      "ID for line |鹿児島市電1系統| not defined",
-      "ID for line |草軽電気鉄道線| not defined",
-      "ID for line |北越急行| not defined",
-      "ID for line |山鼻線| not defined",
-      "ID for line |金山線| not defined",
-      "ID for line |File:JR logo (east).svg中央本線(中央東線・辰野支線)| not defined",
-      "ID for line |富山市内軌道線安野屋線| not defined",
-      "ID for line |清水部線| not defined",
-      "ID for line |富山市内軌道線富山都心線| not defined",
-      "ID for line |北海道炭礦鉄道(貨物線)| not defined",
-      "ID for line |貨物支線| not defined",
-      "ID for line |雄別鉄道#雄別鉄道線| not defined",
-      "ID for line |名鉄高富線| not defined",
-      "ID for line |平野線| not defined",
-      "ID for line |鹿児島市電2系統| not defined",
-      "ID for line |熊本市電春竹線| not defined",
-      "ID for line |長崎電気軌道3号系統| not defined",
-      "ID for line |京葉線(高谷支線)| not defined",
-      "ID for line |六本木駅| not defined",
-      "ID for line |南武線支線(浜川崎支線)| not defined",
-      "ID for line |山陰本線(仙崎支線)| not defined",
-      "ID for line |大門駅 (東京都)| not defined",
-      "ID for line |北海道旅客鉄道| not defined",
-      "ID for line |北海道拓殖鉄道線| not defined",
+      "Company |三井芦別鉄道| has no ID",
+      "ID for line |黒部峡谷鉄道| not defined",
+      "Company |JR西日本宮島フェリー| has no ID",
+      "Company |札幌市電| has no ID",
+      "Company |十勝鉄道| has no ID",
       "Company |叡山電鉄]]| has no ID",
-      "ID for line |関西本線(貨物支線)| not defined",
-      "ID for line |東北本線(貨物支線)| not defined",
-      "ID for line |大沼電鉄線| not defined",
-      "ID for line |m 東京メトロ丸ノ内線(分岐線)| not defined",
-      "ID for line |箱根ロープウェイ| not defined",
-      "ID for line |おおさか東線#城東貨物線| not defined",
-      "ID for line |羽幌炭礦鉄道線| not defined",
-      "ID for line |小野田線(本山支線)| not defined",
-      "ID for line |小泉線(支線)| not defined",
-      "ID for line |日豊本線(貨物支線)| not defined",
-      "ID for line |羽越本線(貨物支線)| not defined",
-      "ID for line |三岐線(近鉄連絡線)| not defined",
-      "ID for line |飯田橋駅| not defined",
-      "ID for line |軽石軌道線| not defined",
-      "ID for line |東海道本線(美濃赤坂支線)| not defined",
-      "ID for line |阪神北大阪線| not defined",
-      "ID for line |山鹿温泉鉄道線| not defined",
-      "ID for line |電車線| not defined",
-      "ID for line |村松軌道線| not defined",
-      "ID for line |筑豊鉄道線| not defined",
-      "ID for line |富山市内軌道線(支線)| not defined",
-      "ID for line |光が丘駅| not defined",
-      "ID for line |名古屋臨海高速鉄道| not defined",
-      "ID for line |長崎本線(長与支線)| not defined",
-      "ID for line |摩耶ロープウェー| not defined",
-      "ID for line |京王競馬場線| not defined",
-      "ID for line |武蔵野線貨物支線(馬橋支線)| not defined",
-      "ID for line |熊本市電坪井線| not defined",
-      "ID for line |(東海道貨物線)| not defined",
-      "ID for line |島原鉄道島原鉄道線| not defined",
-      "ID for line |東海道本線貨物支線| not defined",
-      "ID for line |新金線| not defined",
-      "ID for line |九十九里鉄道線| not defined",
-      "ID for line |のと鉄道能登線(廃止時)| not defined",
-      "ID for line |臨海本線(支線)| not defined",
-      "ID for line |天塩炭砿鉄道線| not defined",
-      "ID for line |阪和線支線(羽衣線)| not defined",
-      "ID for line |東日本旅客鉄道| not defined",
-      "ID for line |名鉄鏡島線| not defined",
-      "ID for line |美祢線(大嶺支線)| not defined",
-      "ID for line |練馬駅| not defined",
-      "ID for line |坂川鉄道線| not defined",
-      "ID for line |神奈川東部方面線| not defined",
-      "ID for line |京葉線(二俣支線)| not defined",
-      "ID for line |予讃線(新線)| not defined",
-      "ID for line |常磐線(貨物支線・田端貨物線)| not defined",
-      "ID for line |室蘭本線(支線)| not defined",
-      "ID for line |鶴野線| not defined",
-      "ID for line |両国駅| not defined",
-      "ID for line |北陸本線貨物支線(敦賀港線)| not defined",
-      "ID for line |根室拓殖鉄道線| not defined",
-      "ID for line |列車線| not defined",
-      "ID for line |尾小屋鉄道線| not defined",
-      "ID for line |名鉄谷汲線| not defined",
-      "ID for line |File:JR logo (central).svg中央本線(中央西線)| not defined",
-      "ID for line |登川支線| not defined",
-      "ID for line |武蔵野線貨物支線(北小金支線)| not defined",
-      "ID for line |鉄道省| not defined",
-      "ID for line |南美唄支線| not defined",
-      "ID for line |越中鉄道| not defined",
-      "ID for line |宮島航路| not defined",
-      "ID for line |常磐線(貨物支線・隅田川貨物線)| not defined",
-      "ID for line |雄別本線| not defined",
-      "ID for line |電車線・列車線| not defined",
-      "ID for line |大船渡線(BRT区間:上鹿折方面)| not defined",
-      "ID for line |武蔵野南線| not defined",
-      "ID for line |貨物線| not defined",
-      "ID for line |南武線貨物支線(尻手短絡線)| not defined",
-      "ID for line |武蔵野線貨物支線(西浦和支線)| not defined",
-      "ID for line |寿都鉄道線| not defined",
-      "ID for line |大船渡線(BRT区間:陸前矢作方面)| not defined",
-      "ID for line |野上電気鉄道#野上線| not defined",
-      "ID for line |東海道本線(下り本線)| not defined",
-      "ID for line |成田線(我孫子支線)| not defined",
-      "ID for line |長崎電気軌道1号系統| not defined",
-      "ID for line |C 東京メトロ千代田線(支線)| not defined",
-      "ID for line |信越本線(貨物支線)| not defined",
-      "ID for line |総武本線(貨物支線)| not defined",
-      "ID for line |上砂川支線| not defined",
-      "ID for line |上越新幹線(支線)| not defined"
+      "Company |羽幌炭礦鉄道| has no ID",
+      "Company |村松軌道| has no ID",
+      "Company |筑豊鉄道 (2代)| has no ID",
+      "Company |天塩炭砿鉄道| has no ID",
+      "Company |宮島松大汽船| has no ID"
    ],
    "lines" : {
       "1" : {
@@ -1841,31 +1734,30 @@
       "1164" : {
          "names" : {
             "京都市営地下鉄" : 1,
-            "京都市高速鉄道" : 1,
-            "名古屋市営地下鉄" : 1
+            "京都市高速鉄道" : 1
          },
-         "wref" : "京都市営地下鉄"
+         "subway" : "1"
       },
       "1165" : {
          "names" : {
+            "名古屋市営地下鉄" : 1,
             "名古屋市高速度鉄道" : 1
-         }
-      },
-      "1166" : {
-         "names" : {
-            "仙台市営地下鉄" : 1
-         }
+         },
+         "subway" : "1"
       },
       "1168" : {
          "names" : {
+            "仙台市営地下鉄" : 1,
             "仙台市地下鉄" : 1
          },
+         "subway" : "1",
          "wref" : "仙台市地下鉄"
       },
       "1169" : {
          "names" : {
             "神戸市営地下鉄" : 1
-         }
+         },
+         "subway" : "1"
       },
       "117" : {
          "closed" : 1,
@@ -1877,24 +1769,27 @@
       "1170" : {
          "names" : {
             "横浜市営地下鉄" : 1
-         }
+         },
+         "subway" : "1"
       },
       "1171" : {
          "names" : {
             "東京都営地下鉄" : 1,
             "都営地下鉄" : 1
-         }
+         },
+         "subway" : "1"
       },
       "1172" : {
          "closed" : 1,
          "names" : {
-            "仙台市電" : 1,
-            "札幌市営地下鉄" : 1
+            "仙台市電" : 1
          },
          "wref" : "仙台市電"
       },
       "1173" : {
          "closed" : 1,
+         "freight" : "1",
+         "jr" : "1",
          "names" : {
             "東海道本線" : 1,
             "沼津港" : 1,
@@ -1902,7 +1797,7 @@
             "沼津港駅" : 1,
             "蛇松線" : 1
          },
-         "wref" : "沼津港駅"
+         "wref" : "沼津港"
       },
       "1174" : {
          "companies" : {
@@ -1962,8 +1857,7 @@
          },
          "names" : {
             "宇都宮線" : 1,
-            "東武宇都宮線" : 1,
-            "輪島線" : 1
+            "東武宇都宮線" : 1
          },
          "wref" : "東武宇都宮線"
       },
@@ -1973,6 +1867,88 @@
             "上田交通真田傍陽線" : 1
          },
          "wref" : "上田交通真田傍陽線"
+      },
+      "1180" : {
+         "freight" : "1",
+         "jr" : "1",
+         "names" : {
+            "おおさか東線#城東貨物線" : 1,
+            "城東貨物南連絡線" : 1,
+            "片町線#貨物支線" : 1
+         },
+         "wref" : "おおさか東線#城東貨物線"
+      },
+      "1181" : {
+         "freight" : "1",
+         "jr" : "1",
+         "names" : {
+            "おおさか東線#城東貨物線" : 1,
+            "城東貨物線" : 1,
+            "片町線#貨物支線" : 1
+         },
+         "wref" : "おおさか東線#城東貨物線"
+      },
+      "1182" : {
+         "companies" : {
+            "8" : 1
+         },
+         "freight" : 1,
+         "jr" : 1,
+         "names" : {
+            "片町線#貨物支線" : 1,
+            "片町線貨物支線" : 1
+         },
+         "wref" : "片町線#貨物支線"
+      },
+      "1183" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1184" : {
+         "companies" : {
+            "1" : 1,
+            "3" : 1
+         },
+         "jr" : 1,
+         "subway" : 1
+      },
+      "1185" : {
+         "companies" : {
+            "3" : 1,
+            "4" : 1
+         },
+         "jr" : 1
+      },
+      "1186" : {
+         "companies" : {
+            "3" : 1,
+            "4" : 1
+         },
+         "jr" : 1
+      },
+      "1187" : {
+         "companies" : {
+            "1" : 1,
+            "47" : 1,
+            "58" : 1
+         },
+         "subway" : 1
+      },
+      "1188" : {
+         "companies" : {
+            "8" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1189" : {
+         "closed" : 1,
+         "companies" : {
+            "37" : 1
+         }
       },
       "119" : {
          "companies" : {
@@ -1984,6 +1960,64 @@
             "東築線" : 1
          },
          "wref" : "名古屋臨海鉄道東築線"
+      },
+      "1190" : {
+         "closed" : 1,
+         "freight" : 1
+      },
+      "1191" : {
+         "companies" : {
+            "50" : 1
+         }
+      },
+      "1192" : {
+         "companies" : {
+            "7" : 1
+         },
+         "jr" : 1
+      },
+      "1193" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1,
+         "shinkansen" : "full"
+      },
+      "1194" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1,
+         "shinkansen" : "full"
+      },
+      "1195" : {
+         "companies" : {
+            "47" : 1,
+            "58" : 1
+         }
+      },
+      "1196" : {
+         "closed" : 1,
+         "companies" : {
+            "228" : 1
+         }
+      },
+      "1197" : {
+         "companies" : {
+            "21" : 1
+         },
+         "jr" : 1
+      },
+      "1198" : {
+         "companies" : {
+            "31" : 1
+         }
+      },
+      "1199" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
       },
       "12" : {
          "companies" : {
@@ -2006,12 +2040,137 @@
          },
          "wref" : "東海道貨物線"
       },
+      "1200" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1201" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1202" : {
+         "companies" : {
+            "47" : 1,
+            "58" : 1
+         }
+      },
+      "1203" : {
+         "companies" : {
+            "47" : 1,
+            "58" : 1
+         }
+      },
+      "1204" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1205" : {
+         "closed" : 1,
+         "companies" : {
+            "235" : 1
+         }
+      },
+      "1206" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1207" : {
+         "closed" : 1,
+         "companies" : {
+            "232" : 1
+         },
+         "freight" : 1
+      },
+      "1208" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1209" : {
+         "companies" : {
+            "8" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
       "121" : {
          "names" : {
             "岩手開発鉄道赤崎線" : 1,
             "赤崎線" : 1
          },
          "wref" : "岩手開発鉄道赤崎線"
+      },
+      "1210" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1211" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1212" : {
+         "companies" : {
+            "15" : 1
+         },
+         "jr" : 1
+      },
+      "1213" : {
+         "companies" : {
+            "16" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1214" : {
+         "closed" : 1,
+         "companies" : {
+            "24" : 1
+         }
+      },
+      "1215" : {
+         "closed" : 1,
+         "companies" : {
+            "24" : 1
+         }
+      },
+      "1216" : {
+         "closed" : 1,
+         "companies" : {
+            "24" : 1
+         }
+      },
+      "1217" : {
+         "closed" : 1,
+         "companies" : {
+            "75" : 1
+         }
+      },
+      "1218" : {
+         "companies" : {
+            "7" : 1
+         },
+         "jr" : 1
+      },
+      "1219" : {
+         "closed" : 1,
+         "companies" : {
+            "261" : 1
+         }
       },
       "122" : {
          "closed" : 1,
@@ -2021,6 +2180,54 @@
             "西大家駅#西大家貨物線" : 1
          },
          "wref" : "西大家駅#西大家貨物線"
+      },
+      "1220" : {
+         "bus" : "brt",
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1221" : {
+         "bus" : "brt",
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1222" : {
+         "companies" : {
+            "47" : 1,
+            "58" : 1
+         }
+      },
+      "1223" : {
+         "closed" : 1
+      },
+      "1224" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1225" : {
+         "companies" : {
+            "7" : 1
+         },
+         "jr" : 1
+      },
+      "1228" : {
+         "companies" : {
+            "26" : 1
+         },
+         "tram" : 1
+      },
+      "1229" : {
+         "companies" : {
+            "26" : 1
+         },
+         "tram" : 1
       },
       "123" : {
          "companies" : {
@@ -2033,12 +2240,128 @@
          },
          "wref" : "津軽海峡線"
       },
+      "1230" : {
+         "companies" : {
+            "26" : 1
+         },
+         "tram" : 1
+      },
+      "1231" : {
+         "closed" : 1,
+         "companies" : {
+            "215" : 1
+         }
+      },
+      "1232" : {
+         "closed" : 1,
+         "companies" : {
+            "24" : 1
+         }
+      },
+      "1233" : {
+         "companies" : {
+            "2" : 1
+         }
+      },
+      "1234" : {
+         "companies" : {
+            "8" : 1
+         },
+         "jr" : 1
+      },
+      "1235" : {
+         "closed" : 1,
+         "companies" : {
+            "255" : 1
+         }
+      },
+      "1236" : {
+         "companies" : {
+            "8" : 1
+         },
+         "jr" : 1
+      },
+      "1237" : {
+         "closed" : 1,
+         "companies" : {
+            "101" : 1
+         }
+      },
+      "1238" : {
+         "companies" : {
+            "138" : 1
+         }
+      },
+      "1239" : {
+         "companies" : {
+            "105" : 1
+         }
+      },
       "124" : {
          "closed" : 1,
          "names" : {
             "西遠鉄道" : 1
          },
          "wref" : "西遠鉄道"
+      },
+      "1240" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1241" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1242" : {
+         "companies" : {
+            "6" : 1
+         }
+      },
+      "1243" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1244" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1245" : {
+         "companies" : {
+            "251" : 1
+         }
+      },
+      "1246" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1247" : {
+         "companies" : {
+            "5" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1248" : {
+         "closed" : 1
+      },
+      "1249" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
       },
       "125" : {
          "agt" : 1,
@@ -2052,12 +2375,135 @@
          },
          "wref" : "ゆりかもめ東京臨海新交通臨海線"
       },
+      "1250" : {
+         "companies" : {
+            "148" : 1
+         }
+      },
+      "1251" : {
+         "companies" : {
+            "4" : 1
+         },
+         "jr" : 1
+      },
+      "1252" : {
+         "companies" : {
+            "4" : 1
+         },
+         "jr" : 1
+      },
+      "1253" : {
+         "companies" : {
+            "3" : 1,
+            "8" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1254" : {
+         "closed" : 1,
+         "companies" : {
+            "15" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1255" : {
+         "companies" : {
+            "74" : 1
+         },
+         "tram" : 1
+      },
+      "1256" : {
+         "closed" : 1,
+         "companies" : {
+            "41" : 1
+         }
+      },
+      "1257" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1258" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1259" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
       "126" : {
          "closed" : 1,
          "names" : {
             "大阪市電" : 1
          },
          "wref" : "大阪市電"
+      },
+      "1260" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1261" : {
+         "closed" : 1
+      },
+      "1262" : {
+         "closed" : 1,
+         "companies" : {
+            "25" : 1
+         },
+         "tram" : 1
+      },
+      "1263" : {
+         "closed" : 1,
+         "companies" : {
+            "25" : 1
+         },
+         "tram" : 1
+      },
+      "1264" : {
+         "companies" : {
+            "15" : 1
+         },
+         "jr" : 1
+      },
+      "1265" : {
+         "closed" : 1,
+         "companies" : {
+            "142" : 1
+         }
+      },
+      "1266" : {
+         "closed" : 1,
+         "companies" : {
+            "142" : 1
+         }
+      },
+      "1267" : {
+         "companies" : {
+            "153" : 1,
+            "27" : 1
+         }
+      },
+      "1268" : {
+         "companies" : {
+            "239" : 1
+         }
+      },
+      "1269" : {
+         "companies" : {
+            "107" : 1
+         }
       },
       "127" : {
          "closed" : 1,
@@ -2070,6 +2516,56 @@
          },
          "wref" : "北海道ちほく高原鉄道ふるさと銀河線"
       },
+      "1270" : {
+         "closed" : 1
+      },
+      "1271" : {
+         "companies" : {
+            "203" : 1,
+            "263" : 1
+         }
+      },
+      "1272" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1273" : {
+         "companies" : {
+            "47" : 1,
+            "58" : 1
+         }
+      },
+      "1275" : {
+         "closed" : 1
+      },
+      "1276" : {
+         "companies" : {
+            "3" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1277" : {
+         "companies" : {
+            "199" : 1
+         }
+      },
+      "1278" : {
+         "closed" : 1,
+         "companies" : {
+            "258" : 1
+         }
+      },
+      "1279" : {
+         "closed" : 1,
+         "companies" : {
+            "153" : 1
+         },
+         "freight" : 1
+      },
       "128" : {
          "companies" : {
             "3" : 1
@@ -2081,12 +2577,135 @@
          },
          "wref" : "小海線"
       },
+      "1280" : {
+         "companies" : {
+            "16" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1281" : {
+         "companies" : {
+            "268" : 1
+         }
+      },
+      "1282" : {
+         "closed" : 1,
+         "companies" : {
+            "164" : 1
+         }
+      },
+      "1283" : {
+         "closed" : 1,
+         "companies" : {
+            "182" : 1
+         }
+      },
+      "1284" : {
+         "closed" : 1,
+         "companies" : {
+            "243" : 1
+         }
+      },
+      "1285" : {
+         "closed" : 1,
+         "companies" : {
+            "15" : 1
+         },
+         "jr" : 1
+      },
+      "1286" : {
+         "companies" : {
+            "5" : 1
+         },
+         "jr" : 1
+      },
+      "1287" : {
+         "companies" : {
+            "246" : 1
+         },
+         "tram" : 1
+      },
+      "1288" : {
+         "companies" : {
+            "246" : 1
+         },
+         "tram" : 1
+      },
+      "1289" : {
+         "companies" : {
+            "246" : 1
+         },
+         "tram" : 1
+      },
       "129" : {
          "closed" : 1,
          "names" : {
             "南海大浜支線" : 1
          },
          "wref" : "南海大浜支線"
+      },
+      "1290" : {
+         "companies" : {
+            "4" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1291" : {
+         "companies" : {
+            "8" : 1
+         },
+         "freight" : 1,
+         "jr" : 1
+      },
+      "1292" : {
+         "companies" : {
+            "8" : 1
+         },
+         "jr" : 1
+      },
+      "1293" : {
+         "closed" : 1,
+         "companies" : {
+            "71" : 1
+         }
+      },
+      "1294" : {
+         "closed" : 1,
+         "companies" : {
+            "181" : 1
+         }
+      },
+      "1295" : {
+         "closed" : 1,
+         "companies" : {
+            "181" : 1
+         }
+      },
+      "1296" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1297" : {
+         "companies" : {
+            "3" : 1
+         },
+         "jr" : 1
+      },
+      "1298" : {
+         "companies" : {
+            "47" : 1,
+            "58" : 1
+         }
+      },
+      "1299" : {
+         "closed" : 1,
+         "companies" : {
+            "181" : 1
+         }
       },
       "13" : {
          "companies" : {
@@ -2108,6 +2727,18 @@
             "新潟交通電車線" : 1
          },
          "wref" : "新潟交通電車線"
+      },
+      "1300" : {
+         "companies" : {
+            "63" : 1
+         },
+         "tram" : 1
+      },
+      "1301" : {
+         "companies" : {
+            "63" : 1
+         },
+         "tram" : 1
       },
       "131" : {
          "closed" : 1,
@@ -4137,13 +4768,7 @@
       },
       "326" : {
          "closed" : 1,
-         "companies" : {
-            "142" : 1
-         },
          "names" : {
-            "日本硫黄沼尻鉄道部" : 1,
-            "日本硫黄耶麻軌道部" : 1,
-            "日本硫黄観光" : 1,
             "沼尻鉄道" : 1,
             "磐梯急行電鉄" : 1,
             "磐梯急行電鉄線" : 1,
@@ -9448,7 +10073,9 @@
          },
          "names" : {
             "上毛線" : 1,
-            "上毛電気鉄道上毛線" : 1
+            "上毛電気鉄道" : 1,
+            "上毛電気鉄道上毛線" : 1,
+            "上電" : 1
          },
          "wref" : "上毛電気鉄道上毛線"
       },

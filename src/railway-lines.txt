@@ -1,0 +1,77 @@
+826
+  names <- 上毛線
+  names <- 上毛電気鉄道
+  names <- 上毛電気鉄道上毛線
+  names <- 上電
+  names <- 上毛電気鉄道上毛線
+773
+  names <- 国鉄甘木線
+451
+  names <- 黒部峡谷鉄道
+326
+  wref = 磐梯急行電鉄
+  names <- 沼尻鉄道
+  names <- 磐梯急行電鉄
+  names <- 磐梯急行電鉄線
+  names <- 磐梯急行電鉄線(沼尻鉄道線)
+  names <- 耶麻軌道
+1168
+  names <- 仙台市地下鉄
+  names <- 仙台市営地下鉄
+  wref = 仙台市地下鉄
+  subway = 1
+1182
+  names <- 片町線#貨物支線
+  names <- 片町線貨物支線
+  wref = 片町線#貨物支線
+  freight = 1
+  jr = 1
+1181
+  names <- おおさか東線#城東貨物線
+  names <- 城東貨物線
+  names <- 片町線#貨物支線
+  wref = おおさか東線#城東貨物線
+  freight = 1
+  jr = 1
+1180
+  names <- 城東貨物南連絡線
+  names <- おおさか東線#城東貨物線
+  names <- 片町線#貨物支線
+  wref = おおさか東線#城東貨物線
+  freight = 1
+  jr = 1
+1173
+  names <- 沼津港
+  names <- 沼津港線
+  names <- 沼津港駅
+  names <- 蛇松線
+  freight = 1
+  jr = 1
+  wref = 沼津港駅
+1171
+  names <- 東京都営地下鉄
+  names <- 都営地下鉄
+  subway = 1
+1170
+  names <- 横浜市営地下鉄
+  subway = 1
+1164
+  names <- 京都市営地下鉄
+  names <- 京都市高速鉄道
+  subway = 1
+1165
+  names <- 名古屋市営地下鉄
+  names <- 名古屋市高速度鉄道
+  subway = 1
+1169
+  names <- 神戸市営地下鉄
+  subway = 1
+392
+  names <- 1号線
+822
+  names <- 1号線
+400
+  names <- 学研都市線
+  wref = 片町線
+619
+  wref = おおさか東線

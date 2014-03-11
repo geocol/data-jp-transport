@@ -78,9 +78,20 @@ intermediate/wp-railway-stations.json: local/station-list.json \
 	echo "{}" > $@
 	$(PERL) bin/wp-railway-stations-update.pl
 
-intermediate/line-ids.json: intermediate/wp-railway-line-list.json \
-    bin/append-line-ids.pl
-	$(PERL) bin/append-line-ids.pl
+local/src-railway-lines.json: src/railway-lines.txt bin/src-railway-lines.pl
+	$(PERL) bin/src-railway-lines.pl > $@
+local/railway-line-names.txt: local/src-railway-lines.json \
+    intermediate/wp-railway-line-list.json \
+    intermediate/wp-railway-stations.json \
+    bin/railway-line-names.pl
+	$(PERL) bin/railway-line-names.pl > $@
+intermediate/line-ids.json: local/railway-line-names.txt \
+    bin/railway-line-name-to-id.pl
+	$(PERL) bin/railway-line-name-to-id.pl
+data/railways/lines.json: bin/railway-lines.pl local/src-railway-lines.json \
+    intermediate/wp-railway-line-list.json data/railway-lines.json \
+    intermediate/line-ids.json intermediate/company-ids.json
+	$(PERL) bin/railway-lines.pl > $@
 
 intermediate/company-ids.json: intermediate/wp-railway-stations.json \
     bin/append-company-ids.pl
@@ -103,10 +114,6 @@ data/railway-lines.json: \
     intermediate/wp-railway-lines.json \
     intermediate/wp-railway-stations.json bin/railway-lines-2.pl
 	$(PERL) bin/railway-lines-2.pl > $@
-
-data/railways/lines.json: bin/railway-lines-3.pl data/railway-lines.json \
-    intermediate/line-ids.json src/railway-lines-names.txt
-	$(PERL) bin/railway-lines-3.pl > $@
 
 data/railways/companies.json: bin/railway-companies.pl \
     intermediate/company-ids.json src/railway-companies-names.txt
