@@ -10,9 +10,9 @@ my $root_d = file (__FILE__)->dir->parent;
 
 my $Data = {};
 
-my $ids = file2perl $root_d->file ('intermediate', 'station-ids.json');
-my $company_ids = file2perl $root_d->file ('intermediate', 'company-ids.json');
-my $line_ids = file2perl $root_d->file ('intermediate', 'line-ids.json');
+my $ids = (file2perl $root_d->file ('intermediate', 'station-ids.json'))->{stations};
+my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))->{companies};
+my $line_ids = (file2perl $root_d->file ('intermediate', 'line-ids.json'))->{lines};
 #my $stations = file2perl $root_d->file ('intermediate', 'wp-railway-stations.json');
 my $stations = file2perl $root_d->file ('data', 'stations.json'); # XXX
 

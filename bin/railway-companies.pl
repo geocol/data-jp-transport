@@ -10,7 +10,7 @@ my $root_d = file (__FILE__)->dir->parent;
 
 my $Data = {};
 
-my $company_ids = file2perl $root_d->file ('intermediate', 'company-ids.json');
+my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))->{companies};
 
 for my $name (keys %$company_ids) {
     my $id = $company_ids->{$name}->{id};

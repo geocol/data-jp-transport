@@ -8,22 +8,23 @@ my $stations = file2perl file (__FILE__)->dir->parent->file ('intermediate', 'wp
 
 my $data_f = file (__FILE__)->dir->parent->file ('intermediate', 'station-ids.json');
 my $Data = file2perl $data_f;
+delete $Data->{_errors};
 
-my $company_ids = file2perl file (__FILE__)->dir->parent->file ('intermediate', 'company-ids.json');
+my $company_ids = (file2perl file (__FILE__)->dir->parent->file ('intermediate', 'company-ids.json'))->{companies};
 
 my $next_id = 1;
-for (values %$Data) {
+for (values %{$Data->{stations}}) {
     if (defined $_->{id}) {
         $next_id = $_->{id} + 1 if $_->{id} > $next_id;
     }
 }
-for (values %$Data) {
+for (values %{$Data->{stations}}) {
     $_->{id} = $next_id++ unless defined $_->{id};
 }
 
 for my $wref (keys %$stations) {
-    my $id = $Data->{$wref} ? $Data->{$wref}->{id} : $next_id++;
-    $Data->{$wref}->{id} = $id;
+    my $id = $Data->{stations}->{$wref} ? $Data->{stations}->{$wref}->{id} : $next_id++;
+    $Data->{stations}->{$wref}->{id} = $id;
 
     for (values %{$stations->{$wref}->{stations} or {}}) {
         my @id;
@@ -32,15 +33,15 @@ for my $wref (keys %$stations) {
             if (defined $id) {
                 push @id, $id;
             } else {
-                warn "ID for company |$_| not defined";
+                push @{$Data->{_errors} ||= []}, "ID for company |$_| not defined";
             }
         }
         @id = sort { $a <=> $b } @id;
         if (@id) {
-            my $id = $Data->{$wref, @id} ? $Data->{$wref, @id}->{id} : $next_id++;
-            $Data->{$wref, @id}->{id} = $id;
+            my $id = $Data->{stations}->{$wref, @id} ? $Data->{stations}->{$wref, @id}->{id} : $next_id++;
+            $Data->{stations}->{$wref, @id}->{id} = $id;
         } else {
-            warn "|$wref|'s substation has no company";
+            push @{$Data->{_errors} ||= []}, "|$wref|'s substation has no company";
         }
     }
 }
