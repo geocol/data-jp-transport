@@ -313,3 +313,120 @@
   names <- 内子線・予讃線（新線）
   wref = 内子線
   jr = 1
+697
+  names <- 成田スカイアクセス
+  names <- 成田スカイアクセス線
+  names <- Narita Sky Access Line
+  names <- 成田空港線
+  names <- 京成成田空港線(成田スカイアクセス線)
+  names <- 京成成田空港線
+  wref = 京成成田空港線
+  label = 成田スカイアクセス線
+768
+  names <- 京葉線
+  label = 京葉線
+  wref = 京葉線
+  jr = 1
+1199
+  names <- 京葉線二俣支線
+  names <- 京葉線(二俣支線)
+  label = 京葉線二俣支線
+  wref = 京葉線
+  parent_line = 768
+  jr = 1
+1200
+  names <- 京葉線高谷支線
+  names <- 京葉線(高谷支線)
+  label = 京葉線高谷支線
+  wref = 京葉線
+  parent_line = 768
+  jr = 1
+1201
+  names <- 信越本線(貨物支線)
+  names <- 信越本線貨物支線
+  label = 信越本線貨物支線
+  wref = 信越本線
+  parent_line = 895
+  jr = 1
+  freight = 1
+1209
+  names <- 敦賀港線
+  names <- 北陸本線貨物支線(敦賀港線)
+  label = 敦賀港線
+  wref = 北陸本線
+  jr = 1
+  freight = 1
+  parent_line = 261
+1332
+  names <- 山中線
+  names <- 杉津線
+  parent_line = 261
+  jr = 1
+97
+  names <- 南部縦貫鉄道線
+  names <- 南部縦貫鉄道
+  label = 南部縦貫鉄道線
+  wref = 南部縦貫鉄道線
+1333
+  names <- 名鉄挙母線、門立支線
+  names <- 名鉄挙母線門立支線
+  label = 名鉄挙母線門立支線
+  wref = 名鉄挙母線
+  parent_line = 69
+281
+  names <- 富士急行
+  names <- 富士急行線
+  label = 富士急行線
+  wref = 富士急行線
+1334
+  names <- 大月線
+  names <- 富士急行大月線
+  wref = 富士急行
+  label = 富士急行大月線
+  parent_line = 281
+1335
+  names <- 富士急行河口湖線
+  names <- 河口湖線
+  wref = 富士急行
+  label = 富士急行河口湖線
+  parent_line = 281
+745
+  names <- 函館市電
+  label = 函館市電
+  wref = 函館市電
+134
+  names <- 函館市電大森線
+  names <- 大森線
+  label = 函館市電大森線
+  wref = 函館市電
+  parent_line = 745
+1057
+  names <- 函館市電宝来・谷地頭線
+  names <- 宝来・谷地頭線
+  label = 函館市電宝来・谷地頭線
+  wref = 函館市電
+  parent_line = 745
+1337
+  names <- 函館市電宮前線
+  names <- 宮前線
+  label = 函館市電宮前線
+  wref = 函館市電
+  parent_line = 745
+555
+  names <- 函館市電本線
+  names <- 本線
+  label = 函館市電本線
+  wref = 函館市電本線
+  parent_line = 745
+1336
+  names <- 函館市電東雲線
+  names <- 東雲線
+  label = 函館市電東雲線
+  wref = 函館市電
+  parent_line = 745
+1015
+  names <- 函館市電湯の川線
+  names <- 湯の川線
+  label = 函館市電湯の川線
+  wref = 函館市電
+  parent_line = 745

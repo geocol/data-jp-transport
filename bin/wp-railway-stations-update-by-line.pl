@@ -12,7 +12,7 @@ my $line = decode 'utf-8', shift;
 
 my $list_f = $root_d->file ('intermediate', 'wp-railway-lines.json');
 my $list = file2perl $list_f;
-my $stations = [map { $_->{wref} // $_->{name} } @{$list->{$line}->{stations} or {}}];
+my $stations = [map { $_->{wref} // $_->{name} } @{$list->{$line}->{stations} or []}];
 
 my $i = 0;
 {
