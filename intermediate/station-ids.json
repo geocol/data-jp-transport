@@ -1,10 +1,6 @@
 {
    "_errors" : [
       "|大日駅|'s substation has no company",
-      "ID for company |宮島松大汽船| not defined",
-      "|広電宮島口駅|'s substation has no company",
-      "ID for company |天塩炭砿鉄道| not defined",
-      "|留萌駅|'s substation has no company",
       "ID for company |岩内馬車鉄道| not defined",
       "|小沢駅|'s substation has no company",
       "ID for company |筑豊鉄道 (2代)| not defined",
@@ -14,14 +10,10 @@
       "|東海駅|'s substation has no company",
       "ID for company |叡山電鉄]]| not defined",
       "|出町柳駅|'s substation has no company",
-      "ID for company |JR西日本宮島フェリー| not defined",
-      "|宮島口駅|'s substation has no company",
       "ID for company |札幌市電| not defined",
       "|南大嶺駅|'s substation has no company",
       "ID for company |十勝鉄道| not defined",
       "|十勝清水駅|'s substation has no company",
-      "ID for company |三井芦別鉄道| not defined",
-      "|芦別駅|'s substation has no company",
       "ID for company |羽幌炭礦鉄道| not defined",
       "|築別駅|'s substation has no company"
    ],
@@ -11942,6 +11934,18 @@
       "宮島口駅" : {
          "id" : 8155
       },
+      "宮島口駅\u001c287" : {
+         "id" : 11170
+      },
+      "宮島駅" : {
+         "id" : 11165
+      },
+      "宮島駅\u001c287" : {
+         "id" : 11167
+      },
+      "宮島駅\u001c289" : {
+         "id" : 11166
+      },
       "宮崎台駅" : {
          "id" : 9342
       },
@@ -14590,6 +14594,9 @@
       },
       "広電宮島口駅" : {
          "id" : 1539
+      },
+      "広電宮島口駅\u001c289" : {
+         "id" : 11168
       },
       "広電廿日市駅" : {
          "id" : 8719
@@ -23450,6 +23457,9 @@
       "留萌駅" : {
          "id" : 2488
       },
+      "留萌駅\u001c288" : {
+         "id" : 11169
+      },
       "留辺蘂駅" : {
          "id" : 4535
       },
@@ -26818,6 +26828,9 @@
       },
       "芦別駅" : {
          "id" : 9190
+      },
+      "芦別駅\u001c286" : {
+         "id" : 11164
       },
       "芦原橋駅" : {
          "id" : 9227

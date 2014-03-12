@@ -15,7 +15,7 @@ my $company_ids = (file2perl file (__FILE__)->dir->parent->file ('intermediate',
 my $next_id = 1;
 for (values %{$Data->{stations}}) {
     if (defined $_->{id}) {
-        $next_id = $_->{id} + 1 if $_->{id} > $next_id;
+        $next_id = $_->{id} + 1 if $_->{id} >= $next_id;
     }
 }
 for (values %{$Data->{stations}}) {

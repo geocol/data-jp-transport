@@ -13,7 +13,7 @@ my $Data = {};
 my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))->{companies};
 
 for my $name (keys %$company_ids) {
-    my $id = $company_ids->{$name}->{id};
+    my $id = $company_ids->{$name}->{id} // next;
     $Data->{companies}->{$id}->{names}->{$name} = 1;
     if ($company_ids->{$name}->{wref}) {
         if (defined $Data->{companies}->{$id}->{wref} and

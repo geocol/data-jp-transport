@@ -107,7 +107,7 @@ intermediate/company-ids.json: intermediate/wp-railway-stations.json \
 	$(PERL) bin/append-company-ids.pl
 
 intermediate/station-ids.json: intermediate/wp-railway-stations.json \
-    bin/append-station-ids.pl
+    bin/append-station-ids.pl intermediate/company-ids.json
 	$(PERL) bin/append-station-ids.pl
 
 local/bin/jq:

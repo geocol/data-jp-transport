@@ -13,7 +13,7 @@ delete $Data->{_errors};
 my $next_id = 1;
 for (values %{$Data->{companies}}) {
     next unless defined $_->{id};
-    $next_id = $_->{id} + 1 if $_->{id} > $next_id;
+    $next_id = $_->{id} + 1 if $_->{id} >= $next_id;
 }
 for (values %{$Data->{companies}}) {
     $_->{id} = $next_id++ unless defined $_->{id};

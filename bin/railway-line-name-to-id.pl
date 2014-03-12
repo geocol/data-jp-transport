@@ -13,7 +13,7 @@ my $Data = file2perl $data_f;
 my $next_id = 1;
 for (keys %{$Data->{lines}}) {
     my $id = $Data->{lines}->{$_}->{id} // next;
-    if ($id > $next_id) {
+    if ($id >= $next_id) {
         $next_id = $id + 1;
     }
 }

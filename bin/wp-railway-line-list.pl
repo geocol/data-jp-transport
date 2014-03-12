@@ -80,5 +80,9 @@ unless ($Data->{早来鉄道} or $Data->{早来鉄道線}) {
     $Data->{"あつまバス"}->{names}->{早来鉄道線} = 1;
 }
 
+unless ($Data->{宮島連絡船}) {
+    $Data->{宮島連絡船}->{names}->{宮島連絡船} = 1;
+}
+
 use JSON::Functions::XS qw(perl2json_bytes_for_record);
 print perl2json_bytes_for_record $Data;

@@ -273,11 +273,11 @@ sub parse_station ($) {
       }
     }
   } # $iparam
-  if (defined $props->{緯度秒}) {
+  if (defined $props->{緯度秒} and length $props->{緯度秒}) {
     warn "Unsupported lat format - $data->{name}" if not defined $props->{緯度分};
     $data->{lat} = $props->{緯度度} + $props->{緯度分} * (1/60) + $props->{緯度秒} * (1/3600);
   }
-  if (defined $props->{経度秒}) {
+  if (defined $props->{経度秒} and length $props->{経度秒}) {
     $data->{lon} = $props->{経度度} + $props->{経度分} * (1/60) + $props->{経度秒} * (1/3600);
   }
   if (defined $data->{company_wrefs} and

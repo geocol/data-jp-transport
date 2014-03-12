@@ -234,3 +234,11 @@
   wref = 淀川貨物線
   freight = 1
   jr = 1
+25
+  names <- 三井芦別鉄道
+  names <- 三井鉱山芦別専用鉄道
+  names <- 三井鉱山株式会社芦別鉄道
+  names <- 三井芦別鉄道線(貨物線)
+  label = 三井芦別鉄道
+  wref = 三井芦別鉄道
+  freight = 1

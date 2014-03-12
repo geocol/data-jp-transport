@@ -64,6 +64,7 @@ for my $wref (keys %$stations) {
     my $children = {};
 
     my $parent_id = $id;
+    my $parent_dest_data = $dest_data;
     for (values %{$src_data->{stations} or {}}) {
         my $companies = [sort { $a <=> $b } map { $company_ids->{$_}->{id} || '???' } keys %{$_->{company_wrefs} or {}}];
         my $id = $ids->{$wref, @$companies}->{id};
@@ -76,6 +77,11 @@ for my $wref (keys %$stations) {
         $dest_data->{parent_station} = $parent_id;
         $children->{$id} = 1;
         process_station $src_data => $dest_data;
+
+        $dest_data->{lat} ||= $parent_dest_data->{lat}
+            if defined $parent_dest_data->{lat};
+        $dest_data->{lon} ||= $parent_dest_data->{lon}
+            if defined $parent_dest_data->{lon};
 
         $has_different_name = 1 unless $_->{name} =~ /$wref/;
         delete $company{$_} for keys %{$_->{company_wrefs} or {}};
