@@ -8,7 +8,7 @@ use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 
 my $root_d = file (__FILE__)->dir->parent;
 
-my $Data = {};
+my $Data = file2perl $root_d->file ('local', 'src-railway-stations.json');
 
 my $ids = (file2perl $root_d->file ('intermediate', 'station-ids.json'))->{stations};
 my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))->{companies};
@@ -51,7 +51,7 @@ for my $wref (keys %$stations) {
     }
     my $src_data = $stations->{$wref};
     my $dest_data = $Data->{stations}->{$id} ||= {};
-    if (defined $dest_data->{wref}) {
+    if (defined $dest_data->{wref} and not $dest_data->{wref} eq $wref) {
         push @{$Data->{_errors} ||= []}, "|wref| conflict - |$wref| vs |$dest_data->{wref}|";
         next;
     }
@@ -96,5 +96,8 @@ for my $wref (keys %$stations) {
         $dest_data->{abstract} = 1;
     }
 }
+
+## 長木沢駅
+delete $Data->{stations}->{2577}->{lines}->{558};
 
 print perl2json_bytes_for_record $Data;

@@ -130,6 +130,8 @@ for my $line (keys %$Data) {
     $data->{freight} = 1 if $line =~ /貨物|三ヶ尻線/;
     $data->{freight} = 1 if $data->{company_wrefs}->{日本貨物鉄道} and
                             1 == keys %{$data->{company_wrefs}};
+
+    $data->{ferry} = 1 if $line =~ /連絡船/;
 }
 
 print perl2json_bytes_for_record $Data;

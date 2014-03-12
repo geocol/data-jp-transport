@@ -13,7 +13,9 @@ my $Data = {};
   my $f = $root_d->file ('src', 'railway-lines.txt');
   my $last_id;
   for (split /\x0D?\x0A/, decode 'utf-8', scalar $f->slurp) {
-    if (defined $last_id and /^  (\S+)\s+<-\s+(.+)$/) {
+    if (/^\s*#/) {
+      #
+    } elsif (defined $last_id and /^  (\S+)\s+<-\s+(.+)$/) {
       $Data->{lines}->{$last_id}->{$1}->{$2} = 1;
     } elsif (defined $last_id and /^  (\S+)\s+=\s+(.+)$/) {
       $Data->{lines}->{$last_id}->{$1} = $2;

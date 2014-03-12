@@ -242,3 +242,74 @@
   label = 三井芦別鉄道
   wref = 三井芦別鉄道
   freight = 1
+522
+  names <- 秩父鉱業専用線
+  names <- 東松山専用鉄道高本線
+  names <- 東武東上線高本貨物支線
+  names <- 日本セメント東松山専用鉄道
+  names <- 日本セメント（株）東松山専用鉄道
+  names <- 秩父鉱業（株）東松山鉱業所専用線
+  names <- 東武鉄道高坂構外側線
+  wref = 高坂駅#高坂構外側線（廃線）
+  label = 東武鉄道高坂構外側線
+  freight = 1
+803
+  names <- 三菱鉱業美唄鉄道線
+  names <- 美唄鉄道線
+  names <- 美唄鉄道
+  names <- 美唄軽便鉄道
+  names <- 三菱鉱業美唄鉄道
+  names <- 三菱鉱業専用鉄道
+  label = 三菱鉱業美唄鉄道線
+  wref = 三菱鉱業美唄鉄道線
+  freight = 1
+558
+  names <- 小坂製錬小坂線
+  names <- 小坂鉄道小坂線
+  names <- 小坂鉄道
+  names <- 小坂線
+  wref = 小坂製錬小坂線
+  label = 小坂製錬小坂線
+  freight = 1
+1329
+  names <- 長木沢支線
+  names <- 小坂鉄道小坂線長木沢支線
+  label = 小坂鉄道小坂線長木沢支線
+  wref = 小坂製錬小坂線
+  freight = 1
+50
+  names <- 三岐線
+  names <- 三岐鉄道三岐線
+  names <- 三岐線本線
+  label = 三岐鉄道三岐線
+  wref = 三岐鉄道三岐線
+1191
+  names <- 三岐鉄道三岐線近鉄連絡線
+  names <- 近鉄連絡線
+  names <- 三岐線近鉄連絡線
+  names <- 三岐線・近鉄連絡線
+  label = 三岐鉄道三岐線近鉄連絡線
+  wref = 三岐鉄道三岐線
+1193
+  names <- 上越新幹線支線
+  names <- 上越線#上越新幹線 支線
+  names <- 上越新幹線(支線)
+  names <- 上越新幹線#支線（上越線支線）
+  wref = 上越新幹線#支線（上越線支線）
+  label = 上越新幹線支線
+  jr = 1
+  shinkansen = misc
+  parent_line = 101
+  #parent_line = 397
+6
+  names <- 予讃線
+  names <- 予讃本線
+  wref = 予讃線
+  jr = 1
+533
+  names <- 内子線
+  names <- 予讃線(新線)
+  names <- 内山線
+  names <- 内子線・予讃線（新線）
+  wref = 内子線
+  jr = 1

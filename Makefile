@@ -106,9 +106,16 @@ intermediate/company-ids.json: intermediate/wp-railway-stations.json \
     bin/append-company-ids.pl
 	$(PERL) bin/append-company-ids.pl
 
+local/src-railway-stations.json: src/railway-stations.txt \
+    bin/src-railway-stations.pl
+	$(PERL) bin/src-railway-stations.pl > $@
 intermediate/station-ids.json: intermediate/wp-railway-stations.json \
     bin/append-station-ids.pl intermediate/company-ids.json
 	$(PERL) bin/append-station-ids.pl
+data/railways/stations.json: bin/railway-stations-2.pl \
+    intermediate/company-ids.json intermediate/station-ids.json \
+    intermediate/line-ids.json local/src-railway-stations.json
+	$(PERL) bin/railway-stations-2.pl > $@
 
 local/bin/jq:
 	$(WGET) -O $@ http://stedolan.github.io/jq/download/linux64/jq
@@ -127,10 +134,6 @@ data/railway-lines.json: \
 data/railways/companies.json: bin/railway-companies.pl \
     intermediate/company-ids.json src/railway-companies-names.txt
 	$(PERL) bin/railway-companies.pl > $@
-
-data/railways/stations.json: bin/railway-stations-2.pl \
-    intermediate/company-ids.json intermediate/station-ids.json
-	$(PERL) bin/railway-stations-2.pl > $@
 
 data/stations.json: intermediate/wp-railway-stations.json \
     local/suffix-patterns.json local/regions.json bin/stations.pl

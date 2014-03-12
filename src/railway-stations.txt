@@ -1,0 +1,14 @@
+2577
+  lines <- 1329 <-
+11171
+  name_aliases <- 下砂杁信号場
+  name = 下砂杁信号場
+  wref = 枇杷島分岐点
+  lines <- 827 <-
+10002
+  name_aliases <- 枇杷島分岐点
+  name_aliases <- 枇杷島橋駅
+  name = 枇杷島分岐点
+  wref = 枇杷島分岐点
+  lines <- 723 <-
+  lines <- 827 <-

@@ -41,7 +41,7 @@ my $Data = file2perl $root_d->file ('local', 'src-railway-lines.json');
       next;
     }
     for (qw(shinkansen bus tram subway jr cablecar agt hsst
-            monorail freight)) {
+            monorail freight ferry)) {
       $Data->{lines}->{$id}->{$_} = $json->{$wref}->{$_}
           if defined $json->{$wref}->{$_};
     }
