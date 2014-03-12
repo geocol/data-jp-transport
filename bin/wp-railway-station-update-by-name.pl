@@ -15,16 +15,6 @@ use Char::Normalize::FullwidthHalfwidth qw(get_fwhw_normalized);
 my $root_d = file (__FILE__)->dir->parent;
 my $data_f = $root_d->file ('intermediate', 'wp-railway-stations.json');
 
-my $LinesMap = {};
-{
-    my $lines_f = $root_d->file ('intermediate', 'wp-railway-line-list.json');
-    my $lines = file2perl $lines_f;
-    for my $wref (keys %$lines) {
-        $LinesMap->{$_} ||= $wref for keys %{$lines->{$wref}->{names} or {}};
-        $LinesMap->{$wref} = $wref;
-    }
-}
-
 my $Data = file2perl $data_f;
 
 my $mw = AnyEvent::MediaWiki::Source->new_from_dump_f_and_cache_d
@@ -80,8 +70,8 @@ sub _tc ($) {
   return $text;
 } # _tc
 
-sub _extract_objects ($) {
-  my $el = shift;
+sub _extract_objects ($$) {
+  my ($el, $key) = @_;
   my @object;
   my $l;
   my @l;
@@ -104,6 +94,10 @@ sub _extract_objects ($) {
       }
       if ($v =~ /\Q$name\E貨物支線/) {
         $name .= '貨物支線';
+      }
+      if ($v =~ /\Q$name\E[(（](.*支線|BRT区間)[)）]/) {
+        $name .= $1;
+        $v = '';
       }
       push @object, $name;
     }
@@ -154,6 +148,10 @@ sub _extract_objects ($) {
   }
 
   $push_object->();
+
+  if ($key eq 'line_wref') {
+    @object = grep { not /駅(?:\s*\([^()]+\))?$/ and not $_ eq '貨物線' } @object;
+  }
 
   return \@object;
 } # _extract_objects
@@ -206,9 +204,9 @@ sub parse_station ($) {
     if (defined $fdef->{name}) {
       my $value;
       if ($fdef->{object}) {
-        $value = (_extract_objects $iparam)->[0];
+        $value = (_extract_objects $iparam, $fdef->{name})->[0];
       } elsif ($fdef->{objects}) {
-        $value = _extract_objects $iparam;
+        $value = _extract_objects $iparam, $fdef->{name};
       } elsif ($name =~ /_wref$/) {
         $value = _tc $iparam;
       } else {
@@ -287,8 +285,6 @@ sub parse_station ($) {
   for (@$lines) {
     my $line_wrefs = delete $_->{line_wref} // '';
     for my $line_wref (@$line_wrefs) {
-        $line_wref = $LinesMap->{$line_wref} // $line_wref;
-        $line_wref = [grep { defined } map { $LinesMap->{$_ . $line_wref} } keys %{$data->{company_wrefs}}]->[0] // $line_wref;
         $data->{lines}->{$line_wref} = $_;
     }
   }
@@ -344,6 +340,7 @@ $cv->end;
 
 $cv->cb (sub {
   (($Data->{八丁畷駅} or {})->{lines}->{京急本線} or {})->{number} =~ s/\s*\(京急\)$//;
+  delete $Data->{蟹田駅}->{lines}->{北海道旅客鉄道};
   print { $data_f->openw } perl2json_bytes_for_record $Data;
 });
 

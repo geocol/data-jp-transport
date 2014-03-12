@@ -34,7 +34,12 @@ sub process_station ($$) {
         }
     }
     for my $wref (keys %{$src_data->{lines} or {}}) {
-        my $id = $line_ids->{$wref}->{id};
+        my $line_def;
+        for (keys %{$src_data->{company_wrefs}}) {
+            $line_def ||= $line_ids->{$_ . $wref};
+        }
+        $line_def ||= $line_ids->{$wref};
+        my $id = $line_def->{id};
         if (defined $id) {
             $dest_data->{lines}->{$id} = $src_data->{lines}->{$wref};
         } else {

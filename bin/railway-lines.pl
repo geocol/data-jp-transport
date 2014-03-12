@@ -57,4 +57,12 @@ my $Data = file2perl $root_d->file ('local', 'src-railway-lines.json');
   }
 }
 
+for (keys %$line_ids) {
+    $Data->{lines}->{$line_ids->{$_}->{id}}->{names}->{$_} = 1;
+}
+
+## 富山市内軌道線
+delete $Data->{lines}->{551}->{names}->{$_}
+    for qw(呉羽線 安野屋線 支線 本線 富山都心線);
+
 print perl2json_bytes_for_record $Data;

@@ -397,36 +397,178 @@
 134
   names <- 函館市電大森線
   names <- 大森線
+  names <- 函館市企業局交通部大森線
   label = 函館市電大森線
   wref = 函館市電
   parent_line = 745
 1057
   names <- 函館市電宝来・谷地頭線
   names <- 宝来・谷地頭線
+  names <- 函館市企業局交通部宝来・谷地頭線
   label = 函館市電宝来・谷地頭線
   wref = 函館市電
   parent_line = 745
 1337
   names <- 函館市電宮前線
   names <- 宮前線
+  names <- 函館市企業局交通部宮前線
   label = 函館市電宮前線
   wref = 函館市電
   parent_line = 745
 555
   names <- 函館市電本線
   names <- 本線
+  names <- 函館市企業局交通部本線
   label = 函館市電本線
   wref = 函館市電本線
   parent_line = 745
 1336
   names <- 函館市電東雲線
   names <- 東雲線
+  names <- 函館市企業局交通部東雲線
   label = 函館市電東雲線
   wref = 函館市電
   parent_line = 745
 1015
   names <- 函館市電湯の川線
+  names <- 函館市企業局交通部湯の川線
   names <- 湯の川線
   label = 函館市電湯の川線
   wref = 函館市電
   parent_line = 745
+1141
+  names <- 大船渡線
+  wref = 大船渡線
+  jr = 1
+1338
+  names <- 大船渡線(BRT区間)
+  names <- 大船渡線BRT区間
+  names <- 大船渡線BRT
+  wref = 大船渡線
+  label = 大船渡線BRT
+  jr = 1
+  parent_line = 1141
+  bus = brt
+1220
+  names <- 大船渡線(BRT区間:上鹿折方面)
+  wref = 大船渡線
+  jr = 1
+  parent_line = 1338
+  bus = brt
+1221
+  names <- 大船渡線(BRT区間:陸前矢作方面)
+  wref = 大船渡線
+  jr = 1
+  parent_line = 1338
+  bus = brt
+1224
+  names <- 秋田港線
+  names <- 奥羽本線(貨物支線)
+  label = 秋田港線
+  jr = 1
+  freight = 1
+  parent_line = 107
+1154
+  names <- 秋田臨海鉄道
+  names <- 秋田臨海鉄道線
+  label = 秋田臨海鉄道線
+  wref = 秋田臨海鉄道線
+872
+  names <- 秋田臨海鉄道北線
+  names <- 北線
+  label = 秋田臨海鉄道北線
+  wref = 秋田臨海鉄道線
+  parent_line = 1154
+62
+  names <- 秋田臨海鉄道南線
+  names <- 南線
+  names <- 秋田臨海鉄道線(南線)
+  label = 秋田臨海鉄道北線
+  wref = 秋田臨海鉄道線
+  parent_line = 1154
+663
+  names <- 室蘭本線
+  label = 室蘭本線
+  wref = 室蘭本線
+  jr = 1
+1225
+  names <- 室蘭本線(支線)
+  names <- 室蘭本線支線
+  names <- 室蘭支線
+  label = 室蘭本線
+  wref = 室蘭本線
+  jr = 1
+1339
+  names <- 室蘭本線(貨物支線)
+  names <- 室蘭本線貨物支線
+  jr = 1
+  freight = 1
+  parent_line = 1225
+551
+  names <- 富山市内軌道線
+  names <- 富山地方鉄道市内電車
+  names <- 富山地方鉄道富山市内軌道線
+  names <- 富山軌道線
+  names <- 富山地鉄市内電車
+  label = 富山地方鉄道市内電車
+  wref = 富山地方鉄道富山市内軌道線
+1341
+  names <- 富山市内軌道線本線
+  names <- 本線
+  label = 富山市内軌道線本線
+  wref = 富山地方鉄道富山市内軌道線
+  parent_line = 551
+1228
+  names <- 富山市内軌道線(支線)
+  names <- 富山市内軌道線支線
+  names <- 支線
+  label = 富山市内軌道線支線
+  wref = 富山地方鉄道富山市内軌道線
+  parent_line = 551
+1229
+  names <- 富山市内軌道線安野屋線
+  names <- 安野屋線
+  label = 富山市内軌道線安野屋線
+  wref = 富山地方鉄道富山市内軌道線
+  parent_line = 551
+1230
+  names <- 富山市内軌道線富山都心線
+  names <- 富山都心線
+  label = 富山市内軌道線富山都心線
+  wref = 富山地方鉄道富山市内軌道線
+  parent_line = 551
+1342
+  names <- 呉羽線
+  names <- 富山市内軌道線呉羽線
+  label = 富山市内軌道線呉羽線
+  wref = 富山地方鉄道富山市内軌道線
+  parent_line = 551
+847
+  names <- 小泉線
+  namee <- 東武小泉線
+  wref = 東武小泉線
+  label = 東武小泉線
+1233
+  names <- 東武小泉線支線
+  names <- 小泉線支線
+  names <- 小泉線(支線)
+  wref = 東武小泉線
+  label = 東武小泉線支線
+  parent_line = 847
+1343
+  names <- 仙石河岸線
+  names <- 東武仙石河岸線
+  wref = 東武仙石河岸線
+  label = 東武仙石河岸線
+17
+  names <- 雄別鉄道
+  names <- 雄別鉄道線
+  names <- 雄別鉄道#雄別鉄道線
+  wref = 雄別鉄道#雄別鉄道線
+  label = 雄別鉄道
+508
+  names <- 尺別鉄道
+  names <- 尺別鉄道線
+  names <- 雄別鉄道#尺別鉄道線
+  wref = 雄別鉄道#尺別鉄道線
+  label = 尺別鉄道

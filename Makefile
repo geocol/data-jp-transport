@@ -79,6 +79,7 @@ intermediate/wp-railway-lines.json: bin/wp-railway-lines.pl \
 	$(PERL) bin/wp-railway-lines.pl
 intermediate/wp-railway-stations.json: local/station-list.json \
     bin/wp-railway-stations-update.pl \
+    bin/wp-railway-station-update-by-name.pl \
     local/intermediate-wikipedia #wikipedia-dumps
 	echo "{}" > $@
 	$(PERL) bin/wp-railway-stations-update.pl
