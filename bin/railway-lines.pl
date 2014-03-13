@@ -10,6 +10,7 @@ my $root_d = file (__FILE__)->dir->parent;
 
 my $line_ids = (file2perl $root_d->file ('intermediate', 'line-ids.json'))->{lines};
 my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))->{companies};
+my $station_ids = (file2perl $root_d->file ('intermediate', 'station-ids.json'))->{stations};
 
 my $Data = file2perl $root_d->file ('local', 'src-railway-lines.json');
 
@@ -49,11 +50,24 @@ my $Data = file2perl $root_d->file ('local', 'src-railway-lines.json');
 
     for (keys %{$json->{$wref}->{company_wrefs}}) {
       if ($company_ids->{$_}) {
-          $Data->{lines}->{$id}->{companies}->{$company_ids->{$_}->{id}} = 1;
+        $Data->{lines}->{$id}->{companies}->{$company_ids->{$_}->{id}} = 1;
       } else {
-        push @{$Data->{_errors}}, "Company |$_| has no ID";
+        push @{$Data->{_errors} ||= []}, "Company |$_| has no ID";
       }
     }
+
+    $Data->{lines}->{$id}->{stations} = [map {
+      my $station_id = ($station_ids->{$_->{wref} // ''} || $station_ids->{$_->{name}} || {})->{id};
+      for my $company_id (keys %{$Data->{lines}->{$id}->{companies} or {}}) {
+        $station_id = ($station_ids->{$_->{wref} // $_->{name}, $company_id} or {})->{id} || $station_id;
+      }
+      unless (defined $station_id) {
+        push @{$Data->{_errors} ||= []}, "Station |$_->{name}| has no ID";
+        (0);
+      } else {
+        ($station_id);
+      }
+    } @{$json->{$wref}->{stations} || []}];
   }
 }
 

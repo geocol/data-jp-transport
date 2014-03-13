@@ -96,7 +96,8 @@ intermediate/line-ids.json: local/railway-line-names.txt \
 	$(PERL) bin/railway-line-name-to-id.pl
 data/railways/lines.json: bin/railway-lines.pl local/src-railway-lines.json \
     intermediate/wp-railway-line-list.json data/railway-lines.json \
-    intermediate/line-ids.json intermediate/company-ids.json
+    intermediate/line-ids.json intermediate/company-ids.json \
+    intermediate/station-ids.json
 	$(PERL) bin/railway-lines.pl > $@
 local/railway-line-ids.json.diff: bin/check-railway-line-ids.pl \
     data/railways/lines.json local/railway-line-ids.json \

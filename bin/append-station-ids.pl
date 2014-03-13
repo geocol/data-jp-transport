@@ -40,6 +40,7 @@ for my $wref (keys %$stations) {
         if (@id) {
             my $id = $Data->{stations}->{$wref, @id} ? $Data->{stations}->{$wref, @id}->{id} : $next_id++;
             $Data->{stations}->{$wref, @id}->{id} = $id;
+            $Data->{stations}->{$wref, $_}->{id} ||= $id for @id;
         } else {
             push @{$Data->{_errors} ||= []}, "|$wref|'s substation has no company";
         }
