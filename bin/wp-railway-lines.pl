@@ -73,6 +73,7 @@ sub extract_from_doc ($$) {
             $label_to_i->{"駅名・信号場名"} //
             $label_to_i->{電停名} //
             $label_to_i->{停留場名} //
+            $label_to_i->{"駅名（読み）"} //
             $label_to_i->{[grep { /駅|電停名/ } keys %$label_to_i]->[0] || '駅'} //
             0;
         $i = 1 if $page_name eq '真岡鐵道真岡線' and $i == 0;
@@ -158,6 +159,8 @@ sub extract_from_doc ($$) {
               $name = $1;
             }
             $name =~ s/$Symbols+\s*\z//o;
+            $name =~ s/^\(//;
+            $name =~ s/\)$//;
             $name =~ s/^\s*\*\s*//;
             $name =~ s/\A\s+//;
             $name =~ s/\s+\z//;

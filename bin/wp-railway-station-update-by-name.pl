@@ -93,10 +93,10 @@ sub _extract_objects ($$) {
         $name =~ s/\A\s+//;
         $name =~ s/\s*\*+\z//;
       }
-      if ($v =~ s/\Q$orig_name\E((?:貨物|)支線)(?:[(（](.+線)[)）])?//) {
+      if ($v =~ s/\Q$orig_name\E((?:貨物|)支線)(?:[(（]([^()]+線)[)）])?//) {
         $name .= $1 . (defined $2 ? "($2)" : '');
       }
-      if ($v =~ /\Q$orig_name\E[(（](.*支線|分岐線|BRT区間|[北南山海新旧]線)[)）]/) {
+      if ($v =~ /\Q$orig_name\E[(（]([^()]*(?:支線|ライン)|分岐線|連絡線|BRT区間|[北南山海新旧]線)[)）]/) {
         $name .= $1;
         $v = '';
       }
@@ -106,11 +106,17 @@ sub _extract_objects ($$) {
         push @object, $name;
       }
     }
-    if ($v =~ s/^.+線支線[(（](.+線)[)）]$//) {
+    if ($v =~ s/^.+線(?:貨物|)支線[(（](.+線)[)）]$//) {
       push @object, $1;
     }
-    if ($v =~ s/^(.+線)\s*\((?!(?:支|本|分岐|休止|北|南|新|旧|後の.+)線\))(.+線)\)$//) {
-      push @object, map { s/^旧名称・//; s/^通称//; $_ } grep { $_ ne '本線' and $_ ne '天王台方快速線' } $1, split /(?<=線)・/, $2;
+    if ($v =~ s/^(.+線)[(（](貨物支線)[)）]$//) {
+      push @object, "$1$2";
+    }
+    if ($v =~ s/^(三河線)[(（]通称([山海]線)[)）]$//) {
+      push @object, "$1($2)";
+    }
+    if ($v =~ s/^(.+線)\s*\((?!(?:支|本|分岐|休止|[北南新旧]|後の.+|正式には.+)線\))([^()]+線)\)$//) {
+      push @object, map { s/^旧名称・//; s/^通称//; $_ } grep { $_ ne '本線' and not $_ =~ /.+方快速線$/ and $_ ne '衣浦臨海鉄道、貨物線' and $_ ne '貨物専用線' } $1, split /(?<=線)[・]/, $2;
     }
     if ($v =~ s/^\((.+線)\)$//) {
       my $w = $1;
@@ -118,7 +124,9 @@ sub _extract_objects ($$) {
       $w =~ s/^通称(、|:|)//;
       $w =~ s/^当駅(?:より|から).+方は//;
       $w =~ s/^所属路線は.+//;
-      push @object, grep { $_ ne '本線' } split /(?<=線)・/, $w;
+      $w =~ s/^正式には.+//;
+      $w =~ s/^線路名称上は.+//;
+      push @object, grep { $_ ne '本線' } split /(?<=線)[・、]/, $w;
     }
     unless (@l) {
       if (length $v) {
@@ -172,9 +180,17 @@ sub _extract_objects ($$) {
 
   if ($key eq 'line_wref') {
     @object = grep { not /駅(?:\s*\([^()]+\))?$/ and
-                     not $_ eq '貨物線' and
-                     not $_ eq '電車線' and
-                     not $_ eq '列車線' } @object;
+                     not {東北本線別線 => 1,
+                          東北本線電車線 => 1,
+                          東北本線列車線 => 1,
+                          東北本線貨物線 => 1,
+                          東海道本線列車線 => 1,
+                          東海道本線電車線 => 1,
+                          東海道本線地下別線 => 1,
+                          貨物線 => 1,
+                          貨物支線 => 1,
+                          電車線 => 1,
+                          列車線 => 1}->{$_} } @object;
   }
 
   return \@object;
@@ -364,6 +380,7 @@ $cv->end;
 
 $cv->cb (sub {
   (($Data->{八丁畷駅} or {})->{lines}->{京急本線} or {})->{number} =~ s/\s*\(京急\)$//;
+  $Data->{保土ヶ谷駅}->{stations}->{保土ヶ谷駅}->{lines}->{相模鉄道貨物支線} ||= {};
   delete $Data->{蟹田駅}->{lines}->{北海道旅客鉄道};
   print { $data_f->openw } perl2json_bytes_for_record $Data;
 });
