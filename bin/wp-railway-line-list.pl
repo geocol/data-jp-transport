@@ -84,5 +84,25 @@ unless ($Data->{宮島連絡船}) {
     $Data->{宮島連絡船}->{names}->{宮島連絡船} = 1;
 }
 
+$Data->{$_}->{names}->{$_} = 1
+    for qw(
+        長崎電気軌道1号系統
+        長崎電気軌道2号系統
+        長崎電気軌道3号系統
+        長崎電気軌道4号系統
+        長崎電気軌道5号系統
+        鹿児島市電1系統
+        鹿児島市電2系統
+        広島電鉄1号線
+        広島電鉄2号線
+        広島電鉄3号線
+        広島電鉄4号線
+        広島電鉄5号線
+        広島電鉄6号線
+        広島電鉄7号線
+        広島電鉄8号線
+        広島電鉄9号線
+    );
+
 use JSON::Functions::XS qw(perl2json_bytes_for_record);
 print perl2json_bytes_for_record $Data;

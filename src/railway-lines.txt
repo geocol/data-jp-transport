@@ -54,6 +54,38 @@
   freight = 1
   jr = 1
   parent_line = 57
+4
+  names <- 東海道本線
+  label = 東海道本線
+  wref = 東海道本線
+  jr = 1
+1355
+  names <- 東海道本線(上り本線)
+  names <- 東海道本線上り本線
+  label = 東海道本線上り本線
+  wref = 東海道本線
+  jr = 1
+  parent_line = 4
+1251
+  names <- 東海道本線下り本線
+  names <- 東海道本線(下り本線)
+  label = 東海道本線下り本線
+  wref = 東海道本線
+  jr = 1
+  parent_line = 4
+247
+  name <- 美濃赤坂支線
+  names <- 美濃赤坂支線
+  names <- 東海道本線(美濃赤坂支線)
+  names <- 東海道本線美濃赤坂支線
+  wref = 東海道本線
+  label = 美濃赤坂線
+  parent_line = 4
+1253
+  names <- 東海道本線貨物支線
+  freight = 1
+  jr = 1
+  parent_line = 4
 1173
   names <- 沼津港
   names <- 沼津港線
@@ -62,6 +94,34 @@
   freight = 1
   jr = 1
   wref = 沼津港駅
+  parent_line = 4
+120
+  names <- 東海道貨物線
+  wref = 東海道貨物線
+  label = 東海道貨物線
+  jr = 1
+  freight = 1
+1313
+  names <- 鶴塩線
+  label = 鶴塩線
+  wref = 東海道貨物線
+  parent_line = 120
+  freight = 1
+  jr = 1
+1312
+  names <- 大汐線
+  label = 大汐線
+  wref = 東海道貨物線
+  parent_line = 120
+  freight = 1
+  jr = 1
+906
+  names <- 品鶴線
+  wref = 品鶴線
+  label = 品鶴線
+  freight = 1
+  jr = 1
+  parent_line = 1253
 1171
   names <- 東京都営地下鉄
   names <- 都営地下鉄
@@ -111,32 +171,6 @@
   parent_line = 1308
   freight = 1
   jr = 1
-1313
-  names <- 鶴塩線
-  label = 鶴塩線
-  wref = 東海道貨物線
-  parent_line = 120
-  freight = 1
-  jr = 1
-1312
-  names <- 大汐線
-  label = 大汐線
-  wref = 東海道貨物線
-  parent_line = 120
-  freight = 1
-  jr = 1
-906
-  names <- 品鶴線
-  wref = 品鶴線
-  label = 品鶴線
-  freight = 1
-  jr = 1
-  parent_line = 1253
-1253
-  names <- 東海道本線貨物支線
-  freight = 1
-  jr = 1
-  parent_line = 4
 542
   names <- 高島線
   wref = 高島線
@@ -572,3 +606,23 @@
   names <- 雄別鉄道#尺別鉄道線
   wref = 雄別鉄道#尺別鉄道線
   label = 尺別鉄道
+137
+  names <- 東京メトロ千代田線
+  wref = 東京メトロ千代田線
+1184
+  names <- 東京メトロ千代田線北綾瀬支線
+  names <- 北綾瀬支線
+  names <- 東京メトロ千代田線支線
+  wref = 東京メトロ千代田線
+  label = 東京メトロ千代田線北綾瀬支線
+  parent_line = 137
+1360
+  names <- 8・9号連絡側線
+  wref = 東京メトロ千代田線
+179
+  names <- 西武安比奈線
+  names <- 安比奈線
+  names <- 砂利線
+  wref = 西武安比奈線
+  label = 西武安比奈線
+  freight = 1

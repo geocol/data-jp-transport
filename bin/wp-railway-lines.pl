@@ -44,7 +44,7 @@ sub _tc ($) {
 sub extract_from_doc ($$) {
   my ($page_name, $doc) = @_;
   my $data = [];
-  my $h1 = $doc->query_selector ('h1:-manakai-contains("駅一覧"), h1:-manakai-contains("電停一覧"), h1:-manakai-contains("駅・信号場一覧")');
+  my $h1 = $doc->query_selector ('h1:-manakai-contains("駅一覧"), h1:-manakai-contains("電停一覧"), h1:-manakai-contains("駅・信号場一覧"), h1:-manakai-contains("停留場一覧")');
 
   my $has_ruby = {鹿児島市電唐湊線 => 1}->{$page_name};
 
@@ -72,6 +72,7 @@ sub extract_from_doc ($$) {
         my $i = $label_to_i->{駅名} //
             $label_to_i->{"駅名・信号場名"} //
             $label_to_i->{電停名} //
+            $label_to_i->{停留場名} //
             $label_to_i->{[grep { /駅|電停名/ } keys %$label_to_i]->[0] || '駅'} //
             0;
         $i = 1 if $page_name eq '真岡鐵道真岡線' and $i == 0;
@@ -178,8 +179,11 @@ sub extract_from_doc ($$) {
                 }
 
                 if (defined $label_to_i->{駅番号} or
-                    defined $label_to_i->{電停番号}) {
-                  my $cell = $t->{cell}->[$label_to_i->{駅番号} // $label_to_i->{電停番号}]->[$y]->[0];
+                    defined $label_to_i->{電停番号} or
+                    defined $label_to_i->{停留場番号}) {
+                  my $cell = $t->{cell}->[$label_to_i->{駅番号} //
+                                          $label_to_i->{電停番号} //
+                                          $label_to_i->{停留場番号}]->[$y]->[0];
                   if ($cell) {
                     my $num = get_fwhw_normalized _tc $cell->{element};
                     $num =~ s/\A\s+//;
@@ -259,6 +263,7 @@ $cv->begin;
 for my $key (@line) {
   $cv->begin;
   my $page_name = $LinesData->{$key}->{wref} || $key;
+  $page_name =~ s/#.*$//s;
   $mw->get_source_text_by_name_as_cv ($page_name, ims => ($force_update ? 0 : $Data->{$key} or {})->{timestamp} || 0)->cb (sub {
     my $data = $_[0]->recv;
     if (defined $data and defined $data->{data}) {

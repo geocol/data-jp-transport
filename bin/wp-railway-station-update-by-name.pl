@@ -79,33 +79,46 @@ sub _extract_objects ($$) {
 
   my $push_object = sub {
     my $v = _n join '', map { _tc $_ } @n;
-    if ($v =~ /^\(正式.+\)$/) {
+    if ($v =~ /^\((?:いずれも|正式).+\)$/) {
       $v = '';
     }
     $v =~ s/\s*\*+\z//;
     for my $l (@l) {
       my $name = $l->get_attribute ('wref');
+      my $orig_name = _tc $l;
       if (defined $name) {
         $name =~ s/\s+\z//;
       } else {
-        $name = _tc $l;
+        $name = $orig_name;
         $name =~ s/\A\s+//;
         $name =~ s/\s*\*+\z//;
       }
-      if ($v =~ /\Q$name\E貨物支線/) {
-        $name .= '貨物支線';
+      if ($v =~ s/\Q$orig_name\E((?:貨物|)支線)(?:[(（](.+線)[)）])?//) {
+        $name .= $1 . (defined $2 ? "($2)" : '');
       }
-      if ($v =~ /\Q$name\E[(（](.*支線|BRT区間)[)）]/) {
+      if ($v =~ /\Q$orig_name\E[(（](.*支線|分岐線|BRT区間|[北南山海新旧]線)[)）]/) {
         $name .= $1;
         $v = '';
       }
-      push @object, $name;
+      if ($v =~ /\Q$orig_name\E[(（]中央東線・本線[)）]/) {
+        push @object, '中央東線', $name;
+      } else {
+        push @object, $name;
+      }
     }
-    if ($v =~ s/^(.+線)\s*\((.+線)\)$//) {
-      push @object, $1, $2;
+    if ($v =~ s/^.+線支線[(（](.+線)[)）]$//) {
+      push @object, $1;
+    }
+    if ($v =~ s/^(.+線)\s*\((?!(?:支|本|分岐|休止|北|南|新|旧|後の.+)線\))(.+線)\)$//) {
+      push @object, map { s/^旧名称・//; s/^通称//; $_ } grep { $_ ne '本線' and $_ ne '天王台方快速線' } $1, split /(?<=線)・/, $2;
     }
     if ($v =~ s/^\((.+線)\)$//) {
-      push @object, $1;
+      my $w = $1;
+      $w =~ s/^以上、//;
+      $w =~ s/^通称(、|:|)//;
+      $w =~ s/^当駅(?:より|から).+方は//;
+      $w =~ s/^所属路線は.+//;
+      push @object, grep { $_ ne '本線' } split /(?<=線)・/, $w;
     }
     unless (@l) {
       if (length $v) {
@@ -117,21 +130,29 @@ sub _extract_objects ($$) {
   for (@{$el->child_nodes}) {
     if ($_->node_type == $_->ELEMENT_NODE) {
       my $ln = $_->local_name;
-      if ($ln eq 'l' and not $_->has_attribute ('embed')) {
-        next if $_->text_content eq '駅詳細';
-        $l //= $_;
-        push @l, $_;
-        push @n, $_;
+      if ($ln eq 'l') {
+        if ($_->has_attribute ('embed')) {
+          #
+        } else {
+          next if $_->text_content eq '駅詳細';
+          $l //= $_;
+          push @l, $_;
+          push @n, $_;
+        }
       } elsif ($ln eq 'comment' or $ln eq 'ref') {
         #
       } elsif ($ln eq 'include' and $IgnoredTemplates->{lc ($_->get_attribute ('wref') // '')}) {
         #
       } elsif ($ln eq 'span') {
         my $e = $_->query_selector ('l');
-        if (defined $e and not $e->has_attribute ('embed')) {
-          $l //= $e;
-          push @l, $e;
-          push @n, $_;
+        if (defined $e) {
+          if ($e->has_attribute ('embed')) {
+            #
+          } else {
+            $l //= $e;
+            push @l, $e;
+            push @n, $_;
+          }
         } else {
           push @n, $_ unless (_tc $_) eq "\x{25A0}";
         }
@@ -150,7 +171,10 @@ sub _extract_objects ($$) {
   $push_object->();
 
   if ($key eq 'line_wref') {
-    @object = grep { not /駅(?:\s*\([^()]+\))?$/ and not $_ eq '貨物線' } @object;
+    @object = grep { not /駅(?:\s*\([^()]+\))?$/ and
+                     not $_ eq '貨物線' and
+                     not $_ eq '電車線' and
+                     not $_ eq '列車線' } @object;
   }
 
   return \@object;
