@@ -3,17 +3,13 @@
       "|大日駅|'s substation has no company",
       "ID for company |岩内馬車鉄道| not defined",
       "|小沢駅|'s substation has no company",
-      "ID for company |筑豊鉄道 (2代)| not defined",
-      "|香月駅|'s substation has no company",
       "|名寄駅|'s substation has no company",
-      "ID for company |叡山電鉄]]| not defined",
-      "|出町柳駅|'s substation has no company",
+      "ID for company |村松軌道| not defined",
+      "|東海駅|'s substation has no company",
       "ID for company |札幌市電| not defined",
       "|南大嶺駅|'s substation has no company",
       "ID for company |十勝鉄道| not defined",
-      "|十勝清水駅|'s substation has no company",
-      "ID for company |羽幌炭礦鉄道| not defined",
-      "|築別駅|'s substation has no company"
+      "|十勝清水駅|'s substation has no company"
    ],
    "stations" : {
       "EXPOドーム駅" : {
@@ -1794,6 +1790,9 @@
       },
       "上熊谷駅" : {
          "id" : 1307
+      },
+      "上熊谷駅\u001c2" : {
+         "id" : 11217
       },
       "上片桐駅" : {
          "id" : 3766
@@ -5853,6 +5852,9 @@
       },
       "公園下駅" : {
          "id" : 5544
+      },
+      "公園前駅 (長野県)" : {
+         "id" : 11218
       },
       "公園口駅" : {
          "id" : 4730
@@ -30636,6 +30638,9 @@
       },
       "遠賀川駅" : {
          "id" : 6797
+      },
+      "遠賀川駅\u001c15" : {
+         "id" : 11219
       },
       "遠賀野駅" : {
          "id" : 6389

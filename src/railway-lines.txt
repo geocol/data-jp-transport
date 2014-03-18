@@ -626,3 +626,22 @@
   wref = 西武安比奈線
   label = 西武安比奈線
   freight = 1
+100
+  names <- 天竜浜名湖鉄道天竜浜名湖線
+  names <- 天竜浜名湖線
+  names <- 天浜線
+  wref = 天竜浜名湖鉄道天竜浜名湖線
+  label = 天浜線
+  url = http://www.tenhama.co.jp/
+1007
+  names <- 東京都電車
+  names <- 東京都電
+  names <- 都電
+  names <- 市電
+  wref = 東京都電車
+  label = 都電
+910
+  names <- 都電荒川線
+  names <- 荒川線
+  wref = 都電荒川線
+  parent_line = 1007

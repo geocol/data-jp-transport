@@ -79,4 +79,12 @@ for (keys %$line_ids) {
 delete $Data->{lines}->{551}->{names}->{$_}
     for qw(呉羽線 安野屋線 支線 本線 富山都心線);
 
+for my $id (keys %{$Data->{lines}}) {
+  my $line = $Data->{lines}->{$id};
+  $line->{label} ||= $line->{wref} || [grep { not {
+    本線 => 1,
+    鋼索線 => 1,
+  }->{$_} } keys %{$line->{names} or {}}]->[0] || [keys %{$line->{names} or {}}]->[0] || $id;
+}
+
 print perl2json_bytes_for_record $Data;
