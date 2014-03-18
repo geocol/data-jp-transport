@@ -46,6 +46,19 @@ sub process_station ($$) {
             push @{$Data->{_errors} ||= []}, "Line |$wref| has no ID";
         }
     }
+
+  if (defined $dest_data->{name}) {
+    $dest_data->{name} =~ s/\(仮称\)$//;
+    $dest_data->{name} =~ s/ステーション駅$/ステーション/;
+    if ($dest_data->{name} =~ / /) {
+      $dest_data->{label_qualified} = delete $dest_data->{name};
+      $dest_data->{label} = [split / +/, $dest_data->{label_qualified}, 2]->[1];
+    } else {
+      $dest_data->{label} = delete $dest_data->{name};
+    }
+    $dest_data->{name} = $dest_data->{label};
+    $dest_data->{name} =~ s/(?:駅|停留場|電停|停留所|信号場|仮乗降場|分岐点)$//;
+  }
 } # process_station
 
 for my $wref (keys %$stations) {
