@@ -1,0 +1,44 @@
+1
+  label = 東京メトロ
+10
+  names <- 近鉄
+15
+  label = 国鉄
+150
+  label = 北大阪急行
+154
+  label = ゆりかもめ
+16
+  names <- JR貨物
+  label = JR貨物
+230
+  label = JRバス関東
+  names <- JRバス関東
+243
+  label = 北海道鉄道
+  names <- 北海道鉄道
+26
+  names <- 富山地鉄
+  names <- 地鉄
+29
+  label = 横浜市交通局
+3
+  label = JR東日本
+  names <- JR東日本
+39
+  label = 仙台市交通局
+4
+  label = JR東海
+  names <- JR東海
+43
+  label = 神戸市交通局
+5
+  label = JR九州
+  names <- JR九州
+47
+  label = 東京都交通局
+53
+  label = 大阪市交通局
+8
+  label = JR西日本
+  names <- JR西日本

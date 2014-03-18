@@ -8,7 +8,7 @@ use JSON::Functions::XS qw(file2perl perl2json_bytes_for_record);
 
 my $root_d = file (__FILE__)->dir->parent;
 
-my $Data = {};
+my $Data = file2perl $root_d->file ('local', 'src-railway-companies.json');
 
 my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))->{companies};
 
@@ -40,6 +40,11 @@ for my $name (keys %$company_ids) {
             die "Broken line: |$line|";
         }
     }
+}
+
+for my $id (keys %{$Data->{companies}}) {
+    my $company = $Data->{companies}->{$id};
+    $company->{label} ||= $company->{wref} || [keys %{$company->{names} or {}}]->[0] || $id;
 }
 
 print perl2json_bytes_for_record $Data;

@@ -105,9 +105,16 @@ local/railway-line-ids.json.diff: bin/check-railway-line-ids.pl \
     intermediate/line-ids.json
 	$(PERL) bin/check-railway-line-ids.pl
 
+local/src-railway-companies.json: src/railway-companies.txt \
+    bin/src-railway-companies.pl
+	$(PERL) bin/src-railway-companies.pl > $@
 intermediate/company-ids.json: intermediate/wp-railway-stations.json \
     bin/append-company-ids.pl
 	$(PERL) bin/append-company-ids.pl
+data/railways/companies.json: bin/railway-companies.pl \
+    intermediate/company-ids.json src/railway-companies-names.txt \
+    local/src-railway-companies.json
+	$(PERL) bin/railway-companies.pl > $@
 
 local/src-railway-stations.json: src/railway-stations.txt \
     bin/src-railway-stations.pl
@@ -128,10 +135,6 @@ local/bin/jq:
 
 local/station-list.json: local/bin/jq intermediate/wp-railway-lines.json
 	cat intermediate/wp-railway-lines.json  | local/bin/jq "[.[].stations[] | .wref // .name] | unique" > $@
-
-data/railways/companies.json: bin/railway-companies.pl \
-    intermediate/company-ids.json src/railway-companies-names.txt
-	$(PERL) bin/railway-companies.pl > $@
 
 local/suffix-patterns.json:
 	$(WGET) -O $@ https://raw.github.com/geocol/data-jp-areas/master/data/jp-regions-suffix-mixed-names.json
