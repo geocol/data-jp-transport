@@ -3,13 +3,17 @@
       "|大日駅|'s substation has no company",
       "ID for company |岩内馬車鉄道| not defined",
       "|小沢駅|'s substation has no company",
+      "ID for company |筑豊鉄道 (2代)| not defined",
+      "|香月駅|'s substation has no company",
       "|名寄駅|'s substation has no company",
-      "ID for company |村松軌道| not defined",
-      "|東海駅|'s substation has no company",
+      "ID for company |叡山電鉄]]| not defined",
+      "|出町柳駅|'s substation has no company",
       "ID for company |札幌市電| not defined",
       "|南大嶺駅|'s substation has no company",
       "ID for company |十勝鉄道| not defined",
-      "|十勝清水駅|'s substation has no company"
+      "|十勝清水駅|'s substation has no company",
+      "ID for company |羽幌炭礦鉄道| not defined",
+      "|築別駅|'s substation has no company"
    ],
    "stations" : {
       "EXPOドーム駅" : {

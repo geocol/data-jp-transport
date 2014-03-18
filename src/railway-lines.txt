@@ -35,6 +35,7 @@
   names <- おおさか東線#城東貨物線
   names <- 城東貨物線
   names <- 片町線#貨物支線
+  label = 城東貨物線
   wref = おおさか東線#城東貨物線
   freight = 1
   jr = 1
@@ -43,6 +44,7 @@
   names <- 城東貨物南連絡線
   names <- おおさか東線#城東貨物線
   names <- 片町線#貨物支線
+  label = 城東貨物南連絡線
   wref = おおさか東線#城東貨物線
   freight = 1
   jr = 1
@@ -51,9 +53,12 @@
   names <- 関西本線(貨物支線)
   names <- 関西本線貨物支線
   wref = 関西本線
+  label = 関西本線貨物支線
   freight = 1
   jr = 1
   parent_line = 57
+1353
+  label = 宮城野貨物線
 4
   names <- 東海道本線
   label = 東海道本線
@@ -91,6 +96,7 @@
   names <- 沼津港線
   names <- 沼津港駅
   names <- 蛇松線
+  label = 沼津港線
   freight = 1
   jr = 1
   wref = 沼津港駅
@@ -159,7 +165,7 @@
   names <- 浜線
   names <- ハマ線
   names <- 南武支線
-  label = 南武支線
+  label = 浜川崎支線
   wref = 南武線
   parent_line = 1308
   jr = 1
@@ -485,12 +491,14 @@
   bus = brt
 1220
   names <- 大船渡線(BRT区間:上鹿折方面)
+  label = 大船渡線BRT (上鹿折方面)
   wref = 大船渡線
   jr = 1
   parent_line = 1338
   bus = brt
 1221
   names <- 大船渡線(BRT区間:陸前矢作方面)
+  label = 大船渡線BRT (陸前矢作方面)
   wref = 大船渡線
   jr = 1
   parent_line = 1338
@@ -565,6 +573,21 @@
   label = 富山市内軌道線安野屋線
   wref = 富山地方鉄道富山市内軌道線
   parent_line = 551
+1234
+  label = 小野田線本山支線
+1240
+  label = 田端貨物線
+1241
+  label = 隅田川貨物線
+1272
+  label = 総武本線貨物支線
+1277
+  label = 臨海本線支線
+1283
+  label = 野上電気鉄道
+  names <- 野上電気鉄道
+125
+  label = ゆりかもめ
 1230
   names <- 富山市内軌道線富山都心線
   names <- 富山都心線
@@ -645,3 +668,123 @@
   names <- 荒川線
   wref = 都電荒川線
   parent_line = 1007
+1012
+  label = 北九州市電
+1019
+  label = 叡山ケーブル
+1021
+  url = http://www.twr.co.jp/
+1034
+  names <- わたらせ渓谷鐵道
+  label = わたらせ渓谷鐵道
+  url = http://www.watetsu.com/
+105
+  names <- 摩耶ケーブル
+  label = 摩耶ケーブル
+  url = http://kobe-rope.jp/
+1052
+  names <- 熊本市電
+  label = 熊本市電
+1053
+  names <- 門司築港
+  names <- 門築電車
+  names <- 田ノ浦線
+  names <- 九州電気軌道田ノ浦線
+  label = 九州電気軌道田ノ浦線
+  wref = 門司築港
+1061
+  names <- 生駒ケーブル
+  label = 生駒ケーブル
+1066
+  label = 箕面鋼索鉄道
+1083
+  names <- 広島高速交通アストラムライン
+  label = 広島高速交通アストラムライン
+1088
+  label = 嵯峨野観光鉄道
+1111
+  label = 黒部ケーブルカー
+122
+  label = 東武西大家貨物線
+1393
+  names <- 近江鉄道彦根・多賀大社線
+  names <- 彦根・多賀大社線
+  label = 近江鉄道彦根・多賀大社線
+1405
+  label = 東北本線山線
+269
+  names <- 仙台空港アクセス鉄道
+  names <- 仙台空港鉄道仙台空港線
+  names <- 仙台空港線
+  label = 仙台空港鉄道仙台空港線
+  wref = 仙台空港鉄道仙台空港線
+  parent_line = 1409
+1433
+  label = 東武スカイツリーライン
+147
+  label = 泉北高速鉄道
+  names <- 泉北高速鉄道
+1490
+  label = 東北本線海線
+208
+  label = 大阪モノレール彩都線
+  names <- 大阪モノレール彩都線
+213
+  label = 男山ケーブル
+216
+  label = 立山トンネルトロリーバス
+270
+  label = つくばエクスプレス
+284
+  label = 筑波山ケーブルカー
+32
+  label = スカイレール
+  names <- スカイレール
+  url = http://www.sekisuihouse.co.jp/bunjou/midorizaka/03townguide/2.html
+333
+  label = ゆとりーとライン
+345
+  names <- ディズニーリゾートライン
+349
+  names <- 立山ケーブルカー
+40
+  label = 箱根登山ケーブルカー
+408
+  names <- 箱根登山電車
+  label <- 箱根登山電車
+430
+  names <- 九州新幹線長崎ルート
+  names <- 九州新幹線西九州ルート
+  label = 九州新幹線西九州ルート
+432
+  label = 金沢シーサイドライン
+619
+  label = 蒲蒲連絡線
+602
+  label = 大阪万博会場内モノレール
+606
+  label = 姫路市営モノレール
+693
+  label = 沖縄海洋博会場内新交通システム
+776
+  names <- 東山公園モノレール
+  label = 東山公園モノレール
+87
+  names <- 大東糖業南大東事業所の砂糖運搬専用軌道
+  label = 大東糖業南大東事業所の砂糖運搬専用軌道
+905
+  names <- 九州新幹線
+  label = 九州新幹線
+91
+  label = 上野動物園モノレール
+920
+  label = 筑豊鉄道
+924
+  label = 六甲ケーブル
+  names <- 六甲ケーブル
+927
+  names <- 東京市財務局線
+  label = 東京市財務局線
+13
+  names <- 九州新幹線鹿児島ルート・長崎ルート
+  label = 九州新幹線鹿児島ルート・長崎ルート
