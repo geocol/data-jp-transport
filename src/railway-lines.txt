@@ -389,6 +389,16 @@
   parent_line = 895
   jr = 1
   freight = 1
+35
+  wref = 太平洋石炭販売輸送臨港線
+  freight = 1
+1542
+  label = 太平洋石炭販売輸送城山線
+  names <- 太平洋石炭販売輸送城山線
+  names <- 城山線
+  wref = 太平洋石炭販売輸送臨港線
+  freight = 1
+  closed = 1
 1209
   names <- 敦賀港線
   names <- 北陸本線貨物支線(敦賀港線)
@@ -788,3 +798,5 @@
 13
   names <- 九州新幹線鹿児島ルート・長崎ルート
   label = 九州新幹線鹿児島ルート・長崎ルート
+1264
+  closed = 1
