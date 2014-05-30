@@ -37,10 +37,18 @@ for my $wref (keys %$stations) {
             }
         }
         @id = sort { $a <=> $b } @id;
+        my @suffix;
+        if ($_->{name} eq $stations->{$wref}->{name} or
+            $_->{name} =~ /\x20\Q$stations->{$wref}->{name}\E$/) {
+            #
+        } else {
+            push @suffix, $_->{name};
+        }
         if (@id) {
-            my $id = $Data->{stations}->{$wref, @id} ? $Data->{stations}->{$wref, @id}->{id} : $next_id++;
-            $Data->{stations}->{$wref, @id}->{id} = $id;
-            $Data->{stations}->{$wref, $_}->{id} ||= $id for @id;
+            my $id = $Data->{stations}->{$wref, @id, @suffix}
+                ? $Data->{stations}->{$wref, @id, @suffix}->{id} : $next_id++;
+            $Data->{stations}->{$wref, @id. @suffix}->{id} = $id;
+            $Data->{stations}->{$wref, $_, @suffix}->{id} ||= $id for @id;
         } else {
             push @{$Data->{_errors} ||= []}, "|$wref|'s substation has no company";
         }

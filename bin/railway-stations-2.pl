@@ -85,9 +85,16 @@ for my $wref (keys %$stations) {
     my $parent_dest_data = $dest_data;
     for (values %{$src_data->{stations} or {}}) {
         my $companies = [sort { $a <=> $b } map { $company_ids->{$_}->{id} || '???' } keys %{$_->{company_wrefs} or {}}];
-        my $id = $ids->{$wref, @$companies}->{id};
+        my @suffix;
+        if ($_->{name} eq $stations->{$wref}->{name} or
+            $_->{name} =~ /\x20\Q$stations->{$wref}->{name}\E$/) {
+            #
+        } else {
+            push @suffix, $_->{name};
+        }
+        my $id = $ids->{$wref, @$companies. @suffix}->{id};
         unless (defined $id) {
-            push @{$Data->{_errors} ||= []}, "Station |$wref @$companies| has no ID";
+            push @{$Data->{_errors} ||= []}, "Station |$wref @$companies @suffix| has no ID";
             next;
         }
         my $src_data = $_;
