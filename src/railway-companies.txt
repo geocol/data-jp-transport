@@ -2,6 +2,8 @@
   label = 東京メトロ
 10
   names <- 近鉄
+  names <- 近畿日本鉄道
+  label = 近畿日本鉄道
 15
   label = 国鉄
 150
@@ -20,6 +22,8 @@
 26
   names <- 富山地鉄
   names <- 地鉄
+  names <- 富山地方鉄道株式会社
+  label = 富山地方鉄道株式会社
 29
   label = 横浜市交通局
 3
@@ -42,3 +46,15 @@
 8
   label = JR西日本
   names <- JR西日本
+178
+  names <- 三菱鉱業
+  names <- 三菱鉱業株式会社
+  label = 三菱鉱業株式会社
+196
+  label = 南部縦貫株式会社
+286
+  label = 三井芦別鉄道株式会社
+290
+  label = 東野交通
+  names <- 東野鉄道
+  names <- 東野交通
