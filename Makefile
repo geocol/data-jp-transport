@@ -2,7 +2,7 @@ GIT = git
 
 all: data-railways
 
-dataautoupdate: clean deps all
+updatenightly: clean deps all
 	$(GIT) add data/*
 
 data: data-railways
