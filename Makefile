@@ -54,7 +54,7 @@ wp-deps:
 
 wp-data: wp-deps intermediate/wp-railway-line-list.json \
     intermediate/wp-railway-lines.json \
-    intermediate/stations.json
+    intermediate/wp-railway-stations.json
 	$(GIT) add intermediate
 
 ## ------ Railways ------
