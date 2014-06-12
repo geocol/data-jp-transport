@@ -58,3 +58,5 @@
   label = 東野交通
   names <- 東野鉄道
   names <- 東野交通
+287
+  label = JR西日本宮島フェリー株式会社

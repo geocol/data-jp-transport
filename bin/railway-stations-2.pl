@@ -13,8 +13,7 @@ my $Data = file2perl $root_d->file ('local', 'src-railway-stations.json');
 my $ids = (file2perl $root_d->file ('intermediate', 'station-ids.json'))->{stations};
 my $company_ids = (file2perl $root_d->file ('intermediate', 'company-ids.json'))->{companies};
 my $line_ids = (file2perl $root_d->file ('intermediate', 'line-ids.json'))->{lines};
-#my $stations = file2perl $root_d->file ('intermediate', 'wp-railway-stations.json');
-my $stations = file2perl $root_d->file ('data', 'stations.json'); # XXX
+my $stations = file2perl $root_d->file ('intermediate', 'wp-railway-stations.json');
 
 sub process_station ($$) {
     my ($src_data => $dest_data) = @_;
