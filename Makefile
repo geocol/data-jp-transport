@@ -60,10 +60,8 @@ wp-data: wp-deps intermediate/wp-railway-line-list.json \
 ## ------ Railways ------
 
 data-railways: \
-    data/railway-lines.json data/stations.json data/region-lines.json \
-    data/stations.json.gz \
     data/railways/lines.json  data/railways/companies.json \
-    data/railways/stations.json data/railways/stations.json.gz \
+    data/railways/stations.json \
     data/railways/region-lines.json
 
 review-railways: local/railway-line-ids.json.diff
@@ -96,7 +94,7 @@ intermediate/line-ids.json: local/railway-line-names.txt \
     bin/railway-line-name-to-id.pl
 	$(PERL) bin/railway-line-name-to-id.pl
 data/railways/lines.json: bin/railway-lines.pl local/src-railway-lines.json \
-    intermediate/wp-railway-line-list.json data/railway-lines.json \
+    intermediate/wp-railway-line-list.json local/railway-lines.json \
     intermediate/line-ids.json intermediate/company-ids.json \
     intermediate/station-ids.json
 	$(PERL) bin/railway-lines.pl > $@
@@ -126,8 +124,6 @@ data/railways/stations.json: bin/railway-stations-2.pl \
     intermediate/company-ids.json intermediate/station-ids.json \
     intermediate/line-ids.json local/src-railway-stations.json
 	$(PERL) bin/railway-stations-2.pl > $@
-data/railways/stations.json.gz: data/railways/stations.json
-	cat $< | gzip > $@
 
 local/bin/jq:
 	$(WGET) -O $@ http://stedolan.github.io/jq/download/linux64/jq
@@ -153,19 +149,11 @@ local/N02-12.xml: local/N02-12_GML.zip
 local/ksj-railroads.json: local/N02-12.xml bin/ksj-railroads.pl
 	$(PERL) bin/ksj-railroads.pl > $@
 
-
-data/railway-lines.json: \
+local/railway-lines.json: \
     intermediate/wp-railway-line-list.json \
     intermediate/wp-railway-lines.json \
     intermediate/wp-railway-stations.json bin/railway-lines-2.pl
 	$(PERL) bin/railway-lines-2.pl > $@
-data/region-lines.json: bin/region-lines.pl data/stations.json
-	$(PERL) bin/region-lines.pl > $@
-data/stations.json: intermediate/wp-railway-stations.json \
-    local/suffix-patterns.json local/regions.json bin/stations.pl
-	$(PERL) bin/stations.pl > $@
-data/stations.json.gz: data/stations.json
-	cat $< | gzip > $@
 
 ## ------ Tests ------
 
