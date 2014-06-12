@@ -33,7 +33,7 @@ my $Data = file2perl $root_d->file ('local', 'src-railway-lines.json');
 }
 
 {
-  my $f = $root_d->file ('data', 'railway-lines.json'); # XXX
+  my $f = $root_d->file ('local', 'railway-lines.json');
   my $json = file2perl $f;
   for my $wref (keys %$json) {
     my $id = $line_ids->{$wref}->{id};
