@@ -46,15 +46,13 @@ local/cache/xml/jawiki-latest-pages-meta-current.xml.bz2:
 wp-autoupdate: deps wp-clean wp-data
 
 wp-clean:
-	rm -fr intermediate/wikipedia.touch local/suffix-patterns.json
-	rm -fr local/regions.json
+	rm -fr local/suffix-patterns.json local/regions.json
 
 wp-deps:
 	$(PERL) bin/prepare-wikipedia-cache.pl
 
-wp-data: wp-deps intermediate/wp-railway-line-list.json \
-    intermediate/wp-railway-lines.json \
-    intermediate/wp-railway-stations.json
+wp-data: wp-deps
+	cd intermediate && $(MAKE) wp-data
 	$(GIT) add intermediate
 
 ## ------ Railways ------
@@ -65,23 +63,6 @@ data-railways: \
     data/railways/region-lines.json
 
 review-railways: local/railway-line-ids.json.diff
-
-intermediate/wikipedia.touch:
-	touch $@
-intermediate/wp-railway-line-list.json: bin/wp-railway-line-list.pl \
-    intermediate/wikipedia.touch #wikipedia-dumps
-	$(PERL) bin/wp-railway-line-list.pl > $@
-intermediate/wp-railway-lines.json: bin/wp-railway-lines.pl \
-    intermediate/wp-railway-line-list.json intermediate/wikipedia.touch \
-    #wikipedia-dumps
-	mkdir -p intermediate
-	$(PERL) bin/wp-railway-lines.pl
-intermediate/wp-railway-stations.json: local/station-list.json \
-    bin/wp-railway-stations-update.pl \
-    bin/wp-railway-station-update-by-name.pl \
-    intermediate/wikipedia.touch #wikipedia-dumps
-	echo "{}" > $@
-	$(PERL) bin/wp-railway-stations-update.pl
 
 local/src-railway-lines.json: src/railway-lines.txt bin/src-railway-lines.pl
 	$(PERL) bin/src-railway-lines.pl > $@
