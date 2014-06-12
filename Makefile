@@ -173,7 +173,7 @@ PROVE = ./prove
 
 test: test-deps test-main
 
-test-deps: deps
+test-deps: deps local/bin/jq
 
 test-main:
-#	$(PROVE) t/*.t
+	$(PROVE) t/*.t
