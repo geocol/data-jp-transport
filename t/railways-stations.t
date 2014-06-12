@@ -8,5 +8,5 @@ test() {
 }
 
 test 1 '.stations["10048"].label == "高岡駅"'
-test 2 '.stations["10102"].companies["8"] | not | not'
+test 2 '.stations["10230"].companies["8"] | not | not'
 test 3 '.stations["10161"].closed_date | not | not'
