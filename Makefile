@@ -3,7 +3,7 @@ GIT = git
 all: data-railways
 
 updatenightly: clean deps all
-	$(GIT) add data/*
+	$(GIT) add data/* intermediate/*
 
 data: data-railways
 review: review-railways
